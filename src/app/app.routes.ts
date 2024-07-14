@@ -9,6 +9,8 @@ import { AdminRoleGuard } from './guards/admin-role.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { GuestGuard } from './guards/guest.guard';
 import { IRole } from './interfaces';
+import { HomeComponent } from './pages/home/home.component';
+
 
 export const routes: Routes = [
   {
@@ -27,23 +29,22 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'app/home',
     pathMatch: 'full',
   },
   {
     path: 'app',
     component: AppLayoutComponent,
-    canActivate: [AuthGuard],
     children: [
       {
         path: 'app',
-        redirectTo: 'users',
+        redirectTo: 'home',
         pathMatch: 'full',
       },
       {
         path: 'users',
         component: UsersComponent,
-        canActivate:[AdminRoleGuard],
+        canActivate:[AuthGuard, AdminRoleGuard],
         data: { 
           authorities: [
             IRole.admin, 
@@ -62,6 +63,13 @@ export const routes: Routes = [
             IRole.user
           ],
           name: 'Dashboard'
+        }
+      },
+      {
+        path: 'home',
+        component: HomeComponent,
+        data: {
+          name: 'Home'
         }
       }
     ],
