@@ -1,15 +1,18 @@
-import { Routes } from "@angular/router";
-import { LoginComponent } from "./pages/auth/login/login.component";
-import { AppLayoutComponent } from "./components/app-layout/app-layout.component";
-import { SigUpComponent } from "./pages/auth/sign-up/signup.component";
-import { UsersComponent } from "./pages/users/users.component";
-import { AuthGuard } from "./guards/auth.guard";
-import { AccessDeniedComponent } from "./pages/access-denied/access-denied.component";
-import { AdminRoleGuard } from "./guards/admin-role.guard";
-import { CalendarComponent } from "./pages/calendar/calendar.component";
-import { GuestGuard } from "./guards/guest.guard";
-import { IRole } from "./interfaces";
+import { Routes } from '@angular/router';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { AppLayoutComponent } from './components/app-layout/app-layout.component';
+import { SigUpComponent } from './pages/auth/sign-up/signup.component';
+import { UsersComponent } from './pages/users/users.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
+import { AdminRoleGuard } from './guards/admin-role.guard';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { GuestGuard } from './guards/guest.guard';
+import { IRole } from './interfaces';
+import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from "./pages/profile/profile.component";
+import { CalendarComponent } from "./pages/calendar/calendar.component";
+
 
 export const routes: Routes = [
   {
@@ -27,30 +30,32 @@ export const routes: Routes = [
     component: AccessDeniedComponent,
   },
   {
-    path: "",
-    redirectTo: "login",
-    pathMatch: "full",
+    path: '',
+    redirectTo: 'app/home',
+    pathMatch: 'full',
   },
   {
     path: "app",
     component: AppLayoutComponent,
-    canActivate: [AuthGuard],
     children: [
       {
-        path: "app",
-        redirectTo: "users",
-        pathMatch: "full",
+        path: 'app',
+        redirectTo: 'home',
+        pathMatch: 'full',
       },
       {
         path: "users",
         component: UsersComponent,
-        canActivate: [AdminRoleGuard],
-        data: {
-          authorities: [IRole.admin, IRole.superAdmin],
-          name: "Users",
-        },
+        canActivate:[AuthGuard, AdminRoleGuard],
+        data: { 
+          authorities: [
+            IRole.admin, 
+            IRole.superAdmin
+          ],
+          name: 'Users'
+        }
       },
-      {
+              {
         path: "calendar",
         component: CalendarComponent,
         data: {
@@ -66,6 +71,25 @@ export const routes: Routes = [
           name: "Profile",
         },
       },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        data: { 
+          authorities: [
+            IRole.admin, 
+            IRole.superAdmin,
+            IRole.user
+          ],
+          name: 'Dashboard'
+        }
+      },
+      {
+        path: 'home',
+        component: HomeComponent,
+        data: {
+          name: 'Home'
+        }
+      }
     ],
   },
 ];
