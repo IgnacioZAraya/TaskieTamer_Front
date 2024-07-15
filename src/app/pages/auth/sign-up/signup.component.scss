@@ -7,29 +7,47 @@
   padding: 20px 20%;
   position: relative;
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad según necesites */
     z-index: 1;
   }
   .login-card {
     position: relative;
     z-index: 2;
-    width: 50%;
+    width: 60%;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 37px rgba(8, 21, 66, 0.05);
     margin: 0 auto;
-    background-color: #fff;
+    background-color: #ec6841;
   }
   .invalid-feedback {
     position: absolute;
     margin-top: 0px;
   }
+
+  .form-parent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  input {
+    background-color: #edc951;
+  }
+
+  button {
+    input {
+      background-color: #6a4a3d;
+      color: #edc951;
+    }
+  }
+
   @media screen and (min-width: 801px) and (max-width: 1500px) {
     padding: 20px 5%;
     .login-card {
