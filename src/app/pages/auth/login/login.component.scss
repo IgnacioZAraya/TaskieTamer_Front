@@ -13,7 +13,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad según necesites */
     z-index: 1;
   }
   .login-card {
@@ -24,7 +23,7 @@
     border-radius: 10px;
     box-shadow: 0 0 37px rgba(8, 21, 66, 0.05);
     margin: 0 auto;
-    background-color: #fff;
+    background-color: #ec6841;
   }
 
   .form-parent {
@@ -32,6 +31,26 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+  }
+
+  input {
+    background-color: #edc951;
+  }
+
+  h1 {
+    font-family: 'Playwrite';
+  }
+
+  h1, p, .customlabel {
+    color: #6a4a3d;
+  }
+
+  button {
+    input {
+      background-color: #6a4a3d;
+      color: #edc951;
+      font-family: 'Playwrite';
+    }
   }
 
   @media screen and (min-width: 801px) and (max-width: 1500px) {

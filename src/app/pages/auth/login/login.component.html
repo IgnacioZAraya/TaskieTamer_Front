@@ -12,14 +12,14 @@
           >
             <div class="form-child">
               <div class="mb-3">
-                <h4>Sign in to account</h4>
-                <small style="color: #4f4f4f">
+                <h1>Log into your Account</h1>
+                <p>
                   Enter your email & password to login
-                </small>
+                </p>
               </div>
 
               <div class="form-group mb-3">
-                <label for="email" class="form-label mb-2">
+                <label for="email" class="form-label mb-2 customlabel">
                   Email Address
                 </label>
                 <input
@@ -42,7 +42,7 @@
               </div>
 
               <div class="form-group mb-4">
-                <label for="password" class="form-label mb-2">Password</label>
+                <label for="password" class="form-label mb-2 customlabel">Password</label>
                 <div class="form-input position-relative">
                   <input
                     #password="ngModel"
@@ -63,12 +63,12 @@
                   </div>
                 </div>
               </div>
-              <a href="/signup">Go SignUp</a>
+              <a href="/register">Go Register!</a>
             </div>
 
             <div class="form-group mb-0">
-              <button class="btn btn-primary btn-block w-100" type="submit">
-                Sign in
+              <button class="btn w-100 custom-btn" type="submit">
+                Log in
               </button>
               @if(loginError) {
               <p class="text-danger">{{ loginError }}</p>

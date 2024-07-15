@@ -1,12 +1,11 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { AppLayoutComponent } from './components/app-layout/app-layout.component';
-import { SigUpComponent } from './pages/auth/sign-up/signup.component';
+import { RegisterComponent } from './pages/auth/register/register.component';
 import { UsersComponent } from './pages/users/users.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
 import { AdminRoleGuard } from './guards/admin-role.guard';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { GuestGuard } from './guards/guest.guard';
 import { IRole } from './interfaces';
 import { HomeComponent } from './pages/home/home.component';
@@ -21,8 +20,8 @@ export const routes: Routes = [
     canActivate: [GuestGuard],
   },
   {
-    path: "signup",
-    component: SigUpComponent,
+    path: 'register',
+    component: RegisterComponent,
     canActivate: [GuestGuard],
   },
   {
