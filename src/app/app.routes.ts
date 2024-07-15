@@ -6,15 +6,16 @@ import { UsersComponent } from './pages/users/users.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
 import { AdminRoleGuard } from './guards/admin-role.guard';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { GuestGuard } from './guards/guest.guard';
 import { IRole } from './interfaces';
 import { HomeComponent } from './pages/home/home.component';
+import { ProfileComponent } from "./pages/profile/profile.component";
+import { CalendarComponent } from "./pages/calendar/calendar.component";
 
 
 export const routes: Routes = [
   {
-    path: 'login',
+    path: "login",
     component: LoginComponent,
     canActivate: [GuestGuard],
   },
@@ -24,7 +25,7 @@ export const routes: Routes = [
     canActivate: [GuestGuard],
   },
   {
-    path: 'access-denied',
+    path: "access-denied",
     component: AccessDeniedComponent,
   },
   {
@@ -33,7 +34,7 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'app',
+    path: "app",
     component: AppLayoutComponent,
     children: [
       {
@@ -42,7 +43,7 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
       {
-        path: 'users',
+        path: "users",
         component: UsersComponent,
         canActivate:[AuthGuard, AdminRoleGuard],
         data: { 
@@ -52,6 +53,22 @@ export const routes: Routes = [
           ],
           name: 'Users'
         }
+      },
+              {
+        path: "calendar",
+        component: CalendarComponent,
+        data: {
+          authorities: [IRole.admin, IRole.superAdmin, IRole.user],
+          name: "Calendar",
+        },
+      },
+      {
+        path: "profile",
+        component: ProfileComponent,
+        data: {
+          authorities: [IRole.admin, IRole.superAdmin, IRole.user],
+          name: "Profile",
+        },
       },
       {
         path: 'dashboard',

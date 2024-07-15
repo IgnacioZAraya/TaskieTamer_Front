@@ -1,13 +1,13 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Route, RouterLink, RouterLinkActive } from '@angular/router';
-import { LayoutService } from '../../../../services/layout.service';
-import { AuthService } from '../../../../services/auth.service';
-import { SvgIconComponent } from '../../../svg-icon/svg-icon.component';
-import { routes } from '../../../../app.routes';
+import { Component, inject } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Route, RouterLink, RouterLinkActive } from "@angular/router";
+import { LayoutService } from "../../../../services/layout.service";
+import { AuthService } from "../../../../services/auth.service";
+import { SvgIconComponent } from "../../../svg-icon/svg-icon.component";
+import { routes } from "../../../../app.routes";
 
 @Component({
-  selector: 'app-sidebar',
+  selector: "app-sidebar",
   standalone: true,
   imports: [
     CommonModule,
@@ -27,10 +27,11 @@ export class SidebarComponent {
   permittedRoutes: Route[] = [];
   appRoutes: any;
 
-  constructor(
-  ) {
-    this.appRoutes = routes.filter(route => route.path == 'app')[0];
-    this.permittedRoutes = this.authService.getPermittedRoutes(this.appRoutes.children);
-    console.log('this.permittedRoutes', this.permittedRoutes);
+  constructor() {
+    this.appRoutes = routes.filter((route) => route.path == "app")[0];
+    this.permittedRoutes = this.authService.getPermittedRoutes(
+      this.appRoutes.children
+    );
+    console.log("this.permittedRoutes", this.permittedRoutes);
   }
 }
