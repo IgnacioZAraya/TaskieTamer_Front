@@ -37,10 +37,19 @@
     background-color: #edc951;
   }
 
+  h1 {
+    font-family: 'Playwrite';
+  }
+
+  h1, p, .customlabel {
+    color: #6a4a3d;
+  }
+
   button {
     input {
       background-color: #6a4a3d;
       color: #edc951;
+      font-family: 'Playwrite';
     }
   }
 
