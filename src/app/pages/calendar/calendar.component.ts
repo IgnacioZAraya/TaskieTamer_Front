@@ -1,29 +1,39 @@
-import { Component } from "@angular/core";
+import { isNullOrUndefined } from "util";
+import { Component, ViewChild } from "@angular/core";
 import {
   ScheduleModule,
   RecurrenceEditorModule,
   WeekService,
-  WorkWeekService,
   MonthService,
-  AgendaService,
   DayService,
   EventSettingsModel,
   DragAndDropService,
   ResizeService,
+  ScheduleComponent,
+  EJ2Instance,
 } from "@syncfusion/ej2-angular-schedule";
+import {
+  TextBoxComponent,
+  TextBoxModule,
+} from "@syncfusion/ej2-angular-inputs";
+import { ButtonModule } from "@syncfusion/ej2-angular-buttons";
+import { closest } from "@syncfusion/ej2-base";
 import { DataManager, WebApiAdaptor } from "@syncfusion/ej2-data";
 import { Subject } from "rxjs";
 
 @Component({
   selector: "app-calendar",
   standalone: true,
-  imports: [ScheduleModule, RecurrenceEditorModule],
+  imports: [
+    ScheduleModule,
+    RecurrenceEditorModule,
+    TextBoxModule,
+    ButtonModule,
+  ],
   providers: [
     WeekService,
-    WorkWeekService,
     MonthService,
     DayService,
-    AgendaService,
     DragAndDropService,
     ResizeService,
   ],
@@ -37,6 +47,7 @@ export class CalendarComponent {
     crossDomain: true
   });*/
 
+  @ViewChild("schedule") scheduleObj!: ScheduleComponent;
   public eventObject: EventSettingsModel = {
     //dataSource: this.eventData
     dataSource: [
@@ -53,4 +64,25 @@ export class CalendarComponent {
       subject: { default: "(Nuevo Evento)", title: "Nombre del Evento" },
     },*/
   };
+
+  public addTask(e: Event, option: string) {
+    let quickPopup: HTMLElement = closest(
+      e.target as HTMLElement,
+      ".e-quick-popup-wrapper"
+    ) as HTMLElement;
+    if (option === "add") {
+      let taskName = (
+        (quickPopup.querySelector("#taskName") as EJ2Instance)
+          .ej2_instances[0] as TextBoxComponent
+      ).value;
+      let addObj: Record<string, any> = {
+        Id: this.scheduleObj.getEventMaxID(),
+        Name: taskName,
+        StartTime: new Date(this.scheduleObj.activeCellsData.startTime),
+        EndTime: new Date(this.scheduleObj.activeCellsData.endTime),
+      };
+      this.scheduleObj.addEvent(addObj);
+    }
+    this.scheduleObj.closeQuickInfoPopup();
+  }
 }
