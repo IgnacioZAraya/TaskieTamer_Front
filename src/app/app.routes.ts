@@ -45,18 +45,19 @@ export const routes: Routes = [
       {
         path: "users",
         component: UsersComponent,
-        canActivate:[AuthGuard, AdminRoleGuard],
+        canActivate:[ AdminRoleGuard],
         data: { 
           authorities: [
             IRole.admin, 
-            IRole.superAdmin
+            IRole.superAdmin                    
           ],
           name: 'Users'
         }
       },
-              {
+      {
         path: "calendar",
         component: CalendarComponent,
+        canActivate:[AuthGuard],
         data: {
           authorities: [IRole.admin, IRole.superAdmin, IRole.user],
           name: "Calendar",
