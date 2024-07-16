@@ -38,4 +38,8 @@ export class LoginComponent {
       });
     }
   }
+  
+  redRegister(){
+    this.router.navigateByUrl('/register');
+  }
 }

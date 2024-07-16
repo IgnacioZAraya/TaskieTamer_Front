@@ -23,14 +23,14 @@
     border-radius: 10px;
     box-shadow: 0 0 37px rgba(8, 21, 66, 0.05);
     margin: 0 auto;
-    background-color: #ec6841;
+    background-color: #ef9174;
   }
 
   .form-parent {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 
   input {
@@ -45,6 +45,15 @@
     color: #6a4a3d;
   }
 
+  .custom-btn {
+    width: 150px;
+  }
+
+  .login-btn {
+    height: 80px;
+    margin-left: 30px;
+  }
+
   button {
     input {
       background-color: #6a4a3d;
@@ -53,7 +62,7 @@
     }
   }
 
-  @media screen and (min-width: 801px) and (max-width: 1500px) {
+  @media screen and (min-width: 891px) and (max-width: 1500px) {
     padding: 20px 5%;
     .login-card {
       width: 60%;
@@ -62,7 +71,7 @@
       }
     }
   }
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 890px) {
     padding: 20px 5%;
     .login-card {
       width: 100%;

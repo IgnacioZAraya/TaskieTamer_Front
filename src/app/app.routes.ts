@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/auth/login/login.component';
 import { AppLayoutComponent } from './components/app-layout/app-layout.component';
-import { RegisterComponent } from './pages/auth/register/register.component';
-import { UsersComponent } from './pages/users/users.component';
-import { AuthGuard } from './guards/auth.guard';
-import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
 import { AdminRoleGuard } from './guards/admin-role.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { GuestGuard } from './guards/guest.guard';
 import { IRole } from './interfaces';
+import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { RegisterComponent } from './pages/auth/register/register.component';
+import { CalendarComponent } from "./pages/calendar/calendar.component";
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from "./pages/profile/profile.component";
-import { CalendarComponent } from "./pages/calendar/calendar.component";
+import { UsersComponent } from './pages/users/users.component';
 
 
 export const routes: Routes = [
@@ -45,18 +45,19 @@ export const routes: Routes = [
       {
         path: "users",
         component: UsersComponent,
-        canActivate:[AuthGuard, AdminRoleGuard],
+        canActivate:[ AdminRoleGuard],
         data: { 
           authorities: [
             IRole.admin, 
-            IRole.superAdmin
+            IRole.superAdmin                    
           ],
           name: 'Users'
         }
       },
-              {
+      {
         path: "calendar",
         component: CalendarComponent,
+        canActivate:[AuthGuard],
         data: {
           authorities: [IRole.admin, IRole.superAdmin, IRole.user],
           name: "Calendar",
@@ -69,18 +70,6 @@ export const routes: Routes = [
           authorities: [IRole.admin, IRole.superAdmin, IRole.user],
           name: "Profile",
         },
-      },
-      {
-        path: 'dashboard',
-        component: DashboardComponent,
-        data: { 
-          authorities: [
-            IRole.admin, 
-            IRole.superAdmin,
-            IRole.user
-          ],
-          name: 'Dashboard'
-        }
       },
       {
         path: 'home',

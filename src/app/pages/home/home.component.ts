@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +10,10 @@ import { Router } from "@angular/router";
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  public isAuth: boolean;
 
-  constructor(public router: Router){
-
+  constructor(public router: Router, private authService : AuthService){
+    this.isAuth = !this.authService.check();
   }
 
   redRegister(){

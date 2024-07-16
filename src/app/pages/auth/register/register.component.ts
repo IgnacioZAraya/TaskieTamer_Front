@@ -26,6 +26,10 @@ export class RegisterComponent {
     private authService: AuthService
   ) {}
 
+  redLogIn() {
+    this.router.navigateByUrl('/login');
+  }
+
   public handleSignup(event: Event) {
     event.preventDefault();
     if (!this.nameModel.valid) {
@@ -45,6 +49,10 @@ export class RegisterComponent {
         next: () => this.validSignup = true,
         error: (err: any) => (this.signUpError = err.description),
       });
+      this.nameModel.reset();
+      this.lastnameModel.reset();
+      this.emailModel.reset();
+      this.passwordModel.reset();
     }
   }
 }
