@@ -1,0 +1,9 @@
+<div class="card-container">
+
+    <div class="card" *ngFor="let image of images" (click)="onImageClick(image)">
+      <img [src]= image.src [alt]="image.alt" class="card-image" fill>
+      <div class="card-body">
+        <p>{{ image.title }}</p>
+      </div>
+    </div>
+  </div>

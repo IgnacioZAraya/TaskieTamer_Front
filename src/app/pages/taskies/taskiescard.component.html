@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <div>
+      <h2>Taskies</h2>
+    </div>
+    <div>
+      @defer {
+      
+      <app-taskie-card></app-taskie-card>
+      } @loading (after 100ms; minimum 1s){
+      <app-loader></app-loader>
+      }
+    </div>
+  </div>
