@@ -1,6 +1,6 @@
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { inject } from "@angular/core";
+import { CanActivateFn, Router } from "@angular/router";
+import { AuthService } from "../services/auth.service";
 
 export const GuestGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
@@ -8,6 +8,6 @@ export const GuestGuard: CanActivateFn = (route, state) => {
 
   if (!authService.check()) return true;
 
-  router.navigateByUrl('/app/dashboard');
+  router.navigateByUrl("/app/calendar");
   return false;
 };

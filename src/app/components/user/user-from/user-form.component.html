@@ -1,11 +1,11 @@
 <form (ngSubmit)="handleAction(frm)" autocomplete="off" #frm="ngForm" class="add-user-container">
-  <h3 class="mb-5 px-5">{{title}}</h3>
+  <h2 class="mb-5 px-5">{{title}}</h2>
   <div class="border-bottom pb-3 mb-3">
     <div class="px-5">
       <label for="email" class="form-label mb-2">
         Email Address
       </label>
-      <input #email="ngModel" type="text" class="form-control" id="email" name="email" 
+      <input #email="ngModel" type="text" class="form-control shadow rounded" id="email" name="email" 
         placeholder="user@gmail.com"
         [(ngModel)]="user.email" 
         [ngClass]="{ 
@@ -27,7 +27,7 @@
         <label for="name" class="form-label mb-2">
           Name
         </label>
-        <input #name="ngModel" type="text" class="form-control" id="name" name="name" 
+        <input #name="ngModel" type="text" class="form-control shadow rounded" id="name" name="name" 
           placeholder="Carlos"
           [(ngModel)]="user.name" 
           [ngClass]="{ 
@@ -46,7 +46,7 @@
         <label for="lastname" class="form-label mb-2">
           Lastname
         </label>
-        <input #lastname="ngModel" type="text" class="form-control" id="lastname" 
+        <input #lastname="ngModel" type="text" class="form-control shadow rounded" id="lastname" 
           name="lastname" 
           placeholder="Hernández"
           [(ngModel)]="user.lastname" 
@@ -67,7 +67,7 @@
           <label for="password" class="form-label mb-2">
             Password
           </label>
-          <input #password="ngModel" type="password" class="form-control" id="password"    
+          <input #password="ngModel" type="password" class="form-control shadow rounded" id="password"    
             name="password" 
             placeholder="*****"
             [(ngModel)]="user.password" 
@@ -89,7 +89,7 @@
   <div class="pb-3 mb-3 d-flex justify-content-center align-items-center">
     <button
       type="submit"
-      class="btn btn-primary d-flex align-items-center">
+      class="shadow btn btn-primary d-flex align-items-center custom-btn">
       <i class="fa-solid white me-2"
         [ngClass]="{'fa-plus': action == 'add', 'fa-pencil':  action == 'edit'}"
       ></i>
