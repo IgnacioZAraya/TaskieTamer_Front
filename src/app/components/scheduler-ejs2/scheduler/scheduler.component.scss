@@ -1,0 +1,30 @@
+@import "../../../../../node_modules/@syncfusion/ej2-material-theme/styles/material.css";
+@import "../../../../../node_modules/@syncfusion/ej2-calendars/styles/material.css";
+
+.quick-info-popup.e-schedule
+  .e-quick-popup-wrapper
+  .e-event-popup
+  .e-popup-content {
+  padding: 8px 18px 8px 26px;
+}
+
+.quick-info-popup.e-schedule
+  .e-quick-popup-wrapper
+  .e-event-popup
+  .e-popup-footer {
+  background: #fff;
+}
+
+.element-conf {
+  display: flex;
+  flex-direction: column;
+}
+
+.element-conf-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.input-width {
+  width: 100%;
+}
