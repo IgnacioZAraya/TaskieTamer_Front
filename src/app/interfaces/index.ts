@@ -24,7 +24,6 @@ export interface IAuthority {
 }
 
 export interface IFeedBackMessage {
-  type?: IFeedbackStatus;
   message?: string;
 }
 

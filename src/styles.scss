@@ -50,44 +50,53 @@ body[class="dark-only"] {
 @import "./assets/layout/layout.scss";
 //end template styles
 
+@import "ngx-toastr/toastr";
+
 @font-face {
-  font-family: 'Playwrite';
+  font-family: "Playwrite";
   src: url(assets/fonts/PlaywriteCU-VariableFont_wght.ttf) format("truetype");
 }
 
-html, body { 
-  height: 100%; 
+html,
+body {
+  height: 100%;
 }
 
-body { margin: 0; }
+body {
+  margin: 0;
+}
 
 .error-snackbar .mdc-snackbar__surface {
   background-color: rgb(197, 49, 49) !important;
 }
 
 h1 {
-  font-family: 'Playwrite';
+  font-family: "Playwrite";
 }
 
 p {
   color: #6a4a3d;
 }
 
-html, body, .footer, .page-body{
+html,
+body,
+.footer,
+.page-body {
   background-color: #00a0b0;
 }
 
-button, .custom-btn {
+button,
+.custom-btn {
   background-color: #6a4a3d;
   color: #edc951;
-  font-family: 'Playwrite';
+  font-family: "Playwrite";
 }
 
 .app-sidebar {
   background-color: #edc951;
 }
 
-.pallettes{
+.pallettes {
   color: #00a0b0;
   color: #6a4a3d;
   color: #cd333f;
