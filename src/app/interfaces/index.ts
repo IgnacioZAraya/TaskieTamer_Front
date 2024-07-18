@@ -39,3 +39,10 @@ export enum IRole {
   user = "ROLE_USER",
   superAdmin = 'ROLE_SUPER_ADMIN'
 }
+
+export interface ITaskieImg {
+  src: string;
+  alt: string;
+  title: string;
+
+}
