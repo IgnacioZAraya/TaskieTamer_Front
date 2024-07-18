@@ -13,7 +13,7 @@ import { provideToastr } from "ngx-toastr";
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
-    provideToastr({ timeOut: 1500, preventDuplicates: true }),
+    provideToastr({ timeOut: 5000, preventDuplicates: true }),
     provideRouter(routes),
     provideClientHydration(),
     provideHttpClient(
