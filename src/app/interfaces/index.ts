@@ -1,6 +1,6 @@
 export interface ILoginResponse {
   accessToken: string;
-  expiresIn: number
+  expiresIn: number;
 }
 
 export interface IResponse<T> {
@@ -24,25 +24,23 @@ export interface IAuthority {
 }
 
 export interface IFeedBackMessage {
-  type?: IFeedbackStatus;
   message?: string;
 }
 
 export enum IFeedbackStatus {
   success = "SUCCESS",
   error = "ERROR",
-  default = ''
+  default = "",
 }
 
 export enum IRole {
   admin = "ROLE_ADMIN",
   user = "ROLE_USER",
-  superAdmin = 'ROLE_SUPER_ADMIN'
+  superAdmin = "ROLE_SUPER_ADMIN",
 }
 
 export interface ITaskieImg {
   src: string;
   alt: string;
   title: string;
-
 }
