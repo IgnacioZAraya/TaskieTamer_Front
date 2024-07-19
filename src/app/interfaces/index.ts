@@ -46,3 +46,14 @@ export interface ITaskieImg {
   title: string;
 
 }
+
+
+export interface ITaskie {
+  id?: number;
+  specie?: string;
+  name?: string;
+  experience?: string;
+  sprite?: string;
+  unlock?: boolean;
+  cosmetic?: string;
+}

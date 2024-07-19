@@ -11,7 +11,8 @@ import { CalendarComponent } from "./pages/calendar/calendar.component";
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from "./pages/profile/profile.component";
 import { UsersComponent } from './pages/users/users.component';
-import { TaskieCardComponent } from './components/taskies/taskieCards/taskies-card.component';
+
+import { TaskieComponent } from './pages/taskies/taskie.component';
 
 
 export const routes: Routes = [
@@ -73,12 +74,14 @@ export const routes: Routes = [
         },
       },{
         path: "taskies",
-        component: TaskieCardComponent,
+        component: TaskieComponent,
         data: {
           authorities: [IRole.admin, IRole.superAdmin, IRole.user],
           name: "Taskies",
         },
-      },
+        },{ path: '', 
+          redirectTo: '/taskies', 
+          pathMatch: 'full' },
       {
         path: 'home',
         component: HomeComponent,

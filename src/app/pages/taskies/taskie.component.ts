@@ -1,20 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { TaskieCardComponent } from '../../components/taskies/taskieCards/taskies-card.component'; 
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { ModalComponent } from '../../components/modal/modal.component';
+
 
 @Component({
   selector: 'app-taskies',
   standalone: true,
   imports: [
-    
     TaskieCardComponent,
     LoaderComponent,
     ModalComponent
   ],
-  templateUrl: './taskiescard.component.html',
-  styleUrl: './taskiecard.component.scss'
+  templateUrl: './taskie.component.html',
+  styleUrl: './taskie.component.scss'
 })
 export class TaskieComponent {
+
 
 }
