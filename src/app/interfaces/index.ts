@@ -19,6 +19,17 @@ export interface IUser {
   authorities?: IAuthority[];
 }
 
+export interface IUserSpec {
+  id?: number;
+  name?: string;
+  lastname?: string;
+  email?: string;
+  password?: string;
+  active?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 export interface IAuthority {
   authority: string;
 }

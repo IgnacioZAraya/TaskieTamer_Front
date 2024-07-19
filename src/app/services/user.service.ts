@@ -1,6 +1,6 @@
 import { Injectable, signal } from "@angular/core";
 import { BaseService } from "./base-service";
-import { IUser } from "../interfaces";
+import { IUser, IUserSpec } from "../interfaces";
 import { Observable, catchError, tap, throwError } from "rxjs";
 
 @Injectable({
@@ -34,7 +34,8 @@ export class UserService extends BaseService<IUser> {
       })
     );
   }
-  updateUserSignal(user: IUser): Observable<any> {
+
+  updateUserSignal(user: IUserSpec): Observable<any> {
     return this.edit(user.id, user).pipe(
       tap((response: any) => {
         const updatedUsers = this.userListSignal().map((u) =>
@@ -48,6 +49,7 @@ export class UserService extends BaseService<IUser> {
       })
     );
   }
+
   deleteUserSignal(user: IUser): Observable<any> {
     return this.del(user.id).pipe(
       tap((response: any) => {

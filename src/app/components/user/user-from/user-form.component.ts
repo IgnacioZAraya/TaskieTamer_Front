@@ -1,5 +1,10 @@
 import { Component, Input, inject } from "@angular/core";
-import { IFeedBackMessage, IUser, IFeedbackStatus } from "../../../interfaces";
+import {
+  IFeedBackMessage,
+  IUser,
+  IFeedbackStatus,
+  IUserSpec,
+} from "../../../interfaces";
 import { CommonModule } from "@angular/common";
 import { FormsModule, NgForm } from "@angular/forms";
 import { UserService } from "../../../services/user.service";
@@ -20,6 +25,13 @@ export class UserFormComponent {
     password: "",
     name: "",
   };
+  @Input() userSpec: IUserSpec = {
+    email: "",
+    lastname: "",
+    password: "",
+    name: "",
+  };
+
   @Input() action: string = "add";
   service = inject(UserService);
   feedbackMessage: IFeedBackMessage = {
@@ -35,9 +47,10 @@ export class UserFormComponent {
       });
       return;
     } else {
+      this.setUserUpdt();
       this.service[
         this.action == "add" ? "saveUserSignal" : "updateUserSignal"
-      ](this.user).subscribe({
+      ](this.userSpec).subscribe({
         next: () => {
           this.feedbackMessage.message = `User successfully ${
             this.action == "add" ? "added" : "updated"
@@ -50,5 +63,13 @@ export class UserFormComponent {
         },
       });
     }
+  }
+
+  private setUserUpdt(): void {
+    this.userSpec.id = this.user.id;
+    this.userSpec.name = this.user.name;
+    this.userSpec.lastname = this.user.lastname;
+    this.userSpec.password = this.user.password;
+    this.userSpec.email = this.user.email;
   }
 }

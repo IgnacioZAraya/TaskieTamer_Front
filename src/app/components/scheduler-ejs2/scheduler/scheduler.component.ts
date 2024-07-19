@@ -18,7 +18,7 @@ import {
 } from "@syncfusion/ej2-angular-inputs";
 import { ButtonModule, CheckBoxModule } from "@syncfusion/ej2-angular-buttons";
 import { closest } from "@syncfusion/ej2-base";
-import { DataManager, WebApiAdaptor } from "@syncfusion/ej2-data";
+import { DataManager, UrlAdaptor } from "@syncfusion/ej2-data";
 import { DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
 import { DropDownListModule } from "@syncfusion/ej2-angular-dropdowns";
 
@@ -49,6 +49,12 @@ export class SchedulerComponent {
   public isRecurrent: boolean = false;
   @ViewChild("schedule") scheduleObj!: ScheduleComponent;
 
+  public data: DataManager = new DataManager({
+    url: "http://localhost:8080/tasks",
+    adaptor: new UrlAdaptor(),
+    crossDomain: true,
+  });
+
   public eventObject: EventSettingsModel = {
     dataSource: [
       {
@@ -63,7 +69,7 @@ export class SchedulerComponent {
       subject: { name: "Name" },
       startTime: { name: "StartDate" },
       endTime: { name: "EndDate" },
-      description: { name: "Deascription" },
+      description: { name: "Description" },
     },
   };
 
