@@ -3,10 +3,29 @@
     <app-scheduler> </app-scheduler>
   </div>
 
-  <span (click)="formModal.show()" style="cursor: pointer">
-    <i class="fa-solid fa-plus white"></i>
-    <p class="mb-0">Add task</p>
-  </span>
+  <div>
+    <h1>Tareas predeterminadas</h1>
+    <div>
+      <span (click)="formModal.show()" style="cursor: pointer">
+        <p class="mb-0">Sacar la basura</p>
+      </span>
+    </div>
+    <div>
+      <span (click)="formModal.show()" style="cursor: pointer">
+        <p class="mb-0">Cepillarse los dientes</p>
+      </span>
+    </div>
+    <div>
+      <span (click)="formModal.show()" style="cursor: pointer">
+        <p class="mb-0">Ordenar el cuarto</p>
+      </span>
+    </div>
+    <div>
+      <span (click)="formModal.show()" style="cursor: pointer">
+        <p class="mb-0">Bañarse</p>
+      </span>
+    </div>
+  </div>
 </div>
 
 <app-modal size="lg" #formModal>
