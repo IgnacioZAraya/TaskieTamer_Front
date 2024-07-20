@@ -44,3 +44,15 @@ export interface ITaskieImg {
   alt: string;
   title: string;
 }
+
+export interface ITask {
+  id?: number;
+  name?: string;
+  userId?: number;
+  priority?: number;
+  description?: string;
+  startDate?: Date;
+  endDate?: Date;
+  isCompleted?: boolean;
+  isVerified?: boolean;
+}

@@ -12,15 +12,15 @@ import {
   EJ2Instance,
   PopupOpenEventArgs,
 } from "@syncfusion/ej2-angular-schedule";
-import {
-  TextBoxComponent,
-  TextBoxModule,
-} from "@syncfusion/ej2-angular-inputs";
+import { TextBoxComponent, TextBoxModule } from "@syncfusion/ej2-angular-inputs";
 import { ButtonModule, CheckBoxModule } from "@syncfusion/ej2-angular-buttons";
 import { closest } from "@syncfusion/ej2-base";
-import { DataManager, WebApiAdaptor } from "@syncfusion/ej2-data";
+import { DataManager, UrlAdaptor } from "@syncfusion/ej2-data";
 import { DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
 import { DropDownListModule } from "@syncfusion/ej2-angular-dropdowns";
+import { AuthService } from "../../../services/auth.service";
+import { IUser, ITask } from "../../../interfaces";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: "app-scheduler",
@@ -47,25 +47,37 @@ import { DropDownListModule } from "@syncfusion/ej2-angular-dropdowns";
 export class SchedulerComponent {
   public items: string[] = ["Daily", "Weekly", "Monthly"];
   public isRecurrent: boolean = false;
+  public currentUserId: number | undefined = 1;
+  public eventObject!: EventSettingsModel;
   @ViewChild("schedule") scheduleObj!: ScheduleComponent;
 
-  public eventObject: EventSettingsModel = {
-    dataSource: [
-      {
-        Name: "Prueba",
-        StartDate: new Date(2024, 6, 17, 10, 0),
-        EndDate: new Date(2024, 6, 17, 12, 0),
-        Priority: 1,
-        Description: "Probando 1 2 3 cha cha",
-      },
-    ],
-    fields: {
-      subject: { name: "Name" },
-      startTime: { name: "StartDate" },
-      endTime: { name: "EndDate" },
-      description: { name: "Deascription" },
-    },
-  };
+  constructor(private authService: AuthService, private http: HttpClient) {
+    this.currentUserId = authService.getUser()?.id;
+  }
+
+  ngOnInit(): void {
+    this.loadEvents();
+  }
+
+  loadEvents(): void {
+    this.http.get<ITask[]>('task/userId/' + this.currentUserId?.toLocaleString()).subscribe((data: ITask[]) => {
+      // Convertir fechas a objetos Date
+      const events = data.map(event => ({
+        ...event,
+        startTime: new Date(event.startDate!),
+        endTime: new Date(event.endDate!)
+      }));
+      this.eventObject = {
+        dataSource: events,
+        fields: {
+          subject: { name: "name" },
+          startTime: { name: "startTime" },
+          endTime: { name: "endTime" },
+          description: { name: "description" },
+        },
+      };
+    });
+  }
 
   onPopupOpen(args: PopupOpenEventArgs): void {
     if (args.type === "Editor") {
