@@ -79,6 +79,8 @@ export class SchedulerComponent {
     });
   }
 
+
+
   onPopupOpen(args: PopupOpenEventArgs): void {
     if (args.type === "Editor") {
       args.cancel = true;

@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
 import { AppLayoutComponent } from './components/app-layout/app-layout.component';
+import { TaskieCardComponent } from './components/taskies/taskieCards/taskies-card.component';
 import { AdminRoleGuard } from './guards/admin-role.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { GuestGuard } from './guards/guest.guard';
-import { IRole } from './interfaces';
+import { IRoleType } from './interfaces';
 import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
@@ -11,7 +12,6 @@ import { CalendarComponent } from "./pages/calendar/calendar.component";
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from "./pages/profile/profile.component";
 import { UsersComponent } from './pages/users/users.component';
-import { TaskieCardComponent } from './components/taskies/taskieCards/taskies-card.component';
 
 
 export const routes: Routes = [
@@ -49,8 +49,8 @@ export const routes: Routes = [
         canActivate:[ AdminRoleGuard],
         data: { 
           authorities: [
-            IRole.admin, 
-            IRole.superAdmin                    
+            IRoleType.admin, 
+            IRoleType.superAdmin                    
           ],
           name: 'Users'
         }
@@ -60,7 +60,7 @@ export const routes: Routes = [
         component: CalendarComponent,
         canActivate:[AuthGuard],
         data: {
-          authorities: [IRole.admin, IRole.superAdmin, IRole.user],
+          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
           name: "Calendar",
         },
       },
@@ -68,14 +68,14 @@ export const routes: Routes = [
         path: "profile",
         component: ProfileComponent,
         data: {
-          authorities: [IRole.admin, IRole.superAdmin, IRole.user],
+          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
           name: "Profile",
         },
       },{
         path: "taskies",
         component: TaskieCardComponent,
         data: {
-          authorities: [IRole.admin, IRole.superAdmin, IRole.user],
+          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
           name: "Taskies",
         },
       },

@@ -18,4 +18,9 @@ export class ProfileComponent {
   constructor() {
     this.profileService.getLoggedUserInfo();
   }
+  
+  public level() {
+    
+    this.profileService.user$().level?.value;
+  }
 }

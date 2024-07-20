@@ -53,8 +53,14 @@ body[class="dark-only"] {
 @import "ngx-toastr/toastr";
 
 @font-face {
-  font-family: "Playwrite";
-  src: url(assets/fonts/PlaywriteCU-VariableFont_wght.ttf) format("truetype");
+  font-family: 'PuppyBellies';
+  src: url(assets/fonts/Puppybellies-JyRM.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: 'QuiteMagical';
+  src: url(assets/fonts/QuiteMagicalRegular-8VA2.ttf) format("truetype");
+
 }
 
 html,
@@ -71,10 +77,24 @@ body {
 }
 
 h1 {
-  font-family: "Playwrite";
+
+  font-family: 'PuppyBellies';
+  font-size: 2rem;
 }
 
-p {
+p, label, input, thead {
+  color: #6a4a3d;
+  font-family: 'QuiteMagical';
+  font-size: 1.5rem;
+}
+
+::placeholder {
+  color: #6a4a3d89;
+}
+
+tbody, tr {
+  font-family: 'QuiteMagical';
+  font-size: 1.25rem;
   color: #6a4a3d;
 }
 
@@ -85,21 +105,35 @@ body,
   background-color: #00a0b0;
 }
 
-button,
-.custom-btn {
+
+button, .custom-btn, .btn-secondary {
   background-color: #6a4a3d;
   color: #edc951;
-  font-family: "Playwrite";
+  font-family: 'PuppyBellies';
+}
+
+.yellow {
+  background-color: #edc951;
 }
 
 .app-sidebar {
   background-color: #edc951;
 }
 
-.pallettes {
+
+.btn-danger {
+  background-color: #6a4a3d;
+  color: #ff0015;
+}
+
+.pallettes{
   color: #00a0b0;
   color: #6a4a3d;
   color: #cd333f;
   color: #ec6841;
   color: #edc951;
+}
+
+.round {
+  border-radius: 80px ;
 }
