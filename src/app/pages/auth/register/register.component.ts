@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, inject, ViewChild } from "@angular/core";
-import { FormsModule, NgModel } from "@angular/forms";
+import { AbstractControl, FormsModule, NgModel, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../../../services/auth.service";
 import { IUser } from "../../../interfaces";
@@ -59,5 +59,28 @@ export class RegisterComponent {
       this.emailModel.reset();
       this.passwordModel.reset();
     }
+  }
+  passwordLengthValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const password = control.value;
+      const lengthValid = password.length >= 8 && password.length <= 12;
+      const hasUpperCase = /[A-Z]/.test(password);
+      const hasNumber = /\d/.test(password);
+
+      if (lengthValid && hasUpperCase && hasNumber) {
+        return null;
+      }
+
+      return {
+        passwordLength: !lengthValid,
+        passwordUpperCase: !hasUpperCase,
+        passwordNumber: !hasNumber,
+      };
+    };
+  }
+
+  ngAfterViewInit() {
+    this.passwordModel.control.setValidators(this.passwordLengthValidator());
+    this.passwordModel.control.updateValueAndValidity();
   }
 }

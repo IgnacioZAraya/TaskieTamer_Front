@@ -81,4 +81,13 @@ export interface ITask {
   endDate?: Date;
   isCompleted?: boolean;
   isVerified?: boolean;
+  visible?: boolean;
+}
+
+export interface ITaskSpec {
+  name?: string;
+  priority?: number;
+  description?: string;
+  startDate?: Date;
+  endDate?: Date;
 }

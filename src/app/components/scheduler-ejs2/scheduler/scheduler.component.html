@@ -38,12 +38,12 @@
         <label for="startDate" class="form-label mb-2"> Start Date</label>
         <ejs-datetimepicker
           id="taskStartDate"
-          value="{{ data.startDate }}"
+          value="{{ data.StartDate }}"
         ></ejs-datetimepicker>
         <label for="endDate" class="form-label mb-2"> End Date</label>
         <ejs-datetimepicker
           id="taskEndDate"
-          value="{{ data.endDate }}"
+          value="{{ data.EndDate }}"
         ></ejs-datetimepicker>
       </div>
     </div>
@@ -90,18 +90,37 @@
         ></textarea>
       </div>
     </div>
-  </ng-template>
-
-  <ng-template #quickInfoTemplatesFooter let-data>
-    <div>
+    <div *ngIf="data.elementType == 'cell'">
       <button
         ejs-button
         cssClass="e-flat"
         [isPrimary]="true"
         (click)="addTask($event, 'add')"
       >
+        Add
+      </button>
+    </div>
+    <div *ngIf="data.elementType == 'event'">
+      <button
+        ejs-button
+        cssClass="e-flat"
+        [isPrimary]="true"
+        (click)="addTask($event, 'edit')"
+      >
         Save
+      </button>
+      <button
+        ejs-button
+        cssClass="e-flat"
+        [isPrimary]="true"
+        (click)="addTask($event, 'delete')"
+      >
+        Delete
       </button>
     </div>
   </ng-template>
+
+  <ng-template #quickInfoTemplatesFooter class="diss">
+  </ng-template>
+  
 </ejs-schedule>
