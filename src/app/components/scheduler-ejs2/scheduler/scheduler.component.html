@@ -17,7 +17,7 @@
         <ejs-textbox
           id="taskName"
           placeholder="Name"
-          value="{{ data.Name }}"
+          value="{{ data.name }}"
           required
         ></ejs-textbox>
       </div>
@@ -28,7 +28,7 @@
         <ejs-textbox
           id="taskPriority"
           placeholder="Priority"
-          value="{{ data.Priority }}"
+          value="{{ data.priority }}"
           required
         ></ejs-textbox>
       </div>
@@ -38,12 +38,12 @@
         <label for="startDate" class="form-label mb-2"> Start Date</label>
         <ejs-datetimepicker
           id="taskStartDate"
-          value="{{ data.StartDate }}"
+          value="{{ data.startDate }}"
         ></ejs-datetimepicker>
         <label for="endDate" class="form-label mb-2"> End Date</label>
         <ejs-datetimepicker
           id="taskEndDate"
-          value="{{ data.EndDate }}"
+          value="{{ data.endDate }}"
         ></ejs-datetimepicker>
       </div>
     </div>
@@ -85,7 +85,7 @@
           #textArea
           id="taskDescription"
           placeholder="Description"
-          [value]="[data.Description]"
+          [value]="[data.description]"
           required
         ></textarea>
       </div>
