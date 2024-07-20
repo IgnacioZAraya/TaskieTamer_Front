@@ -12,14 +12,14 @@
             <div class="form-child">
               <div class="mb-3">
                 <h1>Register Account</h1>
-                <p>
-                  Let's get started!
-                </p>
+                <p>Let's get started!</p>
               </div>
 
               <div class="d-flex align-items-center mb-3">
                 <div class="form-group px-1">
-                  <label for="name" class="form-label mb-2 customlabel"> Name </label>
+                  <label for="name" class="form-label mb-2 customlabel">
+                    Name
+                  </label>
                   <input
                     #name="ngModel"
                     type="text"
@@ -86,7 +86,9 @@
               </div>
 
               <div class="form-group mb-5">
-                <label for="password" class="form-label mb-2 customlabel">Password</label>
+                <label for="password" class="form-label mb-2 customlabel"
+                  >Password</label
+                >
                 <div class="form-input position-relative">
                   <input
                     #password="ngModel"
@@ -116,11 +118,6 @@
               <button class="shadow btn register-btn custom-btn" type="submit">
                 Register
               </button>
-              @if(signUpError) {
-              <p class="text-danger">{{ signUpError }}</p>
-              } @else if (validSignup){
-              <p class="text-success">User registered, please go to login</p>
-              }
             </div>
           </form>
         </div>

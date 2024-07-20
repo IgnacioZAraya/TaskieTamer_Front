@@ -13,9 +13,7 @@
             <div class="form-child">
               <div class="mb-3">
                 <h1>Log into your Account</h1>
-                <p>
-                  Enter your email & password to login
-                </p>
+                <p>Enter your email & password to login</p>
               </div>
 
               <div class="form-group mb-3">
@@ -42,7 +40,9 @@
               </div>
 
               <div class="form-group mb-4">
-                <label for="password" class="form-label mb-2 customlabel">Password</label>
+                <label for="password" class="form-label mb-2 customlabel"
+                  >Password</label
+                >
                 <div class="form-input position-relative">
                   <input
                     #password="ngModel"
@@ -63,7 +63,11 @@
                   </div>
                 </div>
               </div>
-              <button class="btn custom-btn" type="submit" (click)="redRegister()">
+              <button
+                class="btn custom-btn"
+                type="submit"
+                (click)="redRegister()"
+              >
                 Go Register!
               </button>
             </div>
@@ -72,9 +76,6 @@
               <button class="shadow btn login-btn custom-btn" type="submit">
                 Log in
               </button>
-              @if(loginError) {
-              <p class="text-danger">{{ loginError }}</p>
-              }
             </div>
           </form>
         </div>
