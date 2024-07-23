@@ -35,12 +35,19 @@
 
   input {
     background-color: #edc951;
+    color: #6a4a3d;
+    font-size: 1.5rem;
     padding: 3px;
     margin-bottom: 5px;
   }
 
+  ::placeholder {
+    color: #6a4a3d89;
+  }  
+
   h1 {
-    font-family: 'Playwrite';
+    font-family: 'PuppyBellies';
+    font-size: 2rem;
   }
 
   h1, p, .customlabel {
@@ -52,7 +59,7 @@
   }
 
   .login-btn {
-    height: 80px;
+    height: 50px;
     margin-left: 30px;
   }
 
@@ -60,8 +67,12 @@
     input {
       background-color: #6a4a3d;
       color: #edc951;
-      font-family: 'Playwrite';
+      font-family: 'PuppyBellies';
     }
+  }
+
+  .center {
+    align-items: center;
   }
 
   @media screen and (min-width: 891px) and (max-width: 1500px) {

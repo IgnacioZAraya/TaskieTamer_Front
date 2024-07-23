@@ -23,10 +23,15 @@
     "@angular/router": "^17.3.0",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@syncfusion/ej2-angular-buttons": "^26.1.40",
+    "@syncfusion/ej2-angular-calendars": "^26.1.41",
+    "@syncfusion/ej2-angular-dropdowns": "^26.1.42",
     "@syncfusion/ej2-angular-inputs": "^26.1.41",
     "@syncfusion/ej2-angular-schedule": "^26.1.40",
+    "@syncfusion/ej2-angular-splitbuttons": "^26.1.35",
     "@syncfusion/ej2-material-theme": "^26.1.40",
     "dhtmlx-scheduler": "^7.0.5",
+    "gsap": "^3.12.5",
+    "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
@@ -36,12 +41,16 @@
     "@angular/cli": "^17.3.7",
     "@angular/compiler-cli": "^17.3.0",
     "@types/jasmine": "~5.1.0",
+    "autoprefixer": "^10.4.19",
+    "daisyui": "^4.12.10",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.6",
     "typescript": "~5.4.2"
   }
 }
