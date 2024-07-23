@@ -16,5 +16,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
     styleUrls: ["./taskie-prof.component.scss"]
   })
   export class TaskieDetailComponent {
-    constructor(@Inject(MAT_DIALOG_DATA) public taskie: ITaskie) {}
+    constructor(@Inject(MAT_DIALOG_DATA) public taskie: ITaskie) {
+      
+    }
   }

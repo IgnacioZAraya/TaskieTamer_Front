@@ -1,28 +1,17 @@
 <div class="modal-container">
     <h2 class="modal-title">Taskie Info</h2>
     <div class="modal-content">
-        <div class="modal-card">
-            <img [src]="taskie.sprite" alt="{{ taskie.name }}" class="taskie-detail-image">
-            <p class="modal-card-title">Taskie</p>
-        </div>
-        <div class="modal-description">
-            <p class="modal-card-title">Descripcion</p>
-            <h3>{{ taskie.name }}</h3>
-            <p>Specie: {{ taskie.specie }}</p>
-            <p>Is Unlocked: {{ taskie.unlock }}</p>
-            <p>ID: {{ taskie.id }}</p>
-            
-            
-           
-            
-        </div>
-        <div class="modal-cosmetics">
-             <p class="modal-card-title">Cosmetics</p>
-
-        </div>
-
+      <div class="modal-card">
+        <img [src]="taskie.sprite" alt="{{ taskie.name }}" class="taskie-detail-image">
+        <p class="modal-card-title">Taskie</p>
+      </div>
+      <div class="modal-card">
+        <p class="modal-card-title">Descripción</p>
+        <h3>{{ taskie.name }}</h3>
+        <p>Specie: {{ taskie.specie.description }}</p>
+        <p>Status: {{ taskie.status.description }}</p>
+        <p>ID: {{ taskie.id }}</p>
+        <p>Experience: {{ taskie.experience }}</p>
+      </div>
     </div>
-    <div class="modal-footer">
-        <div class="taskie-level">Taskie Level</div>
-    </div>
-</div>
+  </div>

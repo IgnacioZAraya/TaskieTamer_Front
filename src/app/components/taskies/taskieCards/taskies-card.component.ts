@@ -22,9 +22,8 @@ import { TaskieDetailComponent } from '../taskiesProf/taskie-prof.component';
 
 
   ngOnInit(): void {
-    this.taskieService.getTaskies().subscribe(taskies => {
-      this.taskies = taskies;
-    });
+    this.taskieService.getAllSignal();
+    this.taskies = this.taskieService.taskies$();
   }
   openTaskieDetail(taskie: ITaskie): void {
     this.dialog.open(TaskieDetailComponent, {

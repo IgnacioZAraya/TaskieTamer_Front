@@ -49,11 +49,14 @@ export interface ITaskieImg {
 
 
 export interface ITaskie {
-  id?: number;
-  specie?: string;
-  name?: string;
-  experience?: string;
-  sprite?: string;
-  unlock?: boolean;
-  cosmetic?: string;
+  id: number;
+  name: string;
+  experience: number;
+  sprite: string;
+  specie: {
+    description: string;
+  };
+  status: {
+    description: string;
+  };
 }

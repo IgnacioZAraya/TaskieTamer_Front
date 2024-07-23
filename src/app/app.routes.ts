@@ -73,15 +73,21 @@ export const routes: Routes = [
           name: "Profile",
         },
       },{
-        path: "taskies",
+        path: "taskie",
         component: TaskieComponent,
         data: {
           authorities: [IRole.admin, IRole.superAdmin, IRole.user],
-          name: "Taskies",
+          name: "TaskiesDex",
         },
-        },{ path: '', 
-          redirectTo: '/taskies', 
-          pathMatch: 'full' },
+        },
+        {
+          path: "taskieProf",
+          component: TaskieComponent,
+          data: {
+            authorities: [IRole.admin, IRole.superAdmin, IRole.user],
+            name: "TaskiesProfile",
+          },
+          },
       {
         path: 'home',
         component: HomeComponent,
