@@ -84,6 +84,19 @@ export interface ITask {
   visible?: boolean;
 }
 
+export interface ITaskie {
+  id: number;
+  name: string;
+  experience: number;
+  sprite: string;
+  specie: {
+    description: string;
+  };
+  status: {
+    description: string;
+  };
+}
+  
 export interface ITaskSpec {
   name?: string;
   priority?: number;
