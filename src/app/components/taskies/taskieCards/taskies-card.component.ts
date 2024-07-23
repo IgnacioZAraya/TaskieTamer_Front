@@ -1,11 +1,8 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
-import { IFeedBackMessage, IFeedbackStatus, ITaskie} from '../../../interfaces';
+import { Component, Input, inject } from '@angular/core';
+import { IFeedBackMessage, IUser, IFeedbackStatus, ITaskieImg} from '../../../interfaces';
 import { NgOptimizedImage, NgFor  } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import {MatDialog } from '@angular/material/dialog'
-import { TaskieService } from '../../../services/taskies.service';
-import { TaskieDetailComponent } from '../taskiesProf/taskie-prof.component';
+import { UserService } from '../../../services/user.service';
 @Component({
     selector: "app-taskie-card",
     standalone: true,
@@ -15,20 +12,15 @@ import { TaskieDetailComponent } from '../taskiesProf/taskie-prof.component';
     templateUrl: "./taskies-card.component.html",
     styleUrls: ["./taskies-card.component.scss"]
   })
-  export class TaskieCardComponent implements OnInit{
-    taskies: ITaskie[] = [];
-
- constructor(private taskieService: TaskieService, public dialog: MatDialog) {}
-
-
-  ngOnInit(): void {
-    this.taskieService.getAllSignal();
-    this.taskies = this.taskieService.taskies$();
-  }
-  openTaskieDetail(taskie: ITaskie): void {
-    this.dialog.open(TaskieDetailComponent, {
-      data: taskie
-    });
-   
+  export class TaskieCardComponent{
+    images: ITaskieImg[] = [
+        { src: '../../../assets/taskies/Ajolote bb.png', alt: 'Ajolote_bb', title: 'Ajolotito' },
+        { src: '../../../assets/taskies/Croco bb.png', alt: 'Croco bb', title: 'Cocodrilito' },
+        { src: '../../../assets/taskies/Lobo bb.png', alt: 'Lobo bb', title: 'Lobito' },
+      
+      ];
+    
+      onImageClick(image: ITaskieImg) {
+        console.log('Image clicked:', image);
   }
 }

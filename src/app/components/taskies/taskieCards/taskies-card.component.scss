@@ -1,33 +1,34 @@
-.taskie-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.taskie-card {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 16px;
-  margin: 16px;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  width: 200px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.taskie-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.taskie-card h3 {
-  margin: 10px 0 0;
-  font-size: 1.2em;
-}
-
-.taskie-image {
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
+.card-container {
+    display: flex;
+    height: max-content;
+    width: max-content;
+    justify-content: space-around;
+    margin: auto;
+  
+  }
+  
+  .card {
+    background-color: #55e6f3;
+    border: 1.5px solid #000000;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 300px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin: 40px;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .card-body {
+    padding: 15px;
+    text-align: center;
+  }
+  

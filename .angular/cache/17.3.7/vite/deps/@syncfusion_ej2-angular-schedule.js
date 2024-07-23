@@ -14,7 +14,7 @@ import {
   hideSpinner,
   isCollide,
   showSpinner
-} from "./chunk-HEBGXUVE.js";
+} from "./chunk-XDCGFBEL.js";
 import {
   ArrayBase,
   Button,
