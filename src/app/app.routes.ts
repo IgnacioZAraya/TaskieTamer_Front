@@ -14,9 +14,6 @@ import { ProfileComponent } from "./pages/profile/profile.component";
 import { UsersComponent } from './pages/users/users.component';
 
 
-import { TaskieComponent } from './pages/taskies/taskie.component';
-
-
 export const routes: Routes = [
   {
     path: "login",
@@ -75,21 +72,13 @@ export const routes: Routes = [
           name: "Profile",
         },
       },{
-        path: "taskie",
-        component: TaskieComponent,
+        path: "taskies",
+        component: TaskieCardComponent,
         data: {
-          authorities: [IRole.admin, IRole.superAdmin, IRole.user],
-          name: "TaskiesDex",
+          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
+          name: "Taskies",
         },
-        },
-        {
-          path: "taskieProf",
-          component: TaskieComponent,
-          data: {
-            authorities: [IRole.admin, IRole.superAdmin, IRole.user],
-            name: "TaskiesProfile",
-          },
-          },
+      },
       {
         path: 'home',
         component: HomeComponent,
