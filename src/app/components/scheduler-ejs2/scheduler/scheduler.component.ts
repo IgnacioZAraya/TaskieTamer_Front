@@ -22,6 +22,7 @@ import { AuthService } from "../../../services/auth.service";
 import { IUser, ITask, ITaskSpec } from "../../../interfaces";
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from "@angular/common";
+import { FormComponent } from "../form/form.component";
 
 @Component({
   selector: "app-scheduler",
@@ -52,13 +53,18 @@ export class SchedulerComponent {
   public currentUserId: number | undefined = 1;
   public eventObject!: EventSettingsModel;
   @ViewChild("schedule") scheduleObj!: ScheduleComponent;
-
+  @ViewChild(FormComponent) formComponent!: FormComponent;
   constructor(private authService: AuthService, private http: HttpClient) {
     this.currentUserId = authService.getUser()?.id;
   }
 
   ngOnInit(): void {
     this.loadEvents();
+    if (this.formComponent) {
+      this.formComponent.taskChanged.subscribe(() => {
+        this.loadEvents(); 
+      });
+    }
   }
 
   loadEvents(): void {
