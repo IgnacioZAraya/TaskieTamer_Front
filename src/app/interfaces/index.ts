@@ -85,9 +85,12 @@ export interface ITask {
 }
 
 export interface ITaskSpec {
+  id?: number;
   name?: string;
+  userId?: number;
   priority?: number;
   description?: string;
   startDate?: Date;
   endDate?: Date;
+  visible?: boolean;
 }

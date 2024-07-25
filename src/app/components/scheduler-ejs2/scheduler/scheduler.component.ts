@@ -16,7 +16,7 @@ import { TextBoxComponent, TextBoxModule } from "@syncfusion/ej2-angular-inputs"
 import { ButtonModule, CheckBoxModule } from "@syncfusion/ej2-angular-buttons";
 import { closest } from "@syncfusion/ej2-base";
 import { DataManager, UrlAdaptor } from "@syncfusion/ej2-data";
-import { DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
+import { DateTimePickerComponent, DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
 import { DropDownListModule } from "@syncfusion/ej2-angular-dropdowns";
 import { AuthService } from "../../../services/auth.service";
 import { IUser, ITask, ITaskSpec } from "../../../interfaces";
@@ -66,15 +66,15 @@ export class SchedulerComponent {
       // Convertir fechas a objetos Date
       const events = data.map(event => ({
         ...event,
-        startTime: new Date(event.startDate!),
-        endTime: new Date(event.endDate!)
+        startDate: new Date(event.startDate!),
+        endDate: new Date(event.endDate!)
       }));
       this.eventObject = {
         dataSource: events,
         fields: {
           subject: { name: "name" },
-          startTime: { name: "startTime" },
-          endTime: { name: "endTime" },
+          startTime: { name: "startDate" },
+          endTime: { name: "endDate" },
           description: { name: "description" },
         },
       };
@@ -110,34 +110,24 @@ export class SchedulerComponent {
     let taskDescription = (
       quickPopup.querySelector("#taskDescription") as HTMLTextAreaElement
     ).value;
+    let taskStartDate = new Date(
+      (
+        (quickPopup.querySelector("#taskStartDate") as EJ2Instance)
+          .ej2_instances[0] as DateTimePickerComponent
+      ).value
+    );
   
-    // Obtener fechas seleccionadas
-    let startTime = this.scheduleObj.activeCellsData.startTime;
-    let endTime = this.scheduleObj.activeCellsData.endTime;
-  
-    // Validar fechas
-    if (!startTime || !endTime) {
-      console.error("Fechas inválidas o no seleccionadas.");
-      return;
-    }
-  
-    // Crear objetos Date
-    let startDate = new Date(startTime);
-    let endDate = new Date(endTime);
-  
-    // Validar que las fechas sean válidas
-    if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
-      console.error("Fechas inválidas.");
-      return;
-    }
-
-    
-  
+    let taskEndDate = new Date(
+      (
+        (quickPopup.querySelector("#taskEndDate") as EJ2Instance)
+          .ej2_instances[0] as DateTimePickerComponent
+      ).value
+    );
     if (option === "add") {
       let addObj: Record<string, any> = {
         name: taskName,
-        startDate: startDate.toISOString(),  
-        endDate: endDate.toISOString(),      
+        startDate: taskStartDate,
+        endDate: taskEndDate,
         priority: taskPriority,
         description: taskDescription,
         userId: this.currentUserId,
@@ -148,33 +138,32 @@ export class SchedulerComponent {
   
       this.http.post('task', addObj).subscribe(response => {
         console.log('Agregar tarea funciona', response);
-        this.loadEvents(); 
+        this.loadEvents();
       });
   
       this.scheduleObj.addEvent({
         Id: this.scheduleObj.getEventMaxID(),
         Name: taskName,
-        StartDate: startDate,
-        EndDate: endDate,
+        StartDate: taskStartDate,
+        EndDate: taskEndDate,
         Priority: taskPriority,
         Description: taskDescription,
       });
     } else if (option === "edit") {
       let eventDetails: Record<string, any> = this.scheduleObj.activeEventData.event as Record<string, any>;
     
-      // Asegúrate de que el ID esté presente
-      if (!eventDetails || !eventDetails['Id']) {
+      console.log("Detalles del evento: ", eventDetails); // Log de depuración
+      let eventId = eventDetails['id'] || eventDetails['Id'];
+      if (!eventId) {
         console.error("El ID del evento es undefined");
         return;
       }
     
-      // Obtener los valores actualizados
       let taskName = (
         (quickPopup.querySelector("#taskName") as EJ2Instance)
           .ej2_instances[0] as TextBoxComponent
       ).value;
-      
-      // Convertir priority a número
+    
       let taskPriority = (
         (quickPopup.querySelector("#taskPriority") as EJ2Instance)
           .ej2_instances[0] as TextBoxComponent
@@ -189,50 +178,51 @@ export class SchedulerComponent {
         quickPopup.querySelector("#taskDescription") as HTMLTextAreaElement
       ).value;
     
-      // Obtener fechas seleccionadas
-      let startTime = this.scheduleObj.activeCellsData.startTime;
-      let endTime = this.scheduleObj.activeCellsData.endTime;
+      let taskStartDate = new Date(
+        (
+          (quickPopup.querySelector("#taskStartDate") as EJ2Instance)
+            .ej2_instances[0] as DateTimePickerComponent
+        ).value
+      );
     
-      if (!startTime || !endTime) {
-        console.error("Fechas inválidas o no seleccionadas.");
-        return;
-      }
+      let taskEndDate = new Date(
+        (
+          (quickPopup.querySelector("#taskEndDate") as EJ2Instance)
+            .ej2_instances[0] as DateTimePickerComponent
+        ).value
+      );
     
-      // Convertir las fechas a objetos Date
-      let startDate = new Date(startTime);
-      let endDate = new Date(endTime);
-    
-      // Crear objeto para actualizar la tarea
       let updatedTask: ITaskSpec = {
         name: taskName,
         priority: priorityNumber,
         description: taskDescription,
-        startDate: startDate,  // Pasar objeto Date directamente
-        endDate: endDate,      // Pasar objeto Date directamente
+        startDate: taskStartDate,
+        endDate: taskEndDate,
+        visible: true
       };
     
-      // Enviar solicitud PUT al backend
-      this.http.put(`task/${eventDetails['Id']}`, updatedTask).subscribe(response => {
-        console.log('Actualizar tarea funciona', response);
+      console.log('Updated Task:', updatedTask);
     
-        // Actualizar el evento en el calendario
+      this.http.put(`task/${eventId}`, updatedTask).subscribe(response => {
+        console.log('Actualizar tarea funciona', eventId);
+    
         this.scheduleObj.saveEvent({
           ...eventDetails,
           ...updatedTask,
         });
     
-        // Refrescar los eventos
         this.loadEvents();
-      });        
+      });
     } else if (option === "delete") {
       let eventDetails: Record<string, any> = this.scheduleObj.activeEventData.event as Record<string, any>;
-      
-      // Verificar que el ID esté presente
-      if (eventDetails && eventDetails['Id']) {
-        this.http.delete('task/' + eventDetails['Id']).subscribe(response => {
-          console.log('Eliminar tarea funciona', response);
-          this.scheduleObj.deleteEvent(eventDetails['Id']);
-          this.loadEvents(); // Refrescar eventos después de eliminar
+  
+      console.log("Detalles del evento: ", eventDetails);
+      let eventId = eventDetails['id'] || eventDetails['Id'];
+      if (eventId) {
+        this.http.delete('task/' + eventId).subscribe(response => {
+          console.log('Eliminar tarea funciona', eventId);
+          this.scheduleObj.deleteEvent(eventId);
+          this.loadEvents(); 
         });
       } else {
         console.error("El ID del evento es undefined");
@@ -241,6 +231,7 @@ export class SchedulerComponent {
   
     this.scheduleObj.closeQuickInfoPopup();
   }
+    
 }
   
 
