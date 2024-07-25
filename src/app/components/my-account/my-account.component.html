@@ -1,5 +1,6 @@
 <div class="media profile-media d-flex align-items-center">
-  <i class="fa fa-user-circle-o"></i>
+  <i class="fa-solid fa-minus fa-rotate-90"></i>
+  <i class="fa fa-paw" aria-hidden="true"></i>
   <div class="media-body">
     <h1 class="mb-0">
       Wellcome <i class="fa-solid fa-chevron-down"></i>
@@ -7,9 +8,9 @@
     <span>{{profileService.user$().name}}</span>
   </div>
 </div>
-<ul class="profile-dropdown onhover-show-div">
+<ul class="profile-dropdown onhover-show-div row shadow-lg">
   <li (click)="profile()">
-    <i class="fa-solid fa-arrow-right-from-bracket"></i><span>Profile</span>
+    <i class="fa-solid fa-user"></i><span>Profile</span>
   </li>
   <li (click)="logout()">
     <i class="fa-solid fa-arrow-right-from-bracket"></i><span>Log out</span>
