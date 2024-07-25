@@ -1,10 +1,10 @@
 <div class="media profile-media d-flex align-items-center">
-  <i class="fa-regular fa-user"></i>
+  <i class="fa fa-user-circle-o"></i>
   <div class="media-body">
-    <p class="mb-0 font-roboto">
-      Bienvenido <i class="fa-solid fa-chevron-down"></i>
-    </p>
-    <span>{{ userName }}</span>
+    <h1 class="mb-0">
+      Wellcome <i class="fa-solid fa-chevron-down"></i>
+    </h1>
+    <span>{{profileService.user$().name}}</span>
   </div>
 </div>
 <ul class="profile-dropdown onhover-show-div">

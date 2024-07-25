@@ -26,6 +26,10 @@ export class TopbarComponent implements OnInit {
     this.user = this.authService.getUser();
   }
 
+  public profile(): void {
+    this.router.navigateByUrl('/profile');
+  }
+
   public logout(): void {
     this.authService.logout();
     this.router.navigateByUrl('/login');
