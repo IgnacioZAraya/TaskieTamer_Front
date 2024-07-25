@@ -18,5 +18,14 @@
     <app-xp-bar></app-xp-bar>
   </div>
   <button class="btn custom-btn">Activate associate account</button>
-  <button class="btn custom-btn">Edit</button>
+  <button class="btn custom-btn" (click)="formModal.show()">Edit</button>
 </div>
+
+<app-modal size="lg" #formModal>
+  <app-user-form 
+  [user]="profileService.user$()" 
+  [action]="'edit'"
+  [title]="'Update User'"
+  >
+</app-user-form>
+</app-modal>
