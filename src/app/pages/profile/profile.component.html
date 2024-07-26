@@ -1,6 +1,6 @@
 <div class="shadow-lg round padded colored center">
   <h1 class="mb-5">{{profileService.user$().name}}'s profile info</h1>
-  <div class="d-flex mb-5">
+  <div class="infoCont shadow-lg">
     <div class="half">
       <label>Registered Name:</label>
       <label>Registered Last Name:</label>
@@ -12,13 +12,13 @@
       <p>{{profileService.user$().email}}</p>
     </div>
   </div>
-  <div>
-    <label>Your Xp:</label>
+  <div class="xpSection shadow-lg">
+    <label class="xpLabel">Your Xp:</label>
     <!--<p>{{profileService.user$().level?.value}}</p>-->
     <app-xp-bar></app-xp-bar>
   </div>
-  <button class="btn custom-btn">Activate associate account</button>
-  <button class="btn custom-btn" (click)="formModal.show()">Edit</button>
+  <button class="btn custom-btn shadow-lg">Activate associate account</button>
+  <button class="btn custom-btn shadow-lg" (click)="formModal.show()">Edit</button>
 </div>
 
 <app-modal size="lg" #formModal>

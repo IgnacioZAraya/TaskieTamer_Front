@@ -1,7 +1,8 @@
 <ejs-schedule
   #schedule
-  cssClass="quick-info-popup"
+  cssClass="quick-info-popup custom-border shadow-lg"
   (popupOpen)="onPopupOpen($event)"
+  (renderCell)="onRenderCell($event)"
   [eventSettings]="eventObject"
 >
   <e-views>

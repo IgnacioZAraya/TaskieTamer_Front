@@ -15,6 +15,16 @@
   background: #fff;
 }
 
+/*.e-schedule-headerbar {
+  background-color: #ecd381;
+}*/
+
+.custom-border {
+  border-style: ridge;
+  border: 3px solid #6a4a3d;
+  border-bottom: 3px solid #6a4a3d; 
+}
+
 .element-conf {
   display: flex;
   flex-direction: column;

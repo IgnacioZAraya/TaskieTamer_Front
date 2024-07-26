@@ -11,6 +11,7 @@ import {
   ScheduleComponent,
   EJ2Instance,
   PopupOpenEventArgs,
+  RenderCellEventArgs,
 } from "@syncfusion/ej2-angular-schedule";
 import { TextBoxComponent, TextBoxModule } from "@syncfusion/ej2-angular-inputs";
 import { ButtonModule, CheckBoxModule } from "@syncfusion/ej2-angular-buttons";
@@ -65,6 +66,12 @@ export class SchedulerComponent {
         this.loadEvents(); 
       });
     }
+    let toolbarElement = this.scheduleObj.element.querySelector(".e-schedule .e-schedule-toolbar");
+    (toolbarElement as any).style.background = '#ecd381';
+  }
+
+  public onRenderCell(args: RenderCellEventArgs): void {
+    (args.element as any).style.background = '#ecd381';
   }
 
   loadEvents(): void {

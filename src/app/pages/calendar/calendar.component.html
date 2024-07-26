@@ -1,15 +1,17 @@
-<div class="calendar-cont">
+<h1>Your Calendar!</h1>
+<div class="calendar-cont">  
   <div class="scheduler-cont">
     <app-scheduler> </app-scheduler>
   </div>
 
   <div class="defTasks">
-    <h1>Default Tasks</h1>
-    <div *ngFor="let task of tasks" class="taskDiv">
+    <h2>Default Tasks</h2>
+    <div class="taskDiv shadow-lg">
+    <div *ngFor="let task of tasks" class="tasksDiv">
       <span (click)="selectTask(task)" style="cursor: pointer">
         <p class="mb-0">-{{ task.name }}</p>
       </span>
-    </div>
+    </div></div>
   </div>
 </div>
 
