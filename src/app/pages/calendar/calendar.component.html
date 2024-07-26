@@ -3,11 +3,11 @@
     <app-scheduler> </app-scheduler>
   </div>
 
-  <div>
-    <h1>Tareas predeterminadas</h1>
-    <div *ngFor="let task of tasks">
+  <div class="defTasks">
+    <h1>Default Tasks</h1>
+    <div *ngFor="let task of tasks" class="taskDiv">
       <span (click)="selectTask(task)" style="cursor: pointer">
-        <p class="mb-0">{{ task.name }}</p>
+        <p class="mb-0">-{{ task.name }}</p>
       </span>
     </div>
   </div>

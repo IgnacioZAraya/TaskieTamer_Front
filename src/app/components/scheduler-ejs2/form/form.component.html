@@ -2,15 +2,15 @@
   (ngSubmit)="handleAction(frm)"
   autocomplete="off"
   #frm="ngForm"
-  class=""
+  class="yellow"
 >
 <div class="border-bottom pb-3 mb-3">
   <div class="px-5">
-    <label for="name" class="form-label mb-2"> Name </label>
+    <label for="name" class="form-label mb-2 pt-3"> Name </label>
     <input
       #name="ngModel"
       type="text"
-      class="form-control shadow rounded"
+      class="form-control shadow rounded orange"
       id="name"
       name="name"
       placeholder="Name"
@@ -118,7 +118,7 @@
   </div>
 </div>
 <div >
-  <button type="button" class="btn" (click)="handleAction(frm)">
+  <button type="button" class="shadow btn login-btn custom-btn" (click)="handleAction(frm)">
     Add
   </button>
 </div>
