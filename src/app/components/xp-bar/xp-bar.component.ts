@@ -14,8 +14,8 @@ import { Component } from '@angular/core';
 export class XpBarComponent {
   public progressPercentage!: string;
 
-  public experience: number = 1250;
-  public valueLevel: number = 2500;
+  public experience: number = 75;
+  public valueLevel: number = 100;
 
   constructor() {
     this.percentageCalc(this.experience, this.valueLevel);
