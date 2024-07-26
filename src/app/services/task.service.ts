@@ -1,7 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { BaseService } from './base-service';
-import { ITask } from '../interfaces';
+import { ITask, ITaskSpec } from '../interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,41 +33,31 @@ export class TaskService extends BaseService<ITask>{
     });
   }
 
-  public save(task: ITask) {
-    this.add(task).subscribe(
-      (response: any) => {
-        this.taskListSignal.update((tasks: ITask[]) => [response, ...tasks]);
-      },
-      (error: any) => {
-        console.error('Error adding task:', error);
-        const errorMessage = error.error?.description || 'Unknown error';
-        this.snackBar.open(errorMessage, 'Close' , {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
-        });
-      }
+  saveTaskSignal(task: ITask): Observable<any> {
+    return this.add(task).pipe(
+      tap((response: any) => {
+        this.taskListSignal.update((tasks) => [response, ...tasks]);
+      }),
+      catchError((error) => {
+        console.error("Error saving task", error);
+        return throwError(error);
+      })
     );
   }
 
-  public update(task: ITask) {
-    this.add(task).subscribe({
-      next: (response: any) => {
-        const updatedItems = this.taskListSignal().map(task =>
-          task.id === task.id ? response : task
+  updateTaskSignal(task: ITaskSpec): Observable<any> {
+    return this.edit(task.id, task).pipe(
+      tap((response: any) => {
+        const updatedTasks = this.taskListSignal().map((u) =>
+          u.id === task.id ? response : u
         );
-        this.taskListSignal.set(updatedItems);
-      },
-      error: (error: any) => {
-        console.error('Error updating task:', error);
-        const errorMessage = error.error?.description || 'Unknown error';
-        this.snackBar.open(errorMessage, 'Close' , {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
-        });
-      }
-    });
+        this.taskListSignal.set(updatedTasks);
+      }),
+      catchError((error) => {
+        console.error("Error saving task", error);
+        return throwError(error);
+      })
+    );
   }
 
   public delete(task: ITask) {
