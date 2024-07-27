@@ -18,14 +18,26 @@
 h1 {
   font-family: 'PuppyBellies';
   color: #6a4a3d;
-  font-size: xx-large;
+  font-size: 3rem;
+}
+
+h2 {
+  font-family: 'PuppyBellies';
+  color: #6a4a3d;
+  font-size: 2.25rem;
 }
 
 p {
   padding: 15px;
 }
 
-.taskDiv {
+.tasksDiv {
   border-style: ridge;
-  border: #6a4a3d;
+  background-color: #ecd381;
+  border: 3px solid #6a4a3d;
+}
+
+.taskDiv {
+  border-bottom: 3px solid #1f1612;
+  border-left: 3px solid #1f1612;
 }

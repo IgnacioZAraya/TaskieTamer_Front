@@ -10,11 +10,11 @@
     background-color: #ef9174;
   }
 
-  ::placeholder {
+  ::placeholder, .e-ddl.e-input-group input.e-input::placeholder {
     color: #6a4a3d75;
   }
 
-  .e-datetime-wrapper .e-input-group-icon.e-date-icon, .e-input-group-icon {
+  .e-datetime-wrapper .e-input-group-icon.e-date-icon, .e-input-group-icon.e-time-icon {
     font-size: 20px;
     color: #6a4a3d;
   }

@@ -23,10 +23,10 @@ export class CalendarComponent {
 
   // Define the array of tasks
   tasks = [
-    { name: 'Sacar la basura' },
-    { name: 'Cepillarse los dientes' },
-    { name: 'Ordenar el cuarto' },
-    { name: 'Bañarse' }
+    { name: 'Take out the trash' },
+    { name: 'Brush teeth' },
+    { name: 'Clean the room' },
+    { name: 'Shower' }
   ];
 
   // Property to hold the selected task
