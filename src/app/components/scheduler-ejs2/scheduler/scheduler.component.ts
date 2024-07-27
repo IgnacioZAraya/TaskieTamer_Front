@@ -94,11 +94,14 @@ export class SchedulerComponent {
     });
   }
 
-
   onPopupOpen(args: PopupOpenEventArgs): void {
     if (args.type === "Editor") {
       args.cancel = true;
     }
+  }
+
+  public onCloseClick(){
+    this.scheduleObj.closeQuickInfoPopup();
   }
 
   public toggleRecurrencyForm(event: any) {
@@ -242,7 +245,7 @@ export class SchedulerComponent {
       }
     }
   
-    this.scheduleObj.closeQuickInfoPopup();
+    this.onCloseClick();
   }
     
 }

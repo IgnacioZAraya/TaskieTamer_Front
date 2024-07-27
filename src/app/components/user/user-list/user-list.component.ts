@@ -1,11 +1,12 @@
-import { Component, effect, inject } from '@angular/core';
-import { UserService } from '../../../services/user.service';
-import { IUser } from '../../../interfaces';
 import { CommonModule } from '@angular/common';
+import { Component, effect, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { IUser } from '../../../interfaces';
+import { UserService } from '../../../services/user.service';
+import { ConfirmationComponent } from '../../confirmation/confirmation.component';
 import { ModalComponent } from '../../modal/modal.component';
 import { UserFormComponent } from '../user-from/user-form.component';
-import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -16,6 +17,7 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
     FormsModule,
     ModalComponent,
     UserFormComponent,
+    ConfirmationComponent,
     MatSnackBarModule
   ],
   templateUrl: './user-list.component.html',
@@ -25,7 +27,6 @@ export class UserListComponent {
   public search: String = '';
   public userList: IUser[] = [];
   private service = inject(UserService);
-  private snackBar = inject(MatSnackBar);
   public currentUser: IUser = {
     email: '',
     lastname: '',
@@ -45,23 +46,9 @@ export class UserListComponent {
     modal.show();
   }
 
-  deleteUser(user: IUser) {
-    this.service.deleteUserSignal(user).subscribe({
-      next: () => {
-        this.snackBar.open('User deleted', 'Close', {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          duration: 5 * 1000,
-        });
-      },
-      error: (error: any) => {
-        this.snackBar.open('Error deleting user', 'Close', {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
-        });
-      }
-    })
+  showConfirmation(user: IUser, modal: any) {
+    this.currentUser = {...user}; 
+    modal.show();
   }
 
 }
