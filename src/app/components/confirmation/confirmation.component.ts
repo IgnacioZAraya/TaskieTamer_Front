@@ -2,11 +2,12 @@ import { Component, Input, inject } from '@angular/core';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { IUser } from '../../interfaces';
 import { UserService } from '../../services/user.service';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-confirmation',
   standalone: true,
-  imports: [    MatSnackBarModule],
+  imports: [ ModalComponent,   MatSnackBarModule],
   templateUrl: './confirmation.component.html',
   styleUrl: './confirmation.component.scss'
 })
@@ -40,5 +41,7 @@ export class ConfirmationComponent {
     })
   }
 
-  hide (){}
+  public onCloseClick(){
+    //this.app-modal.hide();
+  }
 }
