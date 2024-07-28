@@ -85,9 +85,7 @@ export const routes: Routes = [
       {
         path: 'taskie/:id',
         component: TaskieViewComponent,
-        data: {
-          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user]
-        }
+        
       },
       {
         path: 'home',

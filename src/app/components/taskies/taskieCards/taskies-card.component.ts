@@ -1,10 +1,11 @@
 import { Component, effect, inject, Injector, Input, OnInit, runInInjectionContext, Renderer2 } from '@angular/core';
-import { ICosmetic, ITaskie } from '../../../interfaces';
+import { ICosmetic, IFeedBackMessage, ITaskie } from '../../../interfaces';
 import { CommonModule } from '@angular/common';
 import { DragDropModule, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TaskieService } from '../../../services/taskie.service';
 import { ActivatedRoute } from '@angular/router';
 import { CosmeticService } from '../../../services/cosmetic.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -23,8 +24,12 @@ export class TaskieViewComponent implements OnInit {
   @Input() taskie!: ITaskie;
   cosmetics: ICosmetic[] = [];
   private dragImage: HTMLImageElement | null = null;
+  feedbackMessage: IFeedBackMessage = {
+    message: "",
+  };
 
   private injector = inject(Injector);
+  toastSvc = inject(ToastrService);
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +40,7 @@ export class TaskieViewComponent implements OnInit {
     runInInjectionContext(this.injector, () => {
       effect(() => {
         this.cosmetics = this.cosmeticService.cosmetics$();
-        console.log('Cosmetics loaded:', this.cosmetics);
+    
       });
     });
   }
@@ -49,7 +54,7 @@ export class TaskieViewComponent implements OnInit {
       effect(() => {
         const taskies = this.taskieService.taskies$();
         this.taskie = taskies.find(t => t.id === taskieId) || {} as ITaskie;
-        console.log('Taskie loaded:', this.taskie);
+       
       });
     });
   }
@@ -79,11 +84,11 @@ export class TaskieViewComponent implements OnInit {
 
       this.taskieService.applyCosmetic(this.taskie.id, cosmetic.id).subscribe({
         next: (updatedTaskie: ITaskie) => {
-          console.log('Taskie updated:', updatedTaskie);
+          this.toastSvc.success(this.feedbackMessage.message, "Taskie Updated!");
           this.taskie = updatedTaskie;
         },
         error: (error) => {
-          console.error('Error updating taskie:', error);
+          this.toastSvc.success(this.feedbackMessage.message, "Error!");
         }
       });
     }
