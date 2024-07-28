@@ -1,9 +1,18 @@
-<div class="card-container">
-
-    <div class="card" *ngFor="let image of images" (click)="onImageClick(image)">
-      <img [src]= image.src [alt]="image.alt" class="card-image" fill>
-      <div class="card-body">
-        <p>{{ image.title }}</p>
-      </div>
+<div *ngIf="taskie" class="taskie-detail">
+  <div class="taskie-info">
+    <h2>{{ taskie.name }}</h2>
+    <img [src]="taskie.sprite" alt="{{ taskie.name }} Image" class="taskie-image"
+         (drop)="onDrop($event)" (dragover)="onDragOver($event)" />
+    <p>Life: {{ taskie.life }}</p>
+    <p>Energy: {{ taskie.energy }}</p>
+    <p>Hunger: {{ taskie.hunger }}</p>
+    <p>Cleanse: {{ taskie.cleanse }}</p>
+  </div>
+  <div class="cosmetic-list">
+    <div *ngFor="let cosmetic of cosmetics" class="cosmetic-item" draggable="true" 
+         (dragstart)="onDragStart($event, cosmetic)" (dragend)="onDragEnd($event)">
+      <img [src]="cosmetic.sprite" alt="{{ cosmetic.name }} Image" class="cosmetic-image"/>
+      <p>{{ cosmetic.name }}</p>
     </div>
   </div>
+</div>

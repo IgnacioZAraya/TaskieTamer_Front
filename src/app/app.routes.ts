@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AppLayoutComponent } from './components/app-layout/app-layout.component';
-import { TaskieCardComponent } from './components/taskies/taskieCards/taskies-card.component';
+import { TaskieViewComponent } from './components/taskies/taskieCards/taskies-card.component';
 import { AdminRoleGuard } from './guards/admin-role.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { GuestGuard } from './guards/guest.guard';
@@ -12,6 +12,8 @@ import { CalendarComponent } from "./pages/calendar/calendar.component";
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from "./pages/profile/profile.component";
 import { UsersComponent } from './pages/users/users.component';
+import { TaskieComponent } from './pages/taskies/taskiescard.component';
+import { TaskieDexComponent } from './components/taskies/taskieDex/taskiesDex.component';
 
 
 export const routes: Routes = [
@@ -71,13 +73,21 @@ export const routes: Routes = [
           authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
           name: "Profile",
         },
-      },{
-        path: "taskies",
-        component: TaskieCardComponent,
+      },
+      {
+        path: "taskiedex",
+        component: TaskieDexComponent,
         data: {
           authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
-          name: "Taskies",
+          name: "TaskieDex",
         },
+      },
+      {
+        path: 'taskie/:id',
+        component: TaskieViewComponent,
+        data: {
+          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user]
+        }
       },
       {
         path: 'home',

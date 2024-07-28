@@ -1,0 +1,29 @@
+.taskie-dex {
+  text-align: center;
+
+  .taskie-card {
+    display: inline-block;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: transform 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    .taskie-image {
+      width: 200px; /* Ajusta el tamaño de la imagen aquí */
+      height: auto;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    h3 {
+      margin: 10px 0 0;
+      font-size: 1.2em;
+    }
+  }
+}
