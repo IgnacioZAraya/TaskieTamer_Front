@@ -19,9 +19,8 @@ import { FormsModule } from "@angular/forms";
   styleUrls: ["./calendar.component.scss"],
 })
 export class CalendarComponent {
-  @ViewChild('formModal') formModal!: ModalComponent; // Obtener referencia al modal
+  @ViewChild('formModal') formModal!: ModalComponent; 
 
-  // Define the array of tasks
   tasks = [
     { name: 'Take out the trash' },
     { name: 'Brush teeth' },
@@ -29,14 +28,12 @@ export class CalendarComponent {
     { name: 'Shower' }
   ];
 
-  // Property to hold the selected task
   selectedTask = { name: '' };
 
-  // Method to handle task selection
   selectTask(task: any) {
     this.selectedTask = task;
     if (this.formModal) {
-      this.formModal.show(); // Mostrar el modal usando la referencia
+      this.formModal.show(); 
     }
   }
 }

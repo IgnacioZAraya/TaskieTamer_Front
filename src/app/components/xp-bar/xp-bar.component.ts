@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ProfileService } from '../../services/profile.service';
+import { IUser } from '../../interfaces';
 
 
 @Component({
@@ -12,14 +14,22 @@ import { Component } from '@angular/core';
   styleUrl: './xp-bar.component.scss'
 })
 export class XpBarComponent {
+  public profileService = inject(ProfileService);
   public progressPercentage!: string;
 
-  public experience: number = 75;
-  public valueLevel: number = 100;
-
+  
   constructor() {
-    this.percentageCalc(this.experience, this.valueLevel);
+    this.profileService.getLoggedUserInfo();
+
+    setTimeout(() => {
+      const user = this.profileService.user$();
+      const experience = user?.experience ?? 0;
+      const valueLevel = user?.level?.value ?? 1; 
+
+      this.percentageCalc(experience, valueLevel);
+    }, 100); 
   }
+
 
   private percentageCalc(dividend: number, divisor: number) : void{
     let percentage = (dividend/divisor)*100;

@@ -12,6 +12,7 @@ import { CalendarComponent } from "./pages/calendar/calendar.component";
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from "./pages/profile/profile.component";
 import { UsersComponent } from './pages/users/users.component';
+import { TaskHistoryComponent } from './pages/task-history/task-history.component';
 
 
 export const routes: Routes = [
@@ -77,6 +78,13 @@ export const routes: Routes = [
         data: {
           authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
           name: "Taskies",
+        },
+      },{
+        path: "taskHistory",
+        component: TaskHistoryComponent,
+        data: {
+          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
+          name: "Task History",
         },
       },
       {
