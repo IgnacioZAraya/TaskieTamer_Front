@@ -13,8 +13,9 @@
     </div>
   </div>
   <div class="xpSection shadow-lg">
+      <p>{{profileService.user$().level?.name}}</p>
+      <p>{{profileService.user$().level?.value}}</p>
     <label class="xpLabel">Your Xp:</label>
-    <!--<p>{{profileService.user$().level?.value}}</p>-->
     <app-xp-bar></app-xp-bar>
   </div>
   <button class="btn custom-btn shadow-lg">Activate associate account</button>

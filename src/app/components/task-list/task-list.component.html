@@ -1,1 +1,26 @@
-<p>task-list works!</p>
+<div class="table-container table-responsive">
+    <table class="table table-striped">
+      <thead class="brown">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Priority</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">End Date</th>
+          <th scope="col">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of taskList; track item.id) {
+        <tr>
+          <th scope="row">{{item.id}}</th>
+          <td>{{item.name}}</td>
+          <td>{{item.priority}}</td>
+          <td>{{item.startDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+          <td>{{item.endDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+          <td>{{item.description}}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>

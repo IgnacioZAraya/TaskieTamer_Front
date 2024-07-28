@@ -51,6 +51,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class FormComponent {
   @Output() taskChanged = new EventEmitter<void>();
+  public items: string[] = ["Never", "Daily", "Weekly", "Monthly", "Yearly"];
   public currentUserId: number | undefined = 1;
   constructor(private authService: AuthService, private http: HttpClient) {
     this.currentUserId = authService.getUser()?.id;
@@ -60,6 +61,8 @@ export class FormComponent {
     priority: 0,
     startDate: new Date(),
     endDate: new Date(),
+    recurrent: "",
+    repeatTimes: 0,
     description: "",
   };
   @Input() taskSpec: ITaskSpec = {
@@ -67,9 +70,11 @@ export class FormComponent {
     priority: 0,
     startDate: new Date(),
     endDate: new Date(),
+    recurrent: "",
+    repeatTimes: 0,
     description: "",
   };
-  @Input() action: string = 'add'; // Puede ser "add" o "update"
+  @Input() action: string = 'add';
   service = inject(TaskService);
   feedbackMessage: IFeedBackMessage = {
     message: '',
@@ -84,16 +89,12 @@ export class FormComponent {
       });
       return;
     } else {
-          // Verifica los valores de taskSpec
-    console.log('taskSpec:', this.taskSpec);
-      // Asegúrate de que `currentUserId` tenga un valor válido
       if (this.currentUserId === undefined) {
         console.error('Current user ID is not available');
         return;
       }
       
       this.setTaskUpdt();
-      // Agregar el `userId` al objeto `taskSpec`
       this.taskSpec.userId = this.currentUserId;
   
       this.service[
@@ -119,6 +120,8 @@ export class FormComponent {
     this.taskSpec.priority = this.task.priority;
     this.taskSpec.startDate = this.task.startDate;
     this.taskSpec.endDate = this.task.endDate;
+    this.taskSpec.recurrent = this.task.recurrent;
+    this.taskSpec.repeatTimes = this.task.repeatTimes;
     this.taskSpec.description = this.task.description;
   }
 }
