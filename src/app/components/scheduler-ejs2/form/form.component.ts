@@ -52,13 +52,14 @@ import { HttpClient } from "@angular/common/http";
 export class FormComponent {
   @Output() taskChanged = new EventEmitter<void>();
   public items: string[] = ["Never", "Daily", "Weekly", "Monthly", "Yearly"];
+  public items2: string[] = ["High", "Medium", "Low"];
   public currentUserId: number | undefined = 1;
   constructor(private authService: AuthService, private http: HttpClient) {
     this.currentUserId = authService.getUser()?.id;
   }
   @Input() task: ITask = {
     name: "",
-    priority: 0,
+    priority: "",
     startDate: new Date(),
     endDate: new Date(),
     recurrent: "",
@@ -67,7 +68,7 @@ export class FormComponent {
   };
   @Input() taskSpec: ITaskSpec = {
     name: "",
-    priority: 0,
+    priority: "",
     startDate: new Date(),
     endDate: new Date(),
     recurrent: "",

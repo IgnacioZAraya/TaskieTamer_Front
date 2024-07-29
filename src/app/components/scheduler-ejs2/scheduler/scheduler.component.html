@@ -13,7 +13,7 @@
 
   <ng-template #quickInfoTemplatesHeader>
     <div  class="e-popup-header">
-      <div class="e-header-icon-wrapper yellow">
+      <div class="e-header-icon-wrapper white">
         <button ejs-button class="e-close e-icons" title="close" (click)="onCloseClick()"></button>
       </div>
     </div>
@@ -33,13 +33,16 @@
     </div>
     <div class="border-bottom pb-3 mb-3">
       <div class="px-5">
-        <label for="priority" class="form-label mb-2"> Priority</label>
-        <ejs-textbox
-          id="taskPriority"
-          placeholder="Priority"
-          value="{{ data.priority }}"
-          required
-        ></ejs-textbox>
+        <label for="priority" class="form-label mb-2">Priority</label>
+        <ejs-dropdownlist
+        id="taskPriority"
+        value="{{ data.priority }}"
+        [dataSource]="priority"
+        placeholder="Select the task priority"
+        class="mt-2"
+        popupHeight="200px"
+        popupWidth="250px"
+      ></ejs-dropdownlist>
       </div>
     </div>
     <div class="border-bottom pb-3 mb-3">
@@ -68,6 +71,7 @@
       >
         <ejs-dropdownlist
           id="taskRecurrency"
+          value="{{ data.recurrent }}"
           [dataSource]="items"
           placeholder="Select how often you want to repeat it?"
           class="mt-2"
@@ -79,6 +83,7 @@
         </label>
         <ejs-textbox
           id="taskNumRepetition"
+          [value]="data.repeatTimes"
           placeholder="10"
           required
         ></ejs-textbox>

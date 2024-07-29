@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TaskListComponent } from '../../components/task/task-history-list/task-history-list.component';
+import { TaskListComponent } from '../../components/task/task-next-list/task-next-list.component';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { CommonModule } from '@angular/common';
@@ -13,9 +13,9 @@ import { CommonModule } from '@angular/common';
     ModalComponent,
     CommonModule
   ],
-  templateUrl: './task-history.component.html',
-  styleUrl: './task-history.component.scss'
+  templateUrl: './task-next.component.html',
+  styleUrl: './task-next.component.scss'
 })
-export class TaskHistoryComponent {
+export class TaskNextComponent {
 
 }

@@ -13,6 +13,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from "./pages/profile/profile.component";
 import { UsersComponent } from './pages/users/users.component';
 import { TaskHistoryComponent } from './pages/task-history/task-history.component';
+import { TaskNextComponent } from './pages/task-next/task-next.component';
 
 
 export const routes: Routes = [
@@ -55,6 +56,20 @@ export const routes: Routes = [
           ],
           name: 'Users'
         }
+      },{
+        path: "taskHistory",
+        component: TaskHistoryComponent,
+        data: {
+          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
+          name: "Task History",
+        },
+      },{
+        path: "NextTask",
+        component: TaskNextComponent,
+        data: {
+          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
+          name: "Upcoming Tasks",
+        },
       },
       {
         path: "calendar",
@@ -64,14 +79,6 @@ export const routes: Routes = [
           authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
           name: "Calendar",
         },
-      },
-      {
-        path: "profile",
-        component: ProfileComponent,
-        data: {
-          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
-          name: "Profile",
-        },
       },{
         path: "taskies",
         component: TaskieCardComponent,
@@ -79,12 +86,13 @@ export const routes: Routes = [
           authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
           name: "Taskies",
         },
-      },{
-        path: "taskHistory",
-        component: TaskHistoryComponent,
+      },
+      {
+        path: "profile",
+        component: ProfileComponent,
         data: {
           authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
-          name: "Task History",
+          name: "Profile",
         },
       },
       {

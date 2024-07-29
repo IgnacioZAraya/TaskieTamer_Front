@@ -32,25 +32,23 @@
 <div class="border-bottom pb-3 mb-3">
   <div class="px-5">
     <label for="priority" class="form-label mb-2"> Priority</label>
-    <input
-    #priority="ngModel"
-    type="number"
-    class="form-control shadow rounded"
-    id="priority"
-    name="priority"
-    placeholder="Priority"
-    [(ngModel)]="task.priority"
-    [ngClass]="{
-      'is-invalid': priority.invalid && priority.touched,
-      'is-valid': priority.valid && priority.touched
-    }"
-    required
-  />
-  @if (priority.invalid) {
-  <div *ngIf="priority.invalid" class="invalid-feedback">
-    Please add a valid priority
+    <ejs-dropdownlist
+      #priority="ngModel"
+      type="text"
+      id="priority"
+      name="priority"
+      [dataSource]="items2"
+      placeholder="Select the task priority"
+      [(ngModel)]="task.priority"
+      [ngClass]="{
+        'is-invalid': priority.invalid && priority.touched,
+        'is-valid': priority.valid && priority.touched
+      }"
+      required
+    ></ejs-dropdownlist>
+  <div *ngIf="priority.invalid && priority.touched"  class="invalid-feedback">
+    Please select a valid priority
   </div>
-  }
   </div>
 </div>
 <div class="border-bottom pb-3 mb-3">
