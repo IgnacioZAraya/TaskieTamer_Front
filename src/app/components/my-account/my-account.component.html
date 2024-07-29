@@ -1,15 +1,16 @@
 <div class="media profile-media d-flex align-items-center">
-  <i class="fa-regular fa-user"></i>
+  <i class="fa-solid fa-minus fa-rotate-90"></i>
+  <i class="fa fa-paw" aria-hidden="true"></i>
   <div class="media-body">
-    <p class="mb-0 font-roboto">
-      Bienvenido <i class="fa-solid fa-chevron-down"></i>
-    </p>
-    <span>{{ userName }}</span>
+    <h1 class="mb-0">
+      Welcome <i class="fa-solid fa-chevron-down"></i>
+    </h1>
+    <span>{{profileService.user$().name}}</span>
   </div>
 </div>
-<ul class="profile-dropdown onhover-show-div">
+<ul class="profile-dropdown onhover-show-div row shadow-lg">
   <li (click)="profile()">
-    <i class="fa-solid fa-arrow-right-from-bracket"></i><span>Profile</span>
+    <i class="fa-solid fa-user"></i><span>Profile</span>
   </li>
   <li (click)="logout()">
     <i class="fa-solid fa-arrow-right-from-bracket"></i><span>Log out</span>

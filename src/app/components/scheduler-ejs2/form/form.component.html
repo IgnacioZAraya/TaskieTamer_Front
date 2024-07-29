@@ -2,78 +2,169 @@
   (ngSubmit)="handleAction(frm)"
   autocomplete="off"
   #frm="ngForm"
-  class="add-user-container"
+  class="yellow"
 >
-  <div>
-    <div class="border-bottom pb-3 mb-3">
-      <div class="px-5">
-        <label for="name" class="form-label mb-2"> Name </label>
-        <ejs-textbox id="taskName" placeholder="Name" required></ejs-textbox>
-      </div>
+<div class="border-bottom pb-3 mb-3">
+  <div class="px-5">
+    <label for="name" class="form-label mb-2 pt-3"> Name </label>
+    <input
+      #name="ngModel"
+      type="text"
+      class="form-control shadow rounded orange"
+      id="name"
+      name="name"
+      placeholder="Name"
+      [(ngModel)]="task.name"
+      [ngClass]="{
+          'is-invalid': name.invalid && name.touched,
+          'is-valid': name.valid && name.touched
+      }"
+      required
+      readonly
+    />
+    @if (name.invalid) {
+    <div *ngIf="name.invalid" class="invalid-feedback">
+      Please add a valid name
+    </div>
+    }
+  </div>
+</div>
+<div class="border-bottom pb-3 mb-3">
+  <div class="px-5">
+    <label for="priority" class="form-label mb-2"> Priority</label>
+    <input
+    #priority="ngModel"
+    type="number"
+    class="form-control shadow rounded"
+    id="priority"
+    name="priority"
+    placeholder="Priority"
+    [(ngModel)]="task.priority"
+    [ngClass]="{
+      'is-invalid': priority.invalid && priority.touched,
+      'is-valid': priority.valid && priority.touched
+    }"
+    required
+  />
+  @if (priority.invalid) {
+  <div *ngIf="priority.invalid" class="invalid-feedback">
+    Please add a valid priority
+  </div>
+  }
+  </div>
+</div>
+<div class="border-bottom pb-3 mb-3">
+  <div class="px-5">
+    <ejs-datetimepicker
+    #startDate="ngModel"
+    format="yyyy-MM-dd HH:mm:ss"
+    id="startDate"
+    name="startDate"
+    placeholder="2024-07-27 00:00:00"
+    [(ngModel)]="task.startDate"
+    [ngClass]="{
+      'is-invalid': startDate.invalid && startDate.touched,
+      'is-valid': startDate.valid && startDate.touched
+    }"
+    required
+  ></ejs-datetimepicker>
+  <div *ngIf="startDate.invalid && startDate.touched" class="invalid-feedback">
+    Please select a valid start date
+  </div>
+  </div>
+</div>
+<div class="border-bottom pb-3 mb-3">
+  <div class="px-5">
+    <ejs-datetimepicker
+    #endDate="ngModel"
+    format="yyyy-MM-dd HH:mm:ss"
+    id="endDate"
+    name="endDate"
+    placeholder="2024-07-27 00:00:00"
+    [(ngModel)]="task.endDate"
+    [ngClass]="{
+      'is-invalid': endDate.invalid && endDate.touched,
+      'is-valid': endDate.valid && endDate.touched
+    }"
+    required
+  ></ejs-datetimepicker>
+  <div *ngIf="endDate.invalid && endDate.touched" class="invalid-feedback">
+    Please select a valid end date
+  </div>
+  </div>
+</div>
+<div class="border-bottom pb-3 mb-3">
+  <div class="px-5">
+    <label for="recurrence" class="form-label mb-2">Recurrent time</label>
+    <ejs-dropdownlist
+      #recurrent="ngModel"
+      type="text"
+      id="recurrent"
+      name="recurrent"
+      [dataSource]="items"
+      placeholder="Select how often you want to repeat it?"
+      [(ngModel)]="task.recurrent"
+      [ngClass]="{
+        'is-invalid': recurrent.invalid && recurrent.touched,
+        'is-valid': recurrent.valid && recurrent.touched
+      }"
+      required
+    ></ejs-dropdownlist>
+    <div *ngIf="recurrent.invalid && recurrent.touched" class="invalid-feedback">
+      Please select a valid recurrence option
     </div>
   </div>
-  <div class="border-bottom pb-3 mb-3">
-    <div class="px-5">
-      <label for="priority" class="form-label mb-2"> Priority</label>
-      <ejs-textbox
-        id="taskPriority"
-        placeholder="Priority"
-        required
-      ></ejs-textbox>
-    </div>
-  </div>
-  <div class="border-bottom pb-3 mb-3">
-    <div class="px-5">
-      <label for="priority" class="form-label mb-2"> Start Date</label>
-      <ejs-datetimepicker></ejs-datetimepicker>
-      <label for="priority" class="form-label mb-2"> End Date</label>
-      <ejs-datetimepicker></ejs-datetimepicker>
-    </div>
-  </div>
-  <div class="border-bottom pb-2 mb-3">
-    <div class="px-5">
-      <ejs-checkbox
-        label="Is Recurrent?"
-        id="recurrency-box"
-        (change)="toggleRecurrencyForm($event)"
-      ></ejs-checkbox>
-    </div>
-    <div class="p-3" id="recurrency-form element-conf" [hidden]="!isRecurrent">
-      <ejs-dropdownlist
-        id="repetitionKind"
-        [dataSource]="items"
-        placeholder="Select how often you want to repeat it?"
-        class="mt-2"
-        popupHeight="200px"
-        popupWidth="250px"
-      ></ejs-dropdownlist>
-      <label for="repetitionAmount" class="form-label mt-3">
-        How many times you want to repeat it?
-      </label>
-      <ejs-textbox
-        id="taskNumRepetition"
-        placeholder="10"
-        required
-      ></ejs-textbox>
-    </div>
-  </div>
+</div>
 
-  <div class="p-3" id="recurrency-form element-conf" [hidden]="!isRecurrent">
-    <div class="border-bottom pb-3 mb-3">
-      <div class="px-5 element-conf">
-        <label for="description" class="form-label mb-2"> Description </label>
-        <textarea
-          id="taskDescription"
-          placeholder="Description"
-          required
-        ></textarea>
-      </div>
-    </div>
-    <div class="pb-3 mb-3 d-flex justify-content-center align-items-center">
-      <button
-        type="submit"
-        class="shadow btn btn-primary d-flex align-items-center custom-btn"
-      ></button>
+<div class="border-bottom pb-3 mb-3">
+  <div class="px-5">
+    <label for="repetitionAmount" class="form-label mt-3">
+      How many times you want to repeat it?
+    </label>
+    <ejs-textbox
+      #repeatTimes="ngModel"
+      id="taskNumRepetition"
+      name="repeatTimes"
+      placeholder="10"
+      [(ngModel)]="task.repeatTimes"
+      [ngClass]="{
+        'is-invalid': repeatTimes.invalid && repeatTimes.touched,
+        'is-valid': repeatTimes.valid && repeatTimes.touched
+      }"
+      required
+    ></ejs-textbox>
+    <div *ngIf="repeatTimes.invalid && repeatTimes.touched" class="invalid-feedback">
+      Please enter a valid repetition amount
     </div>
   </div>
+</div>
+<div class="border-bottom pb-3 mb-3">
+  <div class="px-5 element-conf">
+    <label for="description" class="form-label mb-2"> Description </label>
+      <textarea
+      #description="ngModel"
+      type="text"
+      class="form-control shadow rounded"
+      id="description"
+      name="description"
+      placeholder="Description"
+      [(ngModel)]="task.description"
+      [ngClass]="{
+        'is-invalid': description.invalid && description.touched,
+        'is-valid': description.valid && description.touched
+      }"
+      required
+      ></textarea>
+    @if (description.invalid) {
+    <div *ngIf="description.invalid" class="invalid-feedback">
+      Please add a valid description
+    </div>
+    }
+  </div>
+</div>
+<div >
+  <button type="button" class="shadow btn login-btn custom-btn" (click)="handleAction(frm)">
+    Add
+  </button>
+</div>
 </form>

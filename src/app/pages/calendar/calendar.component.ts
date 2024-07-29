@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { SchedulerComponent } from "../../components/scheduler-ejs2/scheduler/scheduler.component";
 import { FormComponent } from "../../components/scheduler-ejs2/form/form.component";
 import { ModalComponent } from "../../components/modal/modal.component";
@@ -16,6 +16,24 @@ import { FormsModule } from "@angular/forms";
     FormsModule,
   ],
   templateUrl: "./calendar.component.html",
-  styleUrl: "./calendar.component.scss",
+  styleUrls: ["./calendar.component.scss"],
 })
-export class CalendarComponent {}
+export class CalendarComponent {
+  @ViewChild('formModal') formModal!: ModalComponent; 
+
+  tasks = [
+    { name: 'Take out the trash' },
+    { name: 'Brush teeth' },
+    { name: 'Clean the room' },
+    { name: 'Shower' }
+  ];
+
+  selectedTask = { name: '' };
+
+  selectTask(task: any) {
+    this.selectedTask = task;
+    if (this.formModal) {
+      this.formModal.show(); 
+    }
+  }
+}

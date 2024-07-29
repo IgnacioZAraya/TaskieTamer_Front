@@ -1,7 +1,8 @@
 <ejs-schedule
   #schedule
-  cssClass="quick-info-popup"
+  cssClass="quick-info-popup custom-border shadow-lg"
   (popupOpen)="onPopupOpen($event)"
+  (renderCell)="onRenderCell($event)"
   [eventSettings]="eventObject"
 >
   <e-views>
@@ -9,6 +10,14 @@
     <e-view option="Week"></e-view>
     <e-view option="Month"></e-view>
   </e-views>
+
+  <ng-template #quickInfoTemplatesHeader>
+    <div  class="e-popup-header">
+      <div class="e-header-icon-wrapper yellow">
+        <button ejs-button class="e-close e-icons" title="close" (click)="onCloseClick()"></button>
+      </div>
+    </div>
+  </ng-template>
 
   <ng-template #quickInfoTemplatesContent let-data>
     <div class="border-bottom pb-3 mb-3">
@@ -51,20 +60,14 @@
     </div>
     <div class="border-bottom pb-2 mb-3">
       <div class="px-5">
-        <ejs-checkbox
-          format="yyyy-MM-dd HH:mm:ss"
-          label="Is Recurrent?"
-          id="recurrency-box"
-          (change)="toggleRecurrencyForm($event)"
-        ></ejs-checkbox>
+        <label for="Recurrency" class="form-label mb-2">Recurrent time</label>
       </div>
       <div
         class="p-3"
         id="recurrency-form element-conf"
-        [hidden]="!isRecurrent"
       >
         <ejs-dropdownlist
-          id="repetitionKind"
+          id="taskRecurrency"
           [dataSource]="items"
           placeholder="Select how often you want to repeat it?"
           class="mt-2"
@@ -81,6 +84,7 @@
         ></ejs-textbox>
       </div>
     </div>
+    
     <div class="border-bottom pb-3 mb-3">
       <div class="px-5 element-conf">
         <label for="description" class="form-label mb-2"> Description </label>
@@ -122,8 +126,6 @@
       </button>
     </div>
   </ng-template>
-
   <ng-template #quickInfoTemplatesFooter class="diss">
   </ng-template>
-  
 </ejs-schedule>

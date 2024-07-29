@@ -23,6 +23,7 @@ export interface IUser {
 }
 
 export interface ILevel {
+  name?: string;
   value?: number;
 }
 
@@ -82,6 +83,8 @@ export interface ITask {
   isCompleted?: boolean;
   isVerified?: boolean;
   visible?: boolean;
+  recurrent?: string;
+  repeatTimes?: number;
 }
 
 export interface ITaskie {
@@ -129,4 +132,6 @@ export interface ITaskSpec {
   startDate?: Date;
   endDate?: Date;
   visible?: boolean;
+  recurrent?: string;
+  repeatTimes?: number;
 }
