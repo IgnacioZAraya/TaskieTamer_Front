@@ -104,3 +104,4 @@ export class TaskieViewComponent implements OnInit {
     this.location.back();
   }
 }
+
