@@ -1,3 +1,5 @@
+
+
 import { Component, effect, inject, Injector, Input, OnInit, runInInjectionContext, Renderer2 } from '@angular/core';
 import { ICosmetic, IFeedBackMessage, ITaskie } from '../../../interfaces';
 import { CommonModule, Location } from '@angular/common';
@@ -102,3 +104,4 @@ export class TaskieViewComponent implements OnInit {
     this.location.back();
   }
 }
+
