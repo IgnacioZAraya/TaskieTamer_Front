@@ -91,21 +91,22 @@
   </div>
   </div>
 </div>
+
 <div class="border-bottom pb-3 mb-3">
   <div class="px-5">
     <label for="recurrence" class="form-label mb-2">Recurrent time</label>
     <ejs-dropdownlist
-      #recurrent="ngModel"
-      type="text"
       id="recurrent"
       name="recurrent"
       [dataSource]="items"
       placeholder="Select how often you want to repeat it?"
       [(ngModel)]="task.recurrent"
+      #recurrent="ngModel"
       [ngClass]="{
         'is-invalid': recurrent.invalid && recurrent.touched,
         'is-valid': recurrent.valid && recurrent.touched
       }"
+      (change)="onRecurrentChange($event.value)"
       required
     ></ejs-dropdownlist>
     <div *ngIf="recurrent.invalid && recurrent.touched" class="invalid-feedback">
@@ -114,17 +115,15 @@
   </div>
 </div>
 
-<div class="border-bottom pb-3 mb-3">
+<div class="border-bottom pb-3 mb-3" *ngIf="task.recurrent && task.recurrent !== 'Never'">
   <div class="px-5">
-    <label for="repetitionAmount" class="form-label mt-3">
-      How many times you want to repeat it?
-    </label>
+    <label for="repetitionAmount" class="form-label mt-3">How many times you want to repeat it?</label>
     <ejs-textbox
-      #repeatTimes="ngModel"
       id="taskNumRepetition"
       name="repeatTimes"
       placeholder="10"
       [(ngModel)]="task.repeatTimes"
+      #repeatTimes="ngModel"
       [ngClass]="{
         'is-invalid': repeatTimes.invalid && repeatTimes.touched,
         'is-valid': repeatTimes.valid && repeatTimes.touched

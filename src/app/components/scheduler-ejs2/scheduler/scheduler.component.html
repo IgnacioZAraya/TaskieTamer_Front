@@ -64,26 +64,26 @@
     <div class="border-bottom pb-2 mb-3">
       <div class="px-5">
         <label for="Recurrency" class="form-label mb-2">Recurrent time</label>
-      </div>
-      <div
-        class="p-3"
-        id="recurrency-form element-conf"
-      >
         <ejs-dropdownlist
           id="taskRecurrency"
-          value="{{ data.recurrent }}"
           [dataSource]="items"
           placeholder="Select how often you want to repeat it?"
           class="mt-2"
           popupHeight="200px"
           popupWidth="250px"
+          (change)="onRecurrenceChange($event)"
         ></ejs-dropdownlist>
+      </div>  
+      <div
+        class="p-3"
+        id="recurrency-form element-conf"
+        [hidden]="!isRecurrent"
+      >
         <label for="repetitionAmount" class="form-label mt-3">
           How many times you want to repeat it?
         </label>
         <ejs-textbox
           id="taskNumRepetition"
-          [value]="data.repeatTimes"
           placeholder="10"
           required
         ></ejs-textbox>
@@ -105,7 +105,8 @@
     <div *ngIf="data.elementType == 'cell'">
       <button
         ejs-button
-        cssClass="e-flat"
+        
+        class="btn custom-btn"
         [isPrimary]="true"
         (click)="addTask($event, 'add')"
       >
@@ -115,7 +116,8 @@
     <div *ngIf="data.elementType == 'event'">
       <button
         ejs-button
-        cssClass="e-flat"
+        
+        class="btn custom-btn"
         [isPrimary]="true"
         (click)="addTask($event, 'edit')"
       >
@@ -123,7 +125,8 @@
       </button>
       <button
         ejs-button
-        cssClass="e-flat"
+        
+        class="btn custom-btn"
         [isPrimary]="true"
         (click)="addTask($event, 'delete')"
       >
