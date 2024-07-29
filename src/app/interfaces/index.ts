@@ -87,6 +87,42 @@ export interface ITask {
   repeatTimes?: number;
 }
 
+export interface ITaskie {
+  id: number;
+  name: string;
+  specie: ISpecie;
+  alive: IStatus;
+  user: IUser;
+  visible: boolean;
+  experience: number;
+  sprite: string;
+  life: number;
+  cleanse: number;
+  hunger: number;
+  energy: number;
+  lvlTaskie: ITaskieLevel[];
+}
+export interface IStatus {
+  id: number;
+  name: string;
+}
+export interface ITaskieLevel {
+  id: number;
+  name: string;
+}
+export interface ICosmetic {
+  id: number;
+  name: string;
+  sprite: string;
+  hungerEffect: number;
+  dirtynessEffect: number;
+  lifeEffect: number;
+}
+export interface ISpecie {
+  id: number;
+  name: string;
+}
+
 export interface ITaskSpec {
   id?: number;
   name?: string;
