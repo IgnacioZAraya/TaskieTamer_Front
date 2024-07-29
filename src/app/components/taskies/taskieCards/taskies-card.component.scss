@@ -1,0 +1,66 @@
+.taskie-detail {
+  text-align: center;
+
+  .taskie-info {
+    margin-bottom: 20px;
+
+    h2 {
+      margin: 10px 0;
+      font-size: 2em;
+    }
+
+    .taskie-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .taskie-stats {
+      margin-left: 20px;
+      text-align: left;
+      font-size: 1.2em;
+    }
+
+    .taskie-image {
+      width: 400px;  // Incrementa el tamaño de la imagen del Taskie
+      height: auto;
+      display: block;
+      border: 2px dashed transparent;
+      &:hover {
+        border-color: #ccc;
+      }
+    }
+  }
+
+  .cosmetic-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .cosmetic-item {
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .cosmetic-image {
+        width: 80px;
+        height: auto;
+        display: block;
+        margin: 0 auto 10px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 1em;
+        text-align: center;
+      }
+    }
+  }
+}

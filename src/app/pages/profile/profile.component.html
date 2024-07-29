@@ -1,14 +1,22 @@
-<div clas="">
-  <div>
-    <label>Name:</label>
-    <p>{{ profileService.user$().name }}</p>
+<div class="shadow-lg round padded colored center">
+  <h1 class="mb-5">{{profileService.user$().name}}'s profile info</h1>
+  <div class="d-flex mb-5">
+    <div class="half">
+      <label>Registered Name:</label>
+      <label>Registered Last Name:</label>
+      <label>Registered Email:</label>
+    </div>
+    <div class="half">
+      <p>{{profileService.user$().name}}</p>
+      <p>{{profileService.user$().lastname}}</p>
+      <p>{{profileService.user$().email}}</p>
+    </div>
   </div>
   <div>
-    <label>Lastname:</label>
-    <p>{{ profileService.user$().lastname }}</p>
+    <label>Your Xp:</label>
+    <!--<p>{{profileService.user$().level?.value}}</p>-->
+    <app-xp-bar></app-xp-bar>
   </div>
-  <div>
-    <label>Email:</label>
-    <p>{{ profileService.user$().email }}</p>
-  </div>
+  <button class="btn custom-btn">Activate associate account</button>
+  <button class="btn custom-btn">Edit</button>
 </div>

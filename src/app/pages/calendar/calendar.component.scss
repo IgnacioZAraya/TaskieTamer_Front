@@ -1,1 +1,12 @@
-@import "../../../../node_modules/@syncfusion/ej2-material-theme/styles/material.css";
+.calendar-cont {
+  display: flex;
+}
+
+.scheduler-cont {
+  width: 80%;
+}
+
+.predetermined {
+  width: 20%;
+  text-align: center;
+}

@@ -1,0 +1,22 @@
+<div *ngIf="taskie" class="taskie-detail">
+  <div class="taskie-info">
+    <h2>{{ taskie.name }}</h2>
+    <div class="taskie-content">
+      <img [src]="taskie.sprite" alt="{{ taskie.name }} Image" class="taskie-image"
+           (drop)="onDrop($event)" (dragover)="onDragOver($event)" />
+      <div class="taskie-stats">
+        <p>Life: {{ taskie.life }}</p>
+        <p>Energy: {{ taskie.energy }}</p>
+        <p>Hunger: {{ taskie.hunger }}</p>
+        <p>Cleanse: {{ taskie.cleanse }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="cosmetic-list">
+    <div *ngFor="let cosmetic of cosmetics" class="cosmetic-item" draggable="true" 
+         (dragstart)="onDragStart($event, cosmetic)" (dragend)="onDragEnd($event)">
+      <img [src]="cosmetic.sprite" alt="{{ cosmetic.name }} Image" class="cosmetic-image"/>
+      <p>{{ cosmetic.name }}</p>
+    </div>
+  </div>
+</div>
