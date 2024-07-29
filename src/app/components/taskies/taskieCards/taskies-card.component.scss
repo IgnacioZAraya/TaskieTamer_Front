@@ -22,7 +22,7 @@
     }
 
     .taskie-image {
-      width: 400px;  // Incrementa el tamaño de la imagen del Taskie
+      width: 400px;  
       height: auto;
       display: block;
       border: 2px dashed transparent;
@@ -62,5 +62,20 @@
         text-align: center;
       }
     }
+  }
+}
+button {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
   }
 }
