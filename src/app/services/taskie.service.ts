@@ -1,3 +1,5 @@
+
+
 import { Injectable, signal } from "@angular/core";
 import { BaseService } from "./base-service";
 import { ICosmetic, ITaskie } from "../interfaces";
@@ -11,8 +13,14 @@ export class TaskieService extends BaseService<ITaskie> {
   protected override source: string = 'taskie';
   private taskieListSignal = signal<ITaskie[]>([]);
 
+  
+
   get taskies$() {
     return this.taskieListSignal;
+  }
+  constructor() {
+    super();
+    this.startPeriodicUpdate();
   }
 
   getAllSignal() {
@@ -89,5 +97,11 @@ export class TaskieService extends BaseService<ITaskie> {
         return throwError(error);
       })
     );
+  }
+
+  startPeriodicUpdate() {
+    setInterval(() => {
+      this.getAllSignal();
+    }, 1000); 
   }
 }

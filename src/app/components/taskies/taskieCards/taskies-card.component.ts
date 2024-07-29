@@ -1,6 +1,8 @@
+
+
 import { Component, effect, inject, Injector, Input, OnInit, runInInjectionContext, Renderer2 } from '@angular/core';
 import { ICosmetic, IFeedBackMessage, ITaskie } from '../../../interfaces';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { DragDropModule, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TaskieService } from '../../../services/taskie.service';
 import { ActivatedRoute } from '@angular/router';
@@ -35,7 +37,8 @@ export class TaskieViewComponent implements OnInit {
     private route: ActivatedRoute,
     private taskieService: TaskieService,
     private cosmeticService: CosmeticService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private location: Location
   ) {
     runInInjectionContext(this.injector, () => {
       effect(() => {
@@ -96,5 +99,8 @@ export class TaskieViewComponent implements OnInit {
 
   onDragOver(event: DragEvent): void {
     event.preventDefault();
+  }
+  goBack(){
+    this.location.back();
   }
 }
