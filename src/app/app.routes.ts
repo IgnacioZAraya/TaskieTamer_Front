@@ -63,6 +63,7 @@ export const routes: Routes = [
         }
       },{
         path: "taskHistory",
+        canActivate:[AuthGuard],
         component: TaskHistoryComponent,
         data: {
           authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
@@ -70,6 +71,7 @@ export const routes: Routes = [
         },
       },{
         path: "NextTask",
+        canActivate:[AuthGuard],
         component: TaskNextComponent,
         data: {
           authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
@@ -86,16 +88,9 @@ export const routes: Routes = [
         },
       },
       {
-        path: "profile",
-        component: ProfileComponent,
-        data: {
-          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
-          name: "Profile",
-        },
-      },
-      {
         path: "taskiedex",
         component: TaskieDexComponent,
+        canActivate:[AuthGuard],
         data: {
           authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
           name: "TaskieDex",
@@ -104,6 +99,7 @@ export const routes: Routes = [
       {
         path: "profile",
         component: ProfileComponent,
+        canActivate: [AuthGuard],
         data: {
           authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
           name: "Profile",
