@@ -76,7 +76,7 @@ export interface ITask {
   id?: number;
   name?: string;
   userId?: number;
-  priority?: number;
+  priority?: string;
   description?: string;
   startDate?: Date;
   endDate?: Date;
@@ -127,7 +127,7 @@ export interface ITaskSpec {
   id?: number;
   name?: string;
   userId?: number;
-  priority?: number;
+  priority?: string;
   description?: string;
   startDate?: Date;
   endDate?: Date;

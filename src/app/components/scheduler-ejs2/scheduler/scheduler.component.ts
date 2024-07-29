@@ -49,6 +49,7 @@ import { FormComponent } from "../form/form.component";
 })
 export class SchedulerComponent {
   public items: string[] = ["Never", "Daily", "Weekly", "Monthly", "Yearly"];
+  public priority: string[] = ["High", "Medium", "Low"];
   public isRecurrent: boolean = false;
   public currentUserId: number | undefined = 1;
   public eventObject!: EventSettingsModel;
@@ -124,7 +125,7 @@ export class SchedulerComponent {
     ).value;
     let taskPriority = (
       (quickPopup.querySelector("#taskPriority") as EJ2Instance)
-        .ej2_instances[0] as TextBoxComponent
+        .ej2_instances[0] as DropDownListComponent
     ).value;
     let taskDescription = (
       quickPopup.querySelector("#taskDescription") as HTMLTextAreaElement
@@ -194,12 +195,8 @@ export class SchedulerComponent {
 
       let taskPriority = (
         (quickPopup.querySelector("#taskPriority") as EJ2Instance)
-          .ej2_instances[0] as TextBoxComponent
-      ).value;
-      let priorityNumber = Number(taskPriority);
-      if (isNaN(priorityNumber)) {
-        return;
-      }
+          .ej2_instances[0] as DropDownListComponent
+      ).value as string;
 
       let taskDescription = (
         quickPopup.querySelector("#taskDescription") as HTMLTextAreaElement
@@ -236,7 +233,7 @@ export class SchedulerComponent {
       let updatedTask: ITaskSpec = {
         id: eventId,
         name: taskName,
-        priority: priorityNumber,
+        priority: taskPriority,
         description: taskDescription,
         startDate: taskStartDate,
         endDate: taskEndDate,

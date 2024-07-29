@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ModalComponent } from '../modal/modal.component';
+import { ModalComponent } from '../../modal/modal.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { ITask } from '../../interfaces';
-import { TaskService } from '../../services/task.service';
+import { ITask } from '../../../interfaces';
+import { TaskService } from '../../../services/task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -15,8 +15,8 @@ import { TaskService } from '../../services/task.service';
     ModalComponent,
     MatSnackBarModule
   ],
-  templateUrl: './task-list.component.html',
-  styleUrl: './task-list.component.scss'
+  templateUrl: './task-next-list.component.html',
+  styleUrl: './task-next-list.component.scss'
 })
 export class TaskListComponent {
   public search: String = '';
@@ -25,7 +25,7 @@ export class TaskListComponent {
   private snackBar = inject(MatSnackBar);
   public currentTask: ITask = {
     name: '',
-    priority: 0,
+    priority: '',
     startDate: new Date(),
     endDate: new Date(),
     description: '',
@@ -36,7 +36,7 @@ export class TaskListComponent {
   }
 
   loadTasks() {
-    this.service.getTasksForCurrentUser();
+    this.service.getNextTaskForCurrentUser();
     effect(() => {      
       this.taskList = this.service.tasks$();
     });

@@ -2,21 +2,105 @@ import { inject, Injectable, signal } from '@angular/core';
 import { BaseService } from './base-service';
 import { ITask, ITaskSpec } from '../interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { catchError, finalize, Observable, tap, throwError } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TaskService extends BaseService<ITask>{
+export class TaskService extends BaseService<ITask> {
   protected override source: string = 'task';
   private taskListSignal = signal<ITask[]>([]);
   private snackBar: MatSnackBar = inject(MatSnackBar);
+  private authService: AuthService = inject(AuthService);
 
-  get tasks$ () {
+  get tasks$() {
     return this.taskListSignal;
   }
 
-  public getAll() {
+  public getTasksForCurrentUser() {
+    const userId = this.authService.getUser()?.id;
+    if (userId) {
+      this.findByUserId(userId).subscribe({
+        next: (response: any) => {
+          response.reverse();
+          this.taskListSignal.set(response);
+        },
+        error: (error: any) => {
+          console.error('Error in get tasks for current user request', error);
+          this.snackBar.open(error.error.description, 'Close', {
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
+    } else {
+      console.error('User ID is not defined');
+      this.snackBar.open('User ID is not defined', 'Close', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      });
+    }
+  }
+
+  public getHistoryForCurrentUser() {
+    const userId = this.authService.getUser()?.id;
+    if (userId) {
+      this.findHistory(userId).subscribe({
+        next: (response: any) => {
+          response.reverse();
+          this.taskListSignal.set(response);
+        },
+        error: (error: any) => {
+          console.error('Error in get tasks for current user request', error);
+          this.snackBar.open(error.error.description, 'Close', {
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
+    } else {
+      console.error('User ID is not defined');
+      this.snackBar.open('User ID is not defined', 'Close', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      });
+    }
+  }
+
+  public getNextTaskForCurrentUser() {
+    const userId = this.authService.getUser()?.id;
+    if (userId) {
+      this.findNext(userId).subscribe({
+        next: (response: any) => {
+          response.reverse();
+          this.taskListSignal.set(response);
+        },
+        error: (error: any) => {
+          console.error('Error in get tasks for current user request', error);
+          this.snackBar.open(error.error.description, 'Close', {
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
+    } else {
+      console.error('User ID is not defined');
+      this.snackBar.open('User ID is not defined', 'Close', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      });
+    }
+  }
+
+
+  getAllSignal() {
     this.findAll().subscribe({
       next: (response: any) => {
         response.reverse();
@@ -24,7 +108,7 @@ export class TaskService extends BaseService<ITask>{
       },
       error: (error: any) => {
         console.error('Error in get all tasks request', error);
-        this.snackBar.open(error.error.description, 'Close' , {
+        this.snackBar.open(error.error.description, 'Close', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
           panelClass: ['error-snackbar']
@@ -41,6 +125,9 @@ export class TaskService extends BaseService<ITask>{
       catchError((error) => {
         console.error("Error saving task", error);
         return throwError(error);
+      }),
+      finalize(() => {
+        this.getTasksForCurrentUser();
       })
     );
   }
@@ -56,23 +143,26 @@ export class TaskService extends BaseService<ITask>{
       catchError((error) => {
         console.error("Error saving task", error);
         return throwError(error);
+      }),
+      finalize(() => {
+        this.getTasksForCurrentUser();
       })
     );
   }
 
-  public delete(task: ITask) {
-    this.del(task.id).subscribe({
-      next: () => {
-        this.taskListSignal.set(this.taskListSignal().filter(task => task.id != task.id));
-      },
-      error: (error: any) => {
-        console.error('response', error.description);
-        this.snackBar.open(error.error.description, 'Close' , {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
-        });
-      }
-    });
+  deleteTaskSignal(task: ITask): Observable<any> {
+    return this.del(task.id).pipe(
+      tap((response: any) => {
+        const updatedTasks = this.taskListSignal().filter(t => t.id !== task.id);
+        this.taskListSignal.set(updatedTasks);
+      }),
+      catchError((error) => {
+        console.error("Error deleting task", error);
+        return throwError(error);
+      }),
+      finalize(() => {
+        this.getTasksForCurrentUser();
+      })
+    );
   }
 }

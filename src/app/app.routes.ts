@@ -17,6 +17,7 @@ import { TaskieComponent } from './pages/taskies/taskiescard.component';
 import { TaskieDexComponent } from './components/taskies/taskieDex/taskiesDex.component';
 
 import { TaskHistoryComponent } from './pages/task-history/task-history.component';
+import { TaskNextComponent } from './pages/task-next/task-next.component';
 
 
 
@@ -60,6 +61,20 @@ export const routes: Routes = [
           ],
           name: 'Users'
         }
+      },{
+        path: "taskHistory",
+        component: TaskHistoryComponent,
+        data: {
+          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
+          name: "Task History",
+        },
+      },{
+        path: "NextTask",
+        component: TaskNextComponent,
+        data: {
+          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
+          name: "Upcoming Tasks",
+        },
       },
       {
         path: "calendar",
@@ -85,12 +100,13 @@ export const routes: Routes = [
           authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
           name: "TaskieDex",
         },
-      },{
-        path: "taskHistory",
-        component: TaskHistoryComponent,
+      },
+      {
+        path: "profile",
+        component: ProfileComponent,
         data: {
           authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
-          name: "Task History",
+          name: "Profile",
         },
       },
       {
