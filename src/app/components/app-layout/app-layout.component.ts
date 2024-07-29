@@ -1,22 +1,22 @@
-import { Component, OnInit } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
-import { TopbarComponent } from "./elements/topbar/topbar.component";
-import { SidebarComponent } from "./elements/sidebar/sidebar.component";
-import { CommonModule } from "@angular/common";
-import { LayoutService } from "../../services/layout.service";
-import { SvgIconComponent } from "../svg-icon/svg-icon.component";
+import { Component, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { TopbarComponent } from './elements/topbar/topbar.component';
+import { SidebarComponent } from './elements/sidebar/sidebar.component';
+import { CommonModule } from '@angular/common';
+import { LayoutService } from '../../services/layout.service';
+import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 
 @Component({
-  selector: "app-layout",
+  selector: 'app-layout',
   standalone: true,
   imports: [
     CommonModule,
     RouterOutlet,
     TopbarComponent,
     SidebarComponent,
-    SvgIconComponent,
+    SvgIconComponent
   ],
-  templateUrl: "./app-layout.component.html",
+  templateUrl: './app-layout.component.html',
 })
 export class AppLayoutComponent {
   public title?: string;

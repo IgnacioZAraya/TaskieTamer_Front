@@ -6,7 +6,7 @@ import { IUser } from "../interfaces";
   providedIn: "root",
 })
 export class ProfileService extends BaseService<IUser> {
-  protected override source: string = "users/me";
+  protected override source: string = "users/currentUser";
   private userSignal = signal<IUser>({});
 
   get user$() {
@@ -16,7 +16,6 @@ export class ProfileService extends BaseService<IUser> {
   getLoggedUserInfo() {
     this.findAll().subscribe({
       next: (response: any) => {
-        console.log('response', response);
         this.userSignal.set(response);
       },
     });
