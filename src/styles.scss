@@ -1,5 +1,5 @@
 :root {
-  --theme-default: #6a4a3d;
+  --theme-default: #7366ff;
   --theme-secondary: #f73164;
   --light-background: rgba(242, 243, 247, 0.7);
   --body-font-color: #2f2f3b;
@@ -8,13 +8,13 @@
   --light-bg: #f6f7f9;
   --white: #fff;
   --light2: #f5f6f9;
-  --sidebar-border: rgba(106, 74, 61, 0.1);
-  --chart-text-color: rgba(106, 74, 61, 0.8);
-  --recent-dashed-border: rgba(106, 74, 61, 0.3);
-  --chart-dashed-border: rgba(106, 74, 61, 0.2);
-  --chart-progress-light: rgba(106, 74, 61, 0.1);
+  --sidebar-border: rgba(0, 0, 0, 0.1);
+  --chart-text-color: rgba(82, 82, 108, 0.8);
+  --recent-dashed-border: rgba(82, 82, 108, 0.3);
+  --chart-dashed-border: rgba(82, 82, 108, 0.2);
+  --chart-progress-light: rgba(82, 82, 108, 0.1);
   --recent-box-bg: #f2f4f7;
-  --recent-border: rgba(106, 74, 61, 0.25);
+  --recent-border: rgba(97, 101, 122, 0.25);
   --course-light-btn: #f2f3f7;
   --course-bg: #f7f7f7;
   --balance-profie-bg: #e0dfef;
@@ -30,11 +30,11 @@
 }
 
 body[class="dark-only"] {
-  --light-background: rgba(106, 74, 61, 0.65);
-  --recent-chart-bg: #283226;
+  --light-background: rgba(31, 32, 40, 0.65);
+  --recent-chart-bg: #262932;
   --light-bg: #1d1e26;
   --white: #262932;
-  --sidebar-border: rgba(106, 74, 61, 0.1);
+  --sidebar-border: rgba(255, 255, 255, 0.1);
   --light2: #1d1e26;
   --chart-border: #374558;
   --recent-box-bg: #1d1e26;
@@ -50,94 +50,15 @@ body[class="dark-only"] {
 @import "./assets/layout/layout.scss";
 //end template styles
 
-@import "ngx-toastr/toastr";
-
-@font-face {
-  font-family: 'PuppyBellies';
-  src: url(assets/fonts/Puppybellies-JyRM.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: 'QuiteMagical';
-  src: url(assets/fonts/QuiteMagicalRegular-8VA2.ttf) format("truetype");
-
-}
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 html,
 body {
   height: 100%;
 }
-
 body {
   margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .error-snackbar .mdc-snackbar__surface {
   background-color: rgb(197, 49, 49) !important;
-}
-
-h1 {
-
-  font-family: 'PuppyBellies';
-  font-size: 2rem;
-}
-
-p, label, input, thead {
-  color: #6a4a3d;
-  font-family: 'QuiteMagical';
-  font-size: 1.5rem;
-}
-
-::placeholder {
-  color: #6a4a3d89;
-}
-
-tbody, tr {
-  font-family: 'QuiteMagical';
-  font-size: 1.25rem;
-  color: #6a4a3d;
-}
-
-html,
-body,
-.footer,
-.page-body {
-  background-color: #00a0b0;
-}
-
-
-button, .custom-btn, .btn-secondary {
-  background-color: #6a4a3d;
-  color: #edc951;
-  font-family: 'PuppyBellies';
-}
-
-.yellow {
-  background-color: #edc951;
-}
-
-.app-sidebar {
-  background-color: #edc951;
-}
-
-
-.btn-danger {
-  background-color: #6a4a3d;
-  color: #ff0015;
-}
-
-.pallettes{
-  color: #00a0b0;
-  color: #6a4a3d;
-  color: #cd333f;
-  color: #ec6841;
-  color: #edc951;
-}
-
-.round {
-  border-radius: 80px ;
 }

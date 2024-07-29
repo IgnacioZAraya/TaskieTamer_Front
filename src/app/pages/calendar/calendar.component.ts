@@ -1,21 +1,17 @@
 import { Component } from "@angular/core";
-import { SchedulerComponent } from "../../components/scheduler-ejs2/scheduler/scheduler.component";
-import { FormComponent } from "../../components/scheduler-ejs2/form/form.component";
-import { ModalComponent } from "../../components/modal/modal.component";
-import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import {
+  ScheduleModule,
+  RecurrenceEditorModule,
+  WeekService,
+  WorkWeekService,
+} from "@syncfusion/ej2-angular-schedule";
 
 @Component({
   selector: "app-calendar",
   standalone: true,
-  imports: [
-    SchedulerComponent,
-    FormComponent,
-    ModalComponent,
-    CommonModule,
-    FormsModule,
-  ],
-  templateUrl: "./calendar.component.html",
+  imports: [ScheduleModule, RecurrenceEditorModule],
+  providers: [WeekService, WorkWeekService],
+  template: "<ejs-schedule></ejs-schedule>",
   styleUrl: "./calendar.component.scss",
 })
 export class CalendarComponent {}

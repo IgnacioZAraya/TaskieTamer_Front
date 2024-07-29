@@ -8,7 +8,7 @@ import { AuthService } from "../../services/auth.service";
   templateUrl: "./my-account.component.html",
 })
 export class MyAccountComponent implements OnInit {
-  public userName: string = ""; //Nombre de usuario
+  public userName: string = "Test";
   private service = inject(AuthService);
 
   constructor(public router: Router) {}

@@ -2,12 +2,11 @@ import { ProfileService } from "./../../services/profile.service";
 import { CommonModule } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { IUser } from "../../interfaces";
-import { XpBarComponent } from "../../components/xp-bar/xp-bar.component";
 
 @Component({
   selector: "app-profile",
   standalone: true,
-  imports: [CommonModule, XpBarComponent],
+  imports: [CommonModule],
   templateUrl: "./profile.component.html",
   styleUrl: "./profile.component.scss",
 })
@@ -18,10 +17,5 @@ export class ProfileComponent {
 
   constructor() {
     this.profileService.getLoggedUserInfo();
-  }
-  
-  public level() {
-    
-    this.profileService.user$().level?.value;
   }
 }

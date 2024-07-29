@@ -1,20 +1,15 @@
-import { Routes } from '@angular/router';
-import { AppLayoutComponent } from './components/app-layout/app-layout.component';
-import { TaskieViewComponent } from './components/taskies/taskieCards/taskies-card.component';
-import { AdminRoleGuard } from './guards/admin-role.guard';
-import { AuthGuard } from './guards/auth.guard';
-import { GuestGuard } from './guards/guest.guard';
-import { IRoleType } from './interfaces';
-import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
-import { LoginComponent } from './pages/auth/login/login.component';
-import { RegisterComponent } from './pages/auth/register/register.component';
+import { Routes } from "@angular/router";
+import { LoginComponent } from "./pages/auth/login/login.component";
+import { AppLayoutComponent } from "./components/app-layout/app-layout.component";
+import { SigUpComponent } from "./pages/auth/sign-up/signup.component";
+import { UsersComponent } from "./pages/users/users.component";
+import { AuthGuard } from "./guards/auth.guard";
+import { AccessDeniedComponent } from "./pages/access-denied/access-denied.component";
+import { AdminRoleGuard } from "./guards/admin-role.guard";
 import { CalendarComponent } from "./pages/calendar/calendar.component";
-import { HomeComponent } from './pages/home/home.component';
+import { GuestGuard } from "./guards/guest.guard";
+import { IRole } from "./interfaces";
 import { ProfileComponent } from "./pages/profile/profile.component";
-import { UsersComponent } from './pages/users/users.component';
-import { TaskieComponent } from './pages/taskies/taskiescard.component';
-import { TaskieDexComponent } from './components/taskies/taskieDex/taskiesDex.component';
-
 
 export const routes: Routes = [
   {
@@ -23,8 +18,8 @@ export const routes: Routes = [
     canActivate: [GuestGuard],
   },
   {
-    path: 'register',
-    component: RegisterComponent,
+    path: "signup",
+    component: SigUpComponent,
     canActivate: [GuestGuard],
   },
   {
@@ -32,37 +27,34 @@ export const routes: Routes = [
     component: AccessDeniedComponent,
   },
   {
-    path: '',
-    redirectTo: 'app/home',
-    pathMatch: 'full',
+    path: "",
+    redirectTo: "login",
+    pathMatch: "full",
   },
   {
     path: "app",
     component: AppLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
-        path: 'app',
-        redirectTo: 'home',
-        pathMatch: 'full',
+        path: "app",
+        redirectTo: "users",
+        pathMatch: "full",
       },
       {
         path: "users",
         component: UsersComponent,
-        canActivate:[ AdminRoleGuard],
-        data: { 
-          authorities: [
-            IRoleType.admin, 
-            IRoleType.superAdmin                    
-          ],
-          name: 'Users'
-        }
+        canActivate: [AdminRoleGuard],
+        data: {
+          authorities: [IRole.admin, IRole.superAdmin],
+          name: "Users",
+        },
       },
       {
         path: "calendar",
         component: CalendarComponent,
-        canActivate:[AuthGuard],
         data: {
-          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
+          authorities: [IRole.admin, IRole.superAdmin, IRole.user],
           name: "Calendar",
         },
       },
@@ -70,30 +62,10 @@ export const routes: Routes = [
         path: "profile",
         component: ProfileComponent,
         data: {
-          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
+          authorities: [IRole.admin, IRole.superAdmin, IRole.user],
           name: "Profile",
         },
       },
-      {
-        path: "taskiedex",
-        component: TaskieDexComponent,
-        data: {
-          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
-          name: "TaskieDex",
-        },
-      },
-      {
-        path: 'taskie/:id',
-        component: TaskieViewComponent,
-        
-      },
-      {
-        path: 'home',
-        component: HomeComponent,
-        data: {
-          name: 'Home'
-        }
-      }
     ],
   },
 ];

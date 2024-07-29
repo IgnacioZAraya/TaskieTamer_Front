@@ -9,14 +9,8 @@ import { routes } from "../../../../app.routes";
 @Component({
   selector: "app-sidebar",
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    RouterLinkActive,
-    SvgIconComponent
-  ],
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  imports: [CommonModule, RouterLink, RouterLinkActive, SvgIconComponent],
+  templateUrl: "./sidebar.component.html",
 })
 export class SidebarComponent {
   public width: any = window.innerWidth;

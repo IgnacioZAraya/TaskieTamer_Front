@@ -1,21 +1,21 @@
-import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
-import { UserListComponent } from "../../components/user/user-list/user-list.component";
-import { UserFormComponent } from "../../components/user/user-from/user-form.component";
-import { LoaderComponent } from "../../components/loader/loader.component";
-import { ModalComponent } from "../../components/modal/modal.component";
+import { Component } from '@angular/core';
+import { UserListComponent } from '../../components/user/user-list/user-list.component';
+import { UserFormComponent } from '../../components/user/user-from/user-form.component';
+import { LoaderComponent } from '../../components/loader/loader.component';
+import { ModalComponent } from '../../components/modal/modal.component';
 
 @Component({
-  selector: "app-users",
+  selector: 'app-users',
   standalone: true,
   imports: [
     UserListComponent,
     UserFormComponent,
     LoaderComponent,
-    ModalComponent,
-    CommonModule,
+    ModalComponent
   ],
-  templateUrl: "./users.component.html",
-  styleUrl: "./users.component.scss",
+  templateUrl: './users.component.html',
+  styleUrl: './users.component.scss'
 })
-export class UsersComponent {}
+export class UsersComponent {
+
+}
