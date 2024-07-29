@@ -278,5 +278,4 @@ export class SchedulerComponent {
     }
     this.scheduleObj.closeQuickInfoPopup();
   }
-
 }
