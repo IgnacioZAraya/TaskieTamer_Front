@@ -1,28 +1,20 @@
-<ejs-schedule #schedule cssClass="quick-info-popup">
-  <e-views>
-    <e-view option="Day"></e-view>
-    <e-view option="Week"></e-view>
-    <e-view option="Month"></e-view>
-  </e-views>
+<h1>Your Calendar!</h1>
+<div class="calendar-cont">  
+  <div class="scheduler-cont">
+    <app-scheduler> </app-scheduler>
+  </div>
 
-  <!-- Contenido de Quick Info -->
-  <ng-template #quickInfoTemplatesContent let-data>
-    <ejs-textbox id="taskName" placeholder="Task Name"></ejs-textbox>
-    <ejs-textbox id="taskPriority" placeholder="Task Priority"></ejs-textbox>
-    <textarea id="taskDescription" placeholder="Description"></textarea>
-  </ng-template>
+  <div class="defTasks">
+    <h2>Default Tasks</h2>
+    <div class="taskDiv shadow-lg">
+    <div *ngFor="let task of tasks" class="tasksDiv">
+      <span (click)="selectTask(task)" style="cursor: pointer">
+        <p class="mb-0">-{{ task.name }}</p>
+      </span>
+    </div></div>
+  </div>
+</div>
 
-  <!-- Footer de Quick Info -->
-  <ng-template #quickInfoTemplatesFooter let-data>
-    <div>
-      <button
-        ejs-button
-        cssClass="e-flat"
-        [isPrimary]="true"
-        (click)="addTask($event, 'add')"
-      >
-        Save
-      </button>
-    </div>
-  </ng-template>
-</ejs-schedule>
+<app-modal size="lg" #formModal>
+  <app-task-form [title]="'Add Task'" [task]="selectedTask"></app-task-form>
+</app-modal>

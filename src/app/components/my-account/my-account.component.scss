@@ -1,0 +1,34 @@
+h1 {
+    font-family: 'PuppyBellies';
+    font-size: 30px;
+    color: #6a4a3d;
+}
+
+span {
+    font-family: 'QuiteMagical';
+    font-size: 25px;
+    color: #6a4a3d;
+}
+
+.profile-media {
+    height: 20px;
+}
+
+i {
+    font-size: 30px;
+    color: #6a4a3d;
+}
+
+ul {
+    display: flex;
+    flex-direction: column; 
+    margin-left: 25%;
+    background: #edc951;
+}
+
+li {
+    display: flex;
+    justify-content: space-around;
+}
+
+

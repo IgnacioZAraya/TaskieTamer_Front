@@ -1,15 +1,43 @@
-@import "../../../../node_modules/@syncfusion/ej2-material-theme/styles/material.css";
-
-.quick-info-popup.e-schedule
-  .e-quick-popup-wrapper
-  .e-event-popup
-  .e-popup-content {
-  padding: 8px 18px 8px 26px;
+.calendar-cont {
+  display: flex;
 }
 
-.quick-info-popup.e-schedule
-  .e-quick-popup-wrapper
-  .e-event-popup
-  .e-popup-footer {
-  background: #fff;
+.scheduler-cont {
+  width: 80%;
+}
+
+.predetermined {
+  width: 20%;
+  text-align: center;
+}
+
+.defTasks{
+  padding-left: 5%;
+}
+
+h1 {
+  font-family: 'PuppyBellies';
+  color: #6a4a3d;
+  font-size: 3rem;
+}
+
+h2 {
+  font-family: 'PuppyBellies';
+  color: #6a4a3d;
+  font-size: 2.25rem;
+}
+
+p {
+  padding: 15px;
+}
+
+.tasksDiv {
+  border-style: ridge;
+  background-color: #ecd381;
+  border: 3px solid #6a4a3d;
+}
+
+.taskDiv {
+  border-bottom: 3px solid #1f1612;
+  border-left: 3px solid #1f1612;
 }

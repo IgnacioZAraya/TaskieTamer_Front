@@ -1,0 +1,7 @@
+<div class="taskie-dex">
+  <h2>Taskies</h2>
+  <div *ngFor="let taskie of taskies" (click)="viewTaskieDetail(taskie.id)" class="taskie-card">
+    <h3>{{ taskie.name }}</h3>
+    <img [src]="taskie.sprite" alt="{{ taskie.name }} Image" class="taskie-image"/>
+  </div>
+</div>

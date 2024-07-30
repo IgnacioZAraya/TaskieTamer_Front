@@ -1,6 +1,6 @@
 <div class="table-container table-responsive">
   <table class="table table-striped">
-    <thead>
+    <thead class="brown">
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Name</th>
@@ -26,7 +26,7 @@
               <i class="fa-solid fa-eye white"
               ></i>
             </button>
-            <button type="button" (click)="deleteUser(item)" class="btn btn-danger">
+            <button type="button" (click)="showConfirmation(item, confirmationModal)" class="btn btn-danger">
               <i class="fa-solid fa-trash white"
               ></i>
             </button>
@@ -45,4 +45,13 @@
   [title]="'Update User'"
   >
 </app-user-form>
+</app-modal>
+
+<app-modal size="lg" #confirmationModal>
+  <app-confirmation 
+  [item]="currentUser" 
+  [title]="'Delete User'"
+  >
+</app-confirmation>
+
 </app-modal>

@@ -17,6 +17,18 @@ export class BaseService<T> {
   public findAll(s: string = ''): Observable<IResponse<T[]>> {
     return this.http.get<IResponse<T[]>>(this.source, { params: { s } });
   }
+  
+  public findByUserId(userId: number): Observable<IResponse<T[]>> {
+    return this.http.get<IResponse<T[]>>(`${this.source}/userId/${userId}`);
+  }
+
+  public findHistory(userId: number): Observable<IResponse<T[]>> {
+    return this.http.get<IResponse<T[]>>(`${this.source}/history/${userId}`);
+  }
+
+  public findNext(userId: number): Observable<IResponse<T[]>> {
+    return this.http.get<IResponse<T[]>>(`${this.source}/nextTask/${userId}`);
+  }
 
   public add(data: {}): Observable<IResponse<T>> {
     return this.http.post<IResponse<T>>(this.source, data);

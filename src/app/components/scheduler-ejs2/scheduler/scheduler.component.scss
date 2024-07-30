@@ -1,0 +1,75 @@
+@import "../../../../../node_modules/@syncfusion/ej2-material-theme/styles/material.css";
+@import "../../../../../node_modules/@syncfusion/ej2-calendars/styles/material.css";
+
+.quick-info-popup.e-schedule .e-quick-popup-wrapper .e-event-popup .e-popup-header {
+  background: #ffff;
+}
+
+.quick-info-popup.e-schedule .e-quick-popup-wrapper .e-event-popup .e-popup-header .e-header-icon-wrapper .e-close {
+  color: black;
+}
+
+.quick-info-popup.e-schedule
+  .e-quick-popup-wrapper
+  .e-event-popup
+  .e-popup-content {
+  padding: 8px 18px 8px 26px;
+}
+
+.quick-info-popup.e-schedule
+  .e-quick-popup-wrapper
+  .e-event-popup
+  .e-popup-footer {
+  background: #fff;
+}
+
+.e-popup-header, .e-cell-popup, .e-quick-popup-wrapper .e-lib .e-popup .e-control .e-popup-open .yellow .e-ddl.e-input-group.e-control-wrapper .e-input .e-dropdownbase .e-list-item, .e-dropdownbase .e-list-item.e-item-focus{
+  background-color: #ecd381;
+}
+
+.custom-border {
+  border-style: ridge;
+  border: 3px solid #6a4a3d;
+  border-bottom: 3px solid #6a4a3d; 
+}
+
+.custom-btn {
+  background-color: #6a4a3d;
+  color: #edc951;
+  padding: 10px 20%;
+  margin: 10px 25%;
+}
+
+.element-conf {
+  display: flex;
+  flex-direction: column;
+}
+
+.element-conf-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.input-width {
+  width: 100%;
+}
+
+.diss{
+  display: none;
+}
+
+.yellow {
+  background-color: #edc951;
+}
+
+.brown {
+  background-color: #6a4a3d;
+}
+
+.orange {
+  background-color: #ec6841;
+}
+
+.white{
+  background-color: #fff;
+}

@@ -1,97 +1,124 @@
 {
-  "hash": "91b4cb3c",
-  "configHash": "1e17689d",
-  "lockfileHash": "98197815",
-  "browserHash": "128934c4",
+  "hash": "1cc83610",
+  "configHash": "def4003b",
+  "lockfileHash": "82e1b803",
+  "browserHash": "c61c3a14",
   "optimized": {
+    "@angular/cdk/drag-drop": {
+      "src": "../../../../../node_modules/@angular/cdk/fesm2022/drag-drop.mjs",
+      "file": "@angular_cdk_drag-drop.js",
+      "fileHash": "4cb249e4",
+      "needsInterop": false
+    },
     "@angular/common": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "bff3447f",
+      "fileHash": "361261b2",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "4ca8d6ad",
+      "fileHash": "f0a7fd9f",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "79bc194c",
+      "fileHash": "c85a08ec",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "865bdea5",
+      "fileHash": "c3ba360f",
       "needsInterop": false
     },
     "@angular/material/snack-bar": {
       "src": "../../../../../node_modules/@angular/material/fesm2022/snack-bar.mjs",
       "file": "@angular_material_snack-bar.js",
-      "fileHash": "f54f26a1",
+      "fileHash": "a197c12a",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "9ced0696",
+      "fileHash": "115df5da",
       "needsInterop": false
     },
-    "@angular/platform-browser/animations/async": {
-      "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/animations/async.mjs",
-      "file": "@angular_platform-browser_animations_async.js",
-      "fileHash": "865ef8bf",
+    "@angular/platform-browser/animations": {
+      "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/animations.mjs",
+      "file": "@angular_platform-browser_animations.js",
+      "fileHash": "1083e50d",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "6a63ed52",
+      "fileHash": "03e1a4ad",
       "needsInterop": false
     },
     "@ng-bootstrap/ng-bootstrap": {
       "src": "../../../../../node_modules/@ng-bootstrap/ng-bootstrap/fesm2022/ng-bootstrap.mjs",
       "file": "@ng-bootstrap_ng-bootstrap.js",
-      "fileHash": "66f22cc9",
+      "fileHash": "66b58596",
       "needsInterop": false
     },
     "@syncfusion/ej2-angular-buttons": {
       "src": "../../../../../node_modules/@syncfusion/ej2-angular-buttons/fesm2020/syncfusion-ej2-angular-buttons.mjs",
       "file": "@syncfusion_ej2-angular-buttons.js",
-      "fileHash": "fb8ced9e",
+      "fileHash": "f9ff1a17",
+      "needsInterop": false
+    },
+    "@syncfusion/ej2-angular-calendars": {
+      "src": "../../../../../node_modules/@syncfusion/ej2-angular-calendars/fesm2020/syncfusion-ej2-angular-calendars.mjs",
+      "file": "@syncfusion_ej2-angular-calendars.js",
+      "fileHash": "f5d2ab7a",
+      "needsInterop": false
+    },
+    "@syncfusion/ej2-angular-dropdowns": {
+      "src": "../../../../../node_modules/@syncfusion/ej2-angular-dropdowns/fesm2020/syncfusion-ej2-angular-dropdowns.mjs",
+      "file": "@syncfusion_ej2-angular-dropdowns.js",
+      "fileHash": "6d3ce20b",
       "needsInterop": false
     },
     "@syncfusion/ej2-angular-inputs": {
       "src": "../../../../../node_modules/@syncfusion/ej2-angular-inputs/fesm2020/syncfusion-ej2-angular-inputs.mjs",
       "file": "@syncfusion_ej2-angular-inputs.js",
-      "fileHash": "31e8f02b",
+      "fileHash": "e72a7010",
       "needsInterop": false
     },
     "@syncfusion/ej2-angular-schedule": {
       "src": "../../../../../node_modules/@syncfusion/ej2-angular-schedule/fesm2020/syncfusion-ej2-angular-schedule.mjs",
       "file": "@syncfusion_ej2-angular-schedule.js",
-      "fileHash": "fffd516b",
+      "fileHash": "96432dc1",
       "needsInterop": false
     },
     "@syncfusion/ej2-base": {
       "src": "../../../../../node_modules/@syncfusion/ej2-base/index.js",
       "file": "@syncfusion_ej2-base.js",
-      "fileHash": "cd2a8644",
+      "fileHash": "7e7d941b",
+      "needsInterop": false
+    },
+    "ngx-toastr": {
+      "src": "../../../../../node_modules/ngx-toastr/fesm2022/ngx-toastr.mjs",
+      "file": "ngx-toastr.js",
+      "fileHash": "4386ab78",
       "needsInterop": false
     },
     "rxjs": {
       "src": "../../../../../node_modules/rxjs/dist/esm5/index.js",
       "file": "rxjs.js",
-      "fileHash": "7c21511d",
+      "fileHash": "586b3a22",
       "needsInterop": false
     }
   },
   "chunks": {
-    "browser-ISF4NFUQ": {
-      "file": "browser-ISF4NFUQ.js"
+    "chunk-3I7TSBJ4": {
+      "file": "chunk-3I7TSBJ4.js"
+    },
+    "chunk-JIUQNGLR": {
+      "file": "chunk-JIUQNGLR.js"
     },
     "chunk-4H2XEX6S": {
       "file": "chunk-4H2XEX6S.js"
@@ -102,17 +129,23 @@
     "chunk-DCXYKRNZ": {
       "file": "chunk-DCXYKRNZ.js"
     },
-    "chunk-XDCGFBEL": {
-      "file": "chunk-XDCGFBEL.js"
+    "chunk-FHMBO2KQ": {
+      "file": "chunk-FHMBO2KQ.js"
     },
-    "chunk-JIVBKAVP": {
-      "file": "chunk-JIVBKAVP.js"
+    "chunk-FTEZD3CJ": {
+      "file": "chunk-FTEZD3CJ.js"
+    },
+    "chunk-54AVPTAK": {
+      "file": "chunk-54AVPTAK.js"
     },
     "chunk-FSZDQEVW": {
       "file": "chunk-FSZDQEVW.js"
     },
     "chunk-EATDXRY4": {
       "file": "chunk-EATDXRY4.js"
+    },
+    "chunk-JIVBKAVP": {
+      "file": "chunk-JIVBKAVP.js"
     },
     "chunk-VCFGKTIQ": {
       "file": "chunk-VCFGKTIQ.js"

@@ -5,6 +5,27 @@ div{
 p {
     min-width: 500px;
     text-align: justify;
+    color: #edc951;
+}
+
+h1 {
+    font-family: 'PuppyBellies';
+    font-size: 50px;
+    text-shadow: #ffc70f 1px 0 10px;
+    color: #48322a;
+}
+
+.bullet {
+    display: list-item;
+    text-shadow: #48322a 1px 0 10px;
+    font-size: 30px;
+}
+
+h2 {
+    font-family: 'QuiteMagical';
+    color: #edc951;
+    text-shadow: #48322a 1px 0 10px;
+    font-size: 35px;
 }
 
 Body {
@@ -34,6 +55,6 @@ Button {
 }
 
 .top {
-   
-    background-position: center;
+    background-image: url("../../../assets/icons/stockImg3.png");
+    background-position: left;
 }

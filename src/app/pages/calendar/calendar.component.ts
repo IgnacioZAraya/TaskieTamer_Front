@@ -1,88 +1,39 @@
-import { isNullOrUndefined } from "util";
 import { Component, ViewChild } from "@angular/core";
-import {
-  ScheduleModule,
-  RecurrenceEditorModule,
-  WeekService,
-  MonthService,
-  DayService,
-  EventSettingsModel,
-  DragAndDropService,
-  ResizeService,
-  ScheduleComponent,
-  EJ2Instance,
-} from "@syncfusion/ej2-angular-schedule";
-import {
-  TextBoxComponent,
-  TextBoxModule,
-} from "@syncfusion/ej2-angular-inputs";
-import { ButtonModule } from "@syncfusion/ej2-angular-buttons";
-import { closest } from "@syncfusion/ej2-base";
-import { DataManager, WebApiAdaptor } from "@syncfusion/ej2-data";
-import { Subject } from "rxjs";
+import { SchedulerComponent } from "../../components/scheduler-ejs2/scheduler/scheduler.component";
+import { FormComponent } from "../../components/scheduler-ejs2/form/form.component";
+import { ModalComponent } from "../../components/modal/modal.component";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-calendar",
   standalone: true,
   imports: [
-    ScheduleModule,
-    RecurrenceEditorModule,
-    TextBoxModule,
-    ButtonModule,
-  ],
-  providers: [
-    WeekService,
-    MonthService,
-    DayService,
-    DragAndDropService,
-    ResizeService,
+    SchedulerComponent,
+    FormComponent,
+    ModalComponent,
+    CommonModule,
+    FormsModule,
   ],
   templateUrl: "./calendar.component.html",
-  styleUrl: "./calendar.component.scss",
+  styleUrls: ["./calendar.component.scss"],
 })
 export class CalendarComponent {
-  /*private eventData: DataMannager = new DataManager({
-    url: //URL DEL API ,
-    adaptor: new WebApiAdaptor,
-    crossDomain: true
-  });*/
+  @ViewChild('formModal') formModal!: ModalComponent; 
 
-  @ViewChild("schedule") scheduleObj!: ScheduleComponent;
-  public eventObject: EventSettingsModel = {
-    //dataSource: this.eventData
-    dataSource: [
-      {
-        Subject: "Prueba",
-        StartTime: new Date(2024, 6, 10, 4, 0),
-        EndTime: new Date(2024, 6, 10, 6, 0),
-        //RecurrenceRule: "FREQ=DAILY;INTERVAL=1;COUNT=10",
-        //IsReadonly: true,
-        //IsBlock: true,
-      },
-    ],
-    /* fields: {
-      subject: { default: "(Nuevo Evento)", title: "Nombre del Evento" },
-    },*/
-  };
+  tasks = [
+    { name: 'Take out the trash' },
+    { name: 'Brush teeth' },
+    { name: 'Clean the room' },
+    { name: 'Shower' }
+  ];
 
-  public addTask(e: Event, option: string) {
-    let quickPopup: HTMLElement = closest(
-      e.target as HTMLElement,
-      ".e-quick-popup-wrapper"
-    ) as HTMLElement;
-    if (option === "add") {
-      let taskName = (
-        (quickPopup.querySelector("#taskName") as EJ2Instance)
-          .ej2_instances[0] as TextBoxComponent
-      ).value;
-      let addObj: Record<string, any> = {
-        Id: this.scheduleObj.getEventMaxID(),
-        Name: taskName,
-        StartTime: new Date(this.scheduleObj.activeCellsData.startTime),
-        EndTime: new Date(this.scheduleObj.activeCellsData.endTime),
-      };
-      this.scheduleObj.addEvent(addObj);
+  selectedTask = { name: '' };
+
+  selectTask(task: any) {
+    this.selectedTask = task;
+    if (this.formModal) {
+      this.formModal.show(); 
     }
-    this.scheduleObj.closeQuickInfoPopup();
   }
 }

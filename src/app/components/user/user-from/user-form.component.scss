@@ -16,13 +16,19 @@ h1, h2, .customlabel {
 }
 
 h2{
-  font-family: "Playwrite";
+  font-family: "PuppyBellies";
   font-size: 30px;
 }
 
 input {
   background-color: #edc951;
+  color: #6a4a3d;
+  font-size: 1.5rem;
   padding: 3px;
   margin-bottom: 5px;
 }
+
+::placeholder {
+  color: #6a4a3d89;
+} 
 
