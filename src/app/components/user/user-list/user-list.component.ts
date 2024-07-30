@@ -1,67 +1,52 @@
-import { Component, effect, inject } from '@angular/core';
-import { UserService } from '../../../services/user.service';
-import { IUser } from '../../../interfaces';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ModalComponent } from '../../modal/modal.component';
-import { UserFormComponent } from '../user-from/user-form.component';
-import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { CommonModule } from "@angular/common";
+import { Component, effect, inject } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { IUser } from "../../../interfaces";
+import { UserService } from "../../../services/user.service";
+import { ConfirmationComponent } from "../../confirmation/confirmation.component";
+import { ModalComponent } from "../../modal/modal.component";
+import { UserFormComponent } from "../user-from/user-form.component";
 
 @Component({
-  selector: 'app-user-list',
+  selector: "app-user-list",
   standalone: true,
   imports: [
-    CommonModule, 
+    CommonModule,
     FormsModule,
     ModalComponent,
     UserFormComponent,
-    MatSnackBarModule
+    ConfirmationComponent,
+    MatSnackBarModule,
   ],
-  templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.scss'
+  templateUrl: "./user-list.component.html",
+  styleUrl: "./user-list.component.scss",
 })
 export class UserListComponent {
-  public search: String = '';
+  public search: String = "";
   public userList: IUser[] = [];
   private service = inject(UserService);
-  private snackBar = inject(MatSnackBar);
   public currentUser: IUser = {
-    email: '',
-    lastname: '',
-    password: '',
-    name: ''
+    email: "",
+    lastname: "",
+    password: "",
+    name: "",
   };
-  
+
   constructor() {
     this.service.getAllSignal();
-    effect(() => {      
+    effect(() => {
       this.userList = this.service.users$();
     });
   }
 
   showDetail(user: IUser, modal: any) {
-    this.currentUser = {...user}; 
+    this.currentUser = { ...user };
     modal.show();
   }
 
-  deleteUser(user: IUser) {
-    this.service.deleteUserSignal(user).subscribe({
-      next: () => {
-        this.snackBar.open('User deleted', 'Close', {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          duration: 5 * 1000,
-        });
-      },
-      error: (error: any) => {
-        this.snackBar.open('Error deleting user', 'Close', {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
-        });
-      }
-    })
+  showConfirmation(user: IUser, modal: any) {
+    this.currentUser = { ...user };
+    modal.show();
   }
-
 }

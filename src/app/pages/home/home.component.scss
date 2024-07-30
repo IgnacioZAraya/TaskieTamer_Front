@@ -1,0 +1,60 @@
+div{
+    padding: 25px;
+}
+
+p {
+    min-width: 500px;
+    text-align: justify;
+    color: #edc951;
+}
+
+h1 {
+    font-family: 'PuppyBellies';
+    font-size: 50px;
+    text-shadow: #ffc70f 1px 0 10px;
+    color: #48322a;
+}
+
+.bullet {
+    display: list-item;
+    text-shadow: #48322a 1px 0 10px;
+    font-size: 30px;
+}
+
+h2 {
+    font-family: 'QuiteMagical';
+    color: #edc951;
+    text-shadow: #48322a 1px 0 10px;
+    font-size: 35px;
+}
+
+Body {
+    max-width: 1500px;
+}
+
+.introText{
+    width: 50%;
+    min-width: 300px;
+}
+
+Button {
+    margin: 5px;
+    height: 40px;
+    width: 20%;
+    min-width: 120px;
+}
+
+.homeImage {
+    width: 40%;
+    margin: 5%;
+}
+
+.logo {
+    width: 40%;
+    min-width: 250px;
+}
+
+.top {
+    background-image: url("../../../assets/icons/stockImg3.png");
+    background-position: left;
+}

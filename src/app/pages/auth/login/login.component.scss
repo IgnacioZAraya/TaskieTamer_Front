@@ -13,7 +13,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad según necesites */
     z-index: 1;
   }
   .login-card {
@@ -24,17 +23,59 @@
     border-radius: 10px;
     box-shadow: 0 0 37px rgba(8, 21, 66, 0.05);
     margin: 0 auto;
-    background-color: #fff;
+    background-color: #ef9174;
   }
 
   .form-parent {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 
-  @media screen and (min-width: 801px) and (max-width: 1500px) {
+  input {
+    background-color: #edc951;
+    color: #6a4a3d;
+    font-size: 1.5rem;
+    padding: 3px;
+    margin-bottom: 5px;
+  }
+
+  ::placeholder {
+    color: #6a4a3d89;
+  }  
+
+  h1 {
+    font-family: 'PuppyBellies';
+    font-size: 2rem;
+  }
+
+  h1, p, .customlabel {
+    color: #6a4a3d;
+  }
+
+  .custom-btn {
+    width: 150px;
+  }
+
+  .login-btn {
+    height: 50px;
+    margin-left: 30px;
+  }
+
+  button {
+    input {
+      background-color: #6a4a3d;
+      color: #edc951;
+      font-family: 'PuppyBellies';
+    }
+  }
+
+  .center {
+    align-items: center;
+  }
+
+  @media screen and (min-width: 891px) and (max-width: 1500px) {
     padding: 20px 5%;
     .login-card {
       width: 60%;
@@ -43,7 +84,7 @@
       }
     }
   }
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 890px) {
     padding: 20px 5%;
     .login-card {
       width: 100%;
@@ -52,4 +93,5 @@
       }
     }
   }
+
 }

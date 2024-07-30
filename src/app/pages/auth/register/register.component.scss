@@ -1,0 +1,101 @@
+.login-container {
+  height: 100vh;
+  // background-image: url("../../../../assets/img/login/login-bg.jpg");
+  background-position: left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 20px 20%;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+  .login-card {
+    position: relative;
+    z-index: 2;
+    width: 60%;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 37px rgba(8, 21, 66, 0.05);
+    margin: 0 auto;
+    background-color: #ef9174;
+  }
+  .invalid-feedback {
+    position: absolute;
+    margin-top: 0px;
+  }
+
+  .form-parent {
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: space-between;
+  }
+
+  input {
+    background-color: #edc951;
+    color: #6a4a3d;
+    font-size: 1.5rem;
+    padding: 3px;
+    margin-bottom: 5px;
+  }
+
+  ::placeholder {
+    color: #6a4a3d89;
+  }  
+
+  .custom-btn {
+    width: 150px;
+  }
+
+  .login-btn {
+    height: 80px;
+    margin-left: 30px;
+  }
+
+  .login-text {
+    margin-left: 30px;
+  }
+
+  button {
+    input {
+      background-color: #6a4a3d;
+      color: #edc951;
+      font-family: 'PuppyBellies';
+      margin-left: 200px;
+    }
+  }
+
+  h1 {
+    font-family: 'PuppyBellies';
+    font-size: 2rem;
+  }
+
+  h1, p, .customlabel {
+    color: #6a4a3d;
+  }
+
+  @media screen and (min-width: 801px) and (max-width: 1500px) {
+    padding: 20px 5%;
+    .login-card {
+      width: 60%;
+      .login-main {
+        padding: 0px;
+      }
+    }
+  }
+  @media screen and (max-width: 800px) {
+    padding: 20px 5%;
+    .login-card {
+      width: 100%;
+      .login-main {
+        padding: 0px;
+      }
+    }
+  }
+}
