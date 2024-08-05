@@ -18,6 +18,11 @@
          (dragstart)="onDragStart($event, cosmetic)" (dragend)="onDragEnd($event)">
       <img [src]="cosmetic.sprite" alt="{{ cosmetic.name }} Image" class="cosmetic-image"/>
       <p>{{ cosmetic.name }}</p>
+      @if (cosmetic.name === "FOOD") {
+        <p>{{food}}</p>
+      }@else if (cosmetic.name === "SHAMPOO"){
+        <p>{{cleaner}}</p>
+      }
     </div>
   </div>
 </div>

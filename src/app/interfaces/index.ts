@@ -20,6 +20,8 @@ export interface IUser {
   role?: IRole;
   level?: ILevel;
   experience?: number;
+  foodUser?: number;
+  cleanerUser?: number;
 }
 
 export interface ILevel {
