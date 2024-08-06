@@ -1,23 +1,23 @@
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { IResponse, IUser } from '../interfaces';
-import { Injectable, inject } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { IResponse, IUser } from "../interfaces";
+import { Injectable, inject } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class BaseService<T> {
   protected source!: string;
   protected http = inject(HttpClient);
 
   public find(id: string | number): Observable<IResponse<T>> {
-    return this.http.get<IResponse<T>>(this.source + '/' + id);
+    return this.http.get<IResponse<T>>(this.source + "/" + id);
   }
 
-  public findAll(s: string = ''): Observable<IResponse<T[]>> {
+  public findAll(s: string = ""): Observable<IResponse<T[]>> {
     return this.http.get<IResponse<T[]>>(this.source, { params: { s } });
   }
-  
+
   public findByUserId(userId: number): Observable<IResponse<T[]>> {
     return this.http.get<IResponse<T[]>>(`${this.source}/userId/${userId}`);
   }
@@ -35,10 +35,17 @@ export class BaseService<T> {
   }
 
   public edit(id: number | undefined, data: {}): Observable<IResponse<T>> {
-    return this.http.put<IResponse<T>>(this.source + '/' + id, data);
+    return this.http.put<IResponse<T>>(this.source + "/" + id, data);
+  }
+
+  public editProfile(
+    id: number | undefined,
+    data: {}
+  ): Observable<IResponse<T>> {
+    return this.http.put<IResponse<T>>(this.source + "/profile/" + id, data);
   }
 
   public del(id: any): Observable<IResponse<T>> {
-    return this.http.delete<IResponse<T>>(this.source + '/' + id);
+    return this.http.delete<IResponse<T>>(this.source + "/" + id);
   }
 }
