@@ -5,30 +5,6 @@
   class="add-user-container"
 >
   <h2 class="mb-5 px-5">{{ title }}</h2>
-  <div class="border-bottom pb-3 mb-3">
-    <div class="px-5">
-      <label for="email" class="form-label mb-2"> Email Address </label>
-      <input
-        #email="ngModel"
-        type="text"
-        class="form-control shadow rounded"
-        id="email"
-        name="email"
-        placeholder="user@gmail.com"
-        [(ngModel)]="user.email"
-        [ngClass]="{
-          'is-invalid': email.invalid && email.touched,
-          'is-valid': email.valid && email.touched
-        }"
-        required
-      />
-      @if (email.invalid) {
-      <div *ngIf="email.invalid" class="invalid-feedback">
-        Please add a valid email
-      </div>
-      }
-    </div>
-  </div>
   <div class="border-bottom pb-3 mb-3 px-5">
     <div class="row">
       <div class="col-6">
@@ -75,32 +51,49 @@
         </div>
         }
       </div>
-      @if(action == 'add') {
-      <div class="col-6 pt-3">
-        <label for="password" class="form-label mb-2"> Password </label>
-        <input
-          #password="ngModel"
-          type="password"
-          class="form-control shadow rounded"
-          id="password"
-          name="password"
-          placeholder="*****"
-          [(ngModel)]="user.password"
-          [ngClass]="{
-            'is-invalid': password.invalid && password.touched,
-            'is-valid': password.valid && password.touched
-          }"
-          required
-        />
-        @if (password.invalid) {
-        <div *ngIf="password.invalid" class="invalid-feedback">
-          Please add a valid password
-        </div>
-        }
+    </div>
+  </div>
+  <div class="border-bottom pb-3 mb-3">
+    <div class="px-5">
+      <label for="email" class="form-label mb-2"> Email Address </label>
+      <input
+        #email="ngModel"
+        type="text"
+        class="form-control shadow rounded"
+        id="email"
+        name="email"
+        placeholder="user@gmail.com"
+        [(ngModel)]="user.email"
+        [ngClass]="{
+          'is-invalid': email.invalid && email.touched,
+          'is-valid': email.valid && email.touched
+        }"
+        required
+      />
+      @if (email.invalid) {
+      <div *ngIf="email.invalid" class="invalid-feedback">
+        Please add a valid email
       </div>
       }
     </div>
   </div>
+  @if(action == 'add' || action == 'profileEdit') {
+  <div class="border-bottom pb-3 mb-3">
+    <div class="px-5">
+      <label for="password" class="form-label mb-2 custom-label"> To know it's you, type down your Password! </label>
+      <input #password="ngModel" type="password" class="form-control shadow rounded" id="password" name="password"
+        placeholder="*****" [(ngModel)]="userSpec.password" [ngClass]="{
+            'is-invalid': password.invalid && password.touched,
+            'is-valid': password.valid && password.touched
+          }" required />
+      @if (password.invalid) {
+      <div *ngIf="password.invalid" class="invalid-feedback">
+        Please add a valid password
+      </div>
+      }
+    </div>
+  </div>
+  }
   <div class="pb-3 mb-3 d-flex justify-content-center align-items-center">
     <button
       type="submit"

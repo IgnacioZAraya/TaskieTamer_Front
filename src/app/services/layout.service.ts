@@ -18,7 +18,7 @@ export class LayoutService {
   public sidebarOpen: boolean = true;
 
   constructor() {
-    // fromEvent(window, 'resize')
+    //fromEvent(window, 'resize')
     //   .pipe(debounceTime(100), takeUntil(this.unsubscriber))
     //   .subscribe((event: any) => {
     //     this.sidebarOpen = event.target.innerWidth >= 991;

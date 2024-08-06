@@ -1,32 +1,30 @@
 <div class="shadow-lg round padded colored center">
-  <h1 class="mb-5">{{profileService.user$().name}}'s profile info</h1>
+  <h1 class="my-4">{{profileService.user$().name}}'s profile info</h1>
   <div class="infoCont shadow-lg">
-    <div class="half">
-      <label>Registered Name:</label>
-      <label>Registered Last Name:</label>
-      <label>Registered Email:</label>
-    </div>
-    <div class="half">
-      <p>{{profileService.user$().name}}</p>
-      <p>{{profileService.user$().lastname}}</p>
-      <p>{{profileService.user$().email}}</p>
+    <div class="d-column">
+      <div class="infoSection">
+        <div class="half">
+          <i class="fa-solid fa-user-circle userIcon"></i>
+        </div>
+        <div class="half">
+          <p>You are {{profileService.user$().name}} {{profileService.user$().lastname}}!</p>
+          <p>Whose email is {{profileService.user$().email}}</p>
+        </div>
+      </div>
+
+      <div class="xpSection">
+        <label class="xpLabel">You are in {{profileService.user$().level?.name}}, with
+          {{profileService.user$().experience}} out of {{profileService.user$().level?.value}} XP points for the next
+          level !!!</label>
+        <app-xp-bar></app-xp-bar>
+      </div>
     </div>
   </div>
-  <div class="xpSection shadow-lg">
-      <p>{{profileService.user$().level?.name}}</p>
-      <p>{{profileService.user$().level?.value}}</p>
-    <label class="xpLabel">Your Xp:</label>
-    <app-xp-bar></app-xp-bar>
-  </div>
-  <button class="btn custom-btn shadow-lg">Activate associate account</button>
+  <button class="btn custom-btn shadow-lg">Parent mode</button>
   <button class="btn custom-btn shadow-lg" (click)="formModal.show()">Edit</button>
 </div>
 
 <app-modal size="lg" #formModal>
-  <app-user-form 
-  [user]="profileService.user$()" 
-  [action]="'edit'"
-  [title]="'Update User'"
-  >
-</app-user-form>
+  <app-user-form [user]="profileService.user$()" [action]="'profileEdit'" [title]="'Update User'">
+  </app-user-form>
 </app-modal>

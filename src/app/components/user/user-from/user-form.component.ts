@@ -1,14 +1,13 @@
+import { CommonModule } from "@angular/common";
 import { Component, Input, inject } from "@angular/core";
+import { FormsModule, NgForm } from "@angular/forms";
+import { ToastrService } from "ngx-toastr";
 import {
   IFeedBackMessage,
   IUser,
-  IFeedbackStatus,
-  IUserSpec,
+  IUserSpec
 } from "../../../interfaces";
-import { CommonModule } from "@angular/common";
-import { FormsModule, NgForm } from "@angular/forms";
 import { UserService } from "../../../services/user.service";
-import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-user-form",
@@ -47,8 +46,8 @@ export class UserFormComponent {
       });
       return;
     } else {
-      this.setUserUpdt();
-      this.service[
+        this.setUserUpdt();
+        this.service[
         this.action == "add" ? "saveUserSignal" : "updateUserSignal"
       ](this.userSpec).subscribe({
         next: () => {

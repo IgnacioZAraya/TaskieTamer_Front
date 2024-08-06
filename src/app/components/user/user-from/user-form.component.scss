@@ -1,14 +1,19 @@
 .add-user-container {
   padding: 30px 0px;
-  background-color: #ec6841;
+  background-color: #ef9174;
 }
 
 div {
-  background-color: #ec6841;
+  background-color: #ef9174;
 }
 
 p {
   color: #edc951;
+}
+
+.custom-label {
+  color: red;
+  text-shadow: #edc951 1px 0 10px;
 }
 
 h1, h2, .customlabel {
