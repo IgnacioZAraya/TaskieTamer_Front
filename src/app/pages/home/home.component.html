@@ -3,7 +3,7 @@
         <div>
             <img src="../../../assets/icons/logo.png" alt="Taskie Tamer Logo" class="logo" />
         </div>
-        <div>
+        <div *ngIf="isAuth === false">
             <button type="register" value="register" class="registerBtn btn custom-btn" (click)="redRegister()" >Register!</button>
             <button type="login" value="login" class="btn custom-btn" (click)="redLogIn()" >Log In!</button>
         </div>

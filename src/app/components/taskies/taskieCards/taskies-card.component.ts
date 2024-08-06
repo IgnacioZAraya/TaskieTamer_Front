@@ -1,14 +1,12 @@
-
-
 import { Component, effect, inject, Injector, Input, OnInit, runInInjectionContext, Renderer2 } from '@angular/core';
-import { ICosmetic, IFeedBackMessage, ITaskie } from '../../../interfaces';
+import { ICosmetic, IFeedBackMessage, ITaskie, IUser, IUserSpec } from '../../../interfaces';
 import { CommonModule, Location } from '@angular/common';
 import { DragDropModule, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TaskieService } from '../../../services/taskie.service';
 import { ActivatedRoute } from '@angular/router';
 import { CosmeticService } from '../../../services/cosmetic.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { ProfileService } from "../../../services/profile.service";
 
 
 @Component({
@@ -22,7 +20,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./taskies-card.component.scss']
 })
 export class TaskieViewComponent implements OnInit {
-
   @Input() taskie!: ITaskie;
   cosmetics: ICosmetic[] = [];
   private dragImage: HTMLImageElement | null = null;
@@ -31,7 +28,16 @@ export class TaskieViewComponent implements OnInit {
   };
 
   private injector = inject(Injector);
+  public profileService = inject(ProfileService);
   toastSvc = inject(ToastrService);
+
+  public userSpec : IUserSpec = {
+    email: "",
+    lastname: "",
+    password: "",
+    name: "",
+  };
+
 
   constructor(
     private route: ActivatedRoute,
@@ -46,6 +52,7 @@ export class TaskieViewComponent implements OnInit {
     
       });
     });
+
   }
 
   ngOnInit(): void {
@@ -87,6 +94,7 @@ export class TaskieViewComponent implements OnInit {
 
       this.taskieService.applyCosmetic(this.taskie.id, cosmetic.id).subscribe({
         next: (updatedTaskie: ITaskie) => {
+         this.updateUserInteractable(cosmetic);
           this.toastSvc.success(this.feedbackMessage.message, "Taskie Updated!");
           this.taskie = updatedTaskie;
         },
@@ -102,6 +110,16 @@ export class TaskieViewComponent implements OnInit {
   }
   goBack(){
     this.location.back();
+  }
+
+  updateUserInteractable(cosmetic: ICosmetic): void {
+    if(cosmetic.name == 'FOOD'){
+      this.userSpec.foodUser = 100;
+      console.log(this.userSpec.foodUser);
+    }else{
+      this.userSpec.cleanerUser = 100;
+      console.log(this.userSpec.cleanerUser);
+    }
   }
 }
 

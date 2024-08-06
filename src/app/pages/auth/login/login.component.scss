@@ -33,6 +33,11 @@
     justify-content: space-between;
   }
 
+  .form-child {
+    width: 80%;
+    padding-right: 5%;
+  }
+
   input {
     background-color: #edc951;
     color: #6a4a3d;
@@ -75,7 +80,24 @@
     align-items: center;
   }
 
-  @media screen and (min-width: 891px) and (max-width: 1500px) {
+  @media screen and (min-width: 1501px) and (max-width: 3000px) {
+    padding: 20px 5%;
+    .login-container{
+      height: 150vh;
+      padding: 0px 0%;
+      background: blue;
+      .login-card {
+        width: 60%;
+
+        .login-main {
+          padding: 0px;
+        }
+    }
+    }
+
+  }
+
+  @media screen and (min-width: 1150px) and (max-width: 1500px) {
     padding: 20px 5%;
     .login-card {
       width: 60%;
@@ -84,7 +106,7 @@
       }
     }
   }
-  @media screen and (max-width: 890px) {
+  @media screen and (max-width: 1150px) {
     padding: 20px 5%;
     .login-card {
       width: 100%;
