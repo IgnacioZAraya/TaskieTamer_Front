@@ -13,6 +13,7 @@ import {
   IFeedBackMessage,
   ITaskie,
   IUser,
+  IUserSpec,
 } from "../../../interfaces";
 import { CommonModule, Location } from "@angular/common";
 import { DragDropModule, CdkDragDrop } from "@angular/cdk/drag-drop";
@@ -21,6 +22,7 @@ import { ActivatedRoute } from "@angular/router";
 import { CosmeticService } from "../../../services/cosmetic.service";
 import { ToastrService } from "ngx-toastr";
 import { ProfileService } from "../../../services/profile.service";
+import { UserService } from "../../../services/user.service";
 
 @Component({
   selector: "app-taskies-card",
@@ -31,7 +33,8 @@ import { ProfileService } from "../../../services/profile.service";
 })
 export class TaskieViewComponent implements OnInit {
   private injector = inject(Injector);
-  userSvc = inject(ProfileService);
+  userProfSvc = inject(ProfileService);
+  userSvc = inject(UserService);
   toastSvc = inject(ToastrService);
 
   @Input() taskie!: ITaskie;
@@ -40,7 +43,6 @@ export class TaskieViewComponent implements OnInit {
   feedbackMessage: IFeedBackMessage = {
     message: "",
   };
-
   public food?: number;
   public cleaner?: number;
 
@@ -62,8 +64,10 @@ export class TaskieViewComponent implements OnInit {
     const taskieId = +this.route.snapshot.paramMap.get("id")!;
     this.taskieService.getAllSignal();
     this.cosmeticService.getAllSignal();
-    this.food = this.userSvc.user$().foodUser;
-    this.cleaner = this.userSvc.user$().cleanerUser;
+    this.food = this.userProfSvc.user$().foodUser;
+    this.cleaner = this.userProfSvc.user$().cleanerUser;
+
+    console.log(this.food);
     runInInjectionContext(this.injector, () => {
       effect(() => {
         const taskies = this.taskieService.taskies$();
@@ -132,9 +136,13 @@ export class TaskieViewComponent implements OnInit {
   interactableUpdt(cosmetic: ICosmetic): void {
     if (cosmetic.name === "FOOD" && this.food != undefined) {
       this.food = this.food - 1;
+      this.userProfSvc.user$().foodUser = this.food;
     } else if (cosmetic.name === "SHAMPOO" && this.cleaner != undefined) {
       this.cleaner = this.cleaner - 1;
+      this.userProfSvc.user$().cleanerUser = this.cleaner;
     }
+
+    this.userSvc.updateUserSignal(this.userProfSvc.user$());
   }
 
   interactableChck(cosmetic: ICosmetic): boolean {

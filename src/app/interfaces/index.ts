@@ -38,6 +38,8 @@ export interface IUserSpec {
   active?: boolean;
   createdAt?: string;
   updatedAt?: string;
+  foodUser?: number;
+  cleanerUser?: number;
 }
 
 export interface IAuthority {
