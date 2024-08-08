@@ -56,7 +56,6 @@ export const routes: Routes = [
         canActivate:[ AdminRoleGuard],
         data: { 
           authorities: [
-            IRoleType.admin, 
             IRoleType.superAdmin                    
           ],
           name: 'Users'
@@ -66,7 +65,7 @@ export const routes: Routes = [
         canActivate:[AuthGuard],
         component: TaskHistoryComponent,
         data: {
-          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
+          authorities: [IRoleType.associate, IRoleType.superAdmin, IRoleType.base],
           name: "Task History",
         },
       },{
@@ -74,7 +73,7 @@ export const routes: Routes = [
         canActivate:[AuthGuard],
         component: TaskNextComponent,
         data: {
-          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
+          authorities: [IRoleType.associate, IRoleType.superAdmin, IRoleType.base],
           name: "Upcoming Tasks",
         },
       },
@@ -83,7 +82,7 @@ export const routes: Routes = [
         component: CalendarComponent,
         canActivate:[AuthGuard],
         data: {
-          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
+          authorities: [IRoleType.associate, IRoleType.superAdmin, IRoleType.base],
           name: "Calendar",
         },
       },
@@ -92,7 +91,7 @@ export const routes: Routes = [
         component: TaskieDexComponent,
         canActivate:[AuthGuard],
         data: {
-          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
+          authorities: [IRoleType.associate, IRoleType.superAdmin, IRoleType.base],
           name: "TaskieDex",
         },
       },
@@ -101,7 +100,7 @@ export const routes: Routes = [
         component: ProfileComponent,
         canActivate: [AuthGuard],
         data: {
-          authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
+          authorities: [IRoleType.associate, IRoleType.superAdmin, IRoleType.base],
           name: "Profile",
         },
       },

@@ -22,6 +22,7 @@ export interface IUser {
   experience?: number;
   foodUser?: number;
   cleanerUser?: number;
+  parentActive?: boolean;
 }
 
 export interface ILevel {
@@ -65,8 +66,8 @@ export interface IRole {
 }
 
 export enum IRoleType {
-  admin = "ROLE_ADMIN",
-  user = "ROLE_USER",
+  associate = "ROLE_ASSOCIATE",
+  base = "ROLE_BASE",
   superAdmin = "ROLE_SUPER_ADMIN",
 }
 

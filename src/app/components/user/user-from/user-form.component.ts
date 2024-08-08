@@ -15,7 +15,7 @@ import { ProfileService } from "../../../services/profile.service";
 })
 export class UserFormComponent {
   @Input() title!: string;
-  @Input() user: IUser = {
+  @Input() auxUser: IUser = {
     email: "",
     lastname: "",
     password: "",
@@ -78,12 +78,12 @@ export class UserFormComponent {
   }
 
   private setUserUpdt(): void {
-    this.userSpec.id = this.user.id;
-    this.userSpec.name = this.user.name;
-    this.userSpec.lastname = this.user.lastname;
+    this.userSpec.id = this.auxUser.id;
+    this.userSpec.name = this.auxUser.name;
+    this.userSpec.lastname = this.auxUser.lastname;
     if (this.action != "profileEdit") {
-      this.userSpec.password = this.user.password;
+      this.userSpec.password = this.auxUser.password;
     }
-    this.userSpec.email = this.user.email;
+    this.userSpec.email = this.auxUser.email;
   }
 }
