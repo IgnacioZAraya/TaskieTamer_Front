@@ -4,11 +4,12 @@ import { LoaderComponent } from "../../components/loader/loader.component";
 import { ModalComponent } from "../../components/modal/modal.component";
 import { UserFormComponent } from "../../components/user/user-from/user-form.component";
 import { XpBarComponent } from "../../components/xp-bar/xp-bar.component";
-import { IUser } from "../../interfaces";
+import { IRoleType, IUser } from "../../interfaces";
 import { ProfileService } from "./../../services/profile.service";
 import { CodeCheckerComponent } from "../../components/code-checker/code-checker.component";
 import { EmailService } from "../../services/email.service";
 import { ToastrService } from "ngx-toastr";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: "app-profile",
@@ -27,13 +28,16 @@ import { ToastrService } from "ngx-toastr";
 export class ProfileComponent {
   toastSvc = inject(ToastrService);
   public profileService = inject(ProfileService);
+  public authService = inject(AuthService);
 
   public user!: IUser;
+  public isParent!: boolean;
   public code!: number;
   public name!: string | undefined;
 
   constructor(private emailService: EmailService) {
     this.profileService.getLoggedUserInfo();
+    this.isParent = this.checkUserAssociate();
     this.name = this.profileService.user$().name;
     this.code = this.randomCode();
   }
@@ -67,5 +71,13 @@ export class ProfileComponent {
 
   randomCode(): number {
     return Math.floor(Math.random() * 900000 + 100000);
+  }
+
+  checkUserAssociate(): boolean{
+    if (this.authService.hasRole(IRoleType.associate) && this.profileService.user$().parentActive){
+      return true;
+    }
+
+    return false;
   }
 }

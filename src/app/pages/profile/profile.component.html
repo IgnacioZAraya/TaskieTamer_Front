@@ -20,8 +20,8 @@
       </div>
     </div>
   </div>
-  <button class="btn custom-btn shadow-lg" (click)="codeModal.show(); sendEmail()">Parental mode</button>
-  <button class="btn custom-btn shadow-lg" (click)="formModal.show() ">Edit</button>
+  <button *ngIf="isParent == false" class="btn custom-btn shadow-lg" (click)="codeModal.show(); sendEmail()">Parental mode</button>
+  <button *ngIf="isParent == false" class="btn custom-btn shadow-lg" (click)="formModal.show() ">Edit</button>
 </div>
 
 <app-modal size="lg" #formModal>

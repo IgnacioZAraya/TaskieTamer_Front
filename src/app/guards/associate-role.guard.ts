@@ -12,7 +12,7 @@ import { IRoleType } from "../interfaces";
 @Injectable({
   providedIn: "root",
 })
-export class associateRoleGuard implements CanActivate {
+export class AssociateRoleGuard implements CanActivate {
   private authService = inject(AuthService);
   private router = inject(Router);
 
