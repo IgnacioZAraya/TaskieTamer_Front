@@ -109,6 +109,7 @@ export interface ITaskie {
 export interface IStatus {
   id: number;
   name: string;
+  description: string;
 }
 export interface ITaskieLevel {
   id: number;
@@ -138,4 +139,11 @@ export interface ITaskSpec {
   visible?: boolean;
   recurrent?: string;
   repeatTimes?: number;
+}
+
+export interface ISpecie{
+  name: string;
+  sprite: string;
+  description: string; 
+  
 }

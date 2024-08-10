@@ -1,39 +1,51 @@
-
-
+import { SpecieService } from './../../../services/specie.service';
 import { Component, effect, inject, Injector, OnInit, runInInjectionContext } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { TaskieService } from '../../../services/taskie.service'; 
-import { ITaskie } from '../../../interfaces';
+import { ISpecie } from '../../../interfaces';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { TaskieDexModalComponent } from '../../modal/taskieModal.component';
+import { AddSpecieComponent } from '../speciesForm/speciesForm.component';
 
 @Component({
   selector: 'app-taskie-dex',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,MatDialogModule],
   templateUrl: './taskieDex.component.html',
   styleUrls: ['./taskieDex.component.scss']
 })
 export class TaskieDexComponent implements OnInit {
-  taskies: ITaskie[] = [];
+  species: ISpecie[] = [];
   private injector = inject(Injector);
 
   constructor(
-    private taskieService: TaskieService,
-    private router: Router
+    private specieService: SpecieService,
+    private router: Router,
+    private dialog: MatDialog
   ) {
     runInInjectionContext(this.injector, () => {
       effect(() => {
-        this.taskies = this.taskieService.taskies$();
-        console.log('Taskies loaded:', this.taskies);
+        this.species = this.specieService.species$();
+      
       });
     });
   }
 
   ngOnInit(): void {
-    this.taskieService.getAllSignal();
+    this.specieService.getAllSignal();
+  }
+  openSpecieModal(specie: ISpecie): void {
+    this.dialog.open(TaskieDexModalComponent, {
+      data: specie,
+      width: '400px',
+      panelClass: 'custom-dialog-container'
+    });
+  }
+  openAddSpecieForm(): void {
+    this.dialog.open(AddSpecieComponent, {
+      width: '500px',
+      panelClass: 'custom-dialog-container'
+    });
   }
 
-  viewTaskieDetail(taskieId: number): void {
-    this.router.navigate(['app/taskie/', taskieId]);
-  }
 }
