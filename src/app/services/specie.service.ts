@@ -57,36 +57,42 @@ export class SpecieService extends BaseService<ISpecie> {
       })
     );
   }
-  updateSpecieSignal(specie: ISpecie): Observable<any> {
-    return this.edit(specie.id, specie).pipe(
-      tap((response: any) => {
-        const updatedSpecies = this.specieListSignal().map((s) =>
-          s.id === specie.id ? response : s
+  deleteSpecie(id: number): Observable<void> {
+    return this.http.delete<void>(this.source + '/' + id).pipe(
+      tap(() => {
+        this.specieListSignal.update((species) =>
+          species.filter((specie) => specie.id !== id)
         );
-        this.specieListSignal.set(updatedSpecies);
       }),
       catchError((error) => {
-        console.error("Error updating taskie", error);
+        console.error('Error deleting specie', error);
         return throwError(error);
       })
     );
   }
-
-  deleteSpecieSignal(specie: ISpecie): Observable<any> {
-    return this.del(specie.id).pipe(
-      tap((response: any) => {
-        const updatedSpecies = this.specieListSignal().filter(
-          (s) => s.id !== specie.id
-        );
-        this.specieListSignal.set(updatedSpecies);
-      }),
-      catchError((error) => {
-        console.error("Error deleting taskie", error);
-        return throwError(error);
-      })
-    );
-  }
+  
  
-
+  updateSpecie(id: number, name: string, description: string, file?: File): Observable<ISpecie> {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('description', description);
+    if (file) {
+      formData.append('file', file);
+    }
+  
+    return this.http.put<ISpecie>(this.source + '/' + id, formData).pipe(
+      tap((updatedSpecie: ISpecie) => {
+        this.specieListSignal.update((species) =>
+          species.map((specie) =>
+            specie.id === id ? updatedSpecie : specie
+          )
+        );
+      }),
+      catchError((error) => {
+        console.error('Error updating specie', error);
+        return throwError(error);
+      })
+    );
+  }
 
 }
