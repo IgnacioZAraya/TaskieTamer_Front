@@ -35,6 +35,22 @@ export class UserService extends BaseService<IUser> {
     );
   }
 
+  saveEmailDataSignal(user: IUserSpec): Observable<any> {
+    return this.emailData(user.id, user).pipe(
+      tap((response: any) => {
+        const updatedUsers = this.userListSignal().map((u) =>
+          u.id === user.id ? response : u
+        );
+        this.userListSignal.set(updatedUsers);
+        return response;
+      }),
+      catchError((error) => {
+        console.error("Error saving user", error);
+        return throwError(error);
+      })
+    );
+  }
+
   updateUserSignal(user: IUserSpec): Observable<any> {
     return this.edit(user.id, user).pipe(
       tap((response: any) => {
@@ -52,6 +68,21 @@ export class UserService extends BaseService<IUser> {
 
   updateUserProfileSignal(user: IUserSpec): Observable<any> {
     return this.editProfile(user.id, user).pipe(
+      tap((response: any) => {
+        const updatedUsers = this.userListSignal().map((u) =>
+          u.id === user.id ? response : u
+        );
+        this.userListSignal.set(updatedUsers);
+      }),
+      catchError((error) => {
+        console.error("Error saving user", error);
+        return throwError(error);
+      })
+    );
+  }
+
+  updateAssociateUserSignal(user: IUserSpec): Observable<any> {
+    return this.editAssociate(user.id, user).pipe(
       tap((response: any) => {
         const updatedUsers = this.userListSignal().map((u) =>
           u.id === user.id ? response : u

@@ -80,7 +80,7 @@
   @if(action == 'add') {
   <div class="border-bottom pb-3 mb-3">
     <div class="px-5">
-      <label for="password" class="form-label mb-2 custom-label"> To know it's you, type down your Password! </label>
+      <label for="password" class="form-label mb-2 custom-label"> Type a Password for the new user! </label>
       <input #password="ngModel" type="password" class="form-control shadow rounded" id="password" name="password"
         placeholder="*****" [(ngModel)]="auxUser.password" [ngClass]="{
             'is-invalid': password.invalid && password.touched,

@@ -22,7 +22,7 @@ export class AssociateRoleGuard implements CanActivate {
   ): boolean {
     const hasRole = this.authService.hasRole(IRoleType.associate);
 
-    if (!hasRole && this.authService.getUser()?.parentActive) {
+    if (!hasRole && this.authService.getUser()?.isKid) {
       this.router.navigate(["access-denied"]);
       return false;
     }

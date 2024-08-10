@@ -45,6 +45,20 @@ export class BaseService<T> {
     return this.http.put<IResponse<T>>(this.source + "/profile/" + id, data);
   }
 
+  public editAssociate(
+    id: number | undefined,
+    data: {}
+  ): Observable<IResponse<T>> {
+    return this.http.put<IResponse<T>>(this.source + "/associate/" + id, data);
+  }
+
+  public emailData(
+    id: number | undefined,
+    data: {}
+  ): Observable<IResponse<T>> {
+    return this.http.put<IResponse<T>>(this.source + "/email/" + id, data);
+  }
+
   public del(id: any): Observable<IResponse<T>> {
     return this.http.delete<IResponse<T>>(this.source + "/" + id);
   }

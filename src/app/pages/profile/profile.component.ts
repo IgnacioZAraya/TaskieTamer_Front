@@ -1,13 +1,18 @@
+import { UserService } from "./../../services/user.service";
 import { CommonModule } from "@angular/common";
-import { Component, inject } from "@angular/core";
+import { Component, inject, Input } from "@angular/core";
 import { LoaderComponent } from "../../components/loader/loader.component";
 import { ModalComponent } from "../../components/modal/modal.component";
 import { UserFormComponent } from "../../components/user/user-from/user-form.component";
 import { XpBarComponent } from "../../components/xp-bar/xp-bar.component";
-import { IRoleType, IUser } from "../../interfaces";
+import {
+  IFeedBackMessage,
+  IRoleType,
+  IUser,
+  IUserSpec,
+} from "../../interfaces";
 import { ProfileService } from "./../../services/profile.service";
 import { CodeCheckerComponent } from "../../components/code-checker/code-checker.component";
-import { EmailService } from "../../services/email.service";
 import { ToastrService } from "ngx-toastr";
 import { AuthService } from "../../services/auth.service";
 
@@ -28,56 +33,69 @@ import { AuthService } from "../../services/auth.service";
 export class ProfileComponent {
   toastSvc = inject(ToastrService);
   public profileService = inject(ProfileService);
+  public UserService = inject(UserService);
   public authService = inject(AuthService);
 
-  public user!: IUser;
-  public isParent!: boolean;
+  public userSpec: IUserSpec = {
+    email: "",
+    lastname: "",
+    password: "",
+    name: "",
+  };
+  public currentUser!: IUser;
+  public isKid!: boolean;
+  public isAssociate!: boolean;
   public code!: number;
   public name!: string | undefined;
+  feedbackMessage: IFeedBackMessage = {
+    message: "",
+  };
 
-  constructor(private emailService: EmailService) {
+  constructor() {
     this.profileService.getLoggedUserInfo();
-    this.isParent = this.checkUserAssociate();
-    this.name = this.profileService.user$().name;
-    this.code = this.randomCode();
+    this.isAssociate = this.authService.hasRole(IRoleType.associate);
+    this.isKid = this.checkUserAssociate();
   }
+
+  ngOnInit(): void {}
 
   public level() {
     this.profileService.user$().level?.value;
   }
 
   sendEmail(): void {
-    const to = this.profileService.user$().email;
-    const subject = "Testing SendGrid API";
-    const content = `
-      <html>
-      <body>
-        <h1>Hello ${this.name}!</h1>
-        <p>Here's your code to change your account role!</p>
-        <p>${this.code}</p>
-      </body>
-      </html>
-    `;
+    this.setUserUpdt();
 
-    this.emailService
-      .sendEmail(to, subject, content)
-      .then(() => {
-        this.toastSvc.success("Email was sent to: ", this.profileService.user$().email);
-      })
-      .catch((error) => {
-        this.toastSvc.error("Error sending email: ", error);
-      });
+    this.UserService.saveEmailDataSignal(this.userSpec).subscribe({
+      next: () => {
+        this.feedbackMessage.message = `Email sent successfuly`;
+        this.toastSvc.success(this.feedbackMessage.message, "SUCCES!!!");
+      },
+      error: (error: any) => {
+        this.feedbackMessage.message = error.message;
+        this.toastSvc.error(this.feedbackMessage.message, "Email wasn't sent!");
+      },
+    });
   }
 
-  randomCode(): number {
-    return Math.floor(Math.random() * 900000 + 100000);
-  }
-
-  checkUserAssociate(): boolean{
-    if (this.authService.hasRole(IRoleType.associate) && this.profileService.user$().parentActive){
+  checkUserAssociate(): boolean {
+    if (
+      this.authService.hasRole(IRoleType.associate) &&
+      this.profileService.user$().isKid
+    ) {
       return true;
     }
 
     return false;
+  }
+
+  private setUserUpdt(): void {
+    console.log(this.authService.getUser()?.id);
+
+    this.userSpec.id = this.authService.getUser()?.id;
+    this.userSpec.name = this.authService.getUser()?.name;
+    this.userSpec.lastname = this.authService.getUser()?.lastname;
+    this.userSpec.password = this.authService.getUser()?.password;
+    this.userSpec.email = this.authService.getUser()?.email;
   }
 }
