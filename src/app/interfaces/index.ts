@@ -41,6 +41,7 @@ export interface IUserSpec {
   updatedAt?: string;
   foodUser?: number;
   cleanerUser?: number;
+  privateCode?: number;
 }
 
 export interface IAuthority {

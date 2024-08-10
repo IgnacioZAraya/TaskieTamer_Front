@@ -6,15 +6,15 @@
 >
   <h2 class="mb-5 px-5">Your code please.</h2>
     <div class="px-5 mb-5">
-      <label for="password" class="form-label mb-2 custom-label"> To know it's really you, write down the key we sent to your email! </label>
-      <input #password="ngModel" type="password" class="form-control shadow rounded" id="password" name="password"
-        placeholder="*****" [(ngModel)]="userSpec.password" [ngClass]="{
-            'is-invalid': password.invalid && password.touched,
-            'is-valid': password.valid && password.touched
+      <label for="privateCode" class="form-label mb-2 custom-label"> To know it's really you, write down the key we sent to your email! </label>
+      <input #privateCode="ngModel" type="number" class="form-control shadow rounded" id="privateCode" name="privateCode"
+        placeholder="7777" [(ngModel)]="userSpec.privateCode" [ngClass]="{
+            'is-invalid': privateCode.invalid && privateCode.touched,
+            'is-valid': privateCode.valid && privateCode.touched
           }" required />
-      @if (password.invalid) {
-      <div *ngIf="password.invalid" class="invalid-feedback">
-        Please add a valid password
+      @if (privateCode.invalid) {
+      <div *ngIf="privateCode.invalid" class="invalid-feedback">
+        Please add a valid code
       </div>
       }
     </div>

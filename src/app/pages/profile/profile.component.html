@@ -20,7 +20,7 @@
       </div>
     </div>
   </div>
-  <button *ngIf=" isAssociate == false " class="btn custom-btn shadow-lg" (click)="codeModal.show(); sendEmail()">Parental mode</button>
+  <button *ngIf="isAssociate == false" class="btn custom-btn shadow-lg" (click)="codeModal.show(); sendEmail()">Parental mode</button>
   <button *ngIf="isKid == false" class="btn custom-btn shadow-lg" (click)="formModal.show() ">Edit</button>
 </div>
 
@@ -30,6 +30,6 @@
 </app-modal>
 
 <app-modal size="lg" #codeModal>
-  <app-code-checker [userSpec]="profileService.user$()" [action]="'edit'" [title]="'Activate Mode'">
+  <app-code-checker [auxUser]="profileService.user$()" [action]="'edit'" [title]="'Activate Mode'">
   </app-code-checker>
 </app-modal>
