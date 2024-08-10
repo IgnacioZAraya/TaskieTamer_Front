@@ -42,7 +42,6 @@ export class ProfileComponent {
     password: "",
     name: "",
   };
-  public currentUser!: IUser;
   public isKid!: boolean;
   public isAssociate!: boolean;
   public code!: number;
