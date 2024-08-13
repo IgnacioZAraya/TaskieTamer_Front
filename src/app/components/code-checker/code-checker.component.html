@@ -1,0 +1,35 @@
+<form
+  (ngSubmit)="handleAction(frm)"
+  autocomplete="off"
+  #frm="ngForm"
+  class="add-user-container"
+>
+  <h2 class="mb-5 px-5">Your code please.</h2>
+    <div class="px-5 mb-5">
+      <label for="privateCode" class="form-label mb-2 custom-label"> To know it's really you, write down the key we sent to your email! </label>
+      <input #privateCode="ngModel" type="number" class="form-control shadow rounded" id="privateCode" name="privateCode"
+        placeholder="7777" [(ngModel)]="userSpec.privateCode" [ngClass]="{
+            'is-invalid': privateCode.invalid && privateCode.touched,
+            'is-valid': privateCode.valid && privateCode.touched
+          }" required />
+      @if (privateCode.invalid) {
+      <div *ngIf="privateCode.invalid" class="invalid-feedback">
+        Please add a valid code
+      </div>
+      }
+    </div>
+  <div class="pb-3 mb-2 d-flex justify-content-center align-items-center">
+    <button
+      type="submit"
+      class="shadow btn btn-primary d-flex align-items-center custom-btn"
+    >
+      <i
+        class="fa-solid white me-2"
+        [ngClass]="{
+          'fa-check': action == 'check'
+        }"
+      ></i>
+      <p class="mb-0">{{ title }}</p>
+    </button>
+  </div>
+</form>

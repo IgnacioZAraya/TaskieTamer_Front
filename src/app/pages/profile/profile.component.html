@@ -20,11 +20,16 @@
       </div>
     </div>
   </div>
-  <button class="btn custom-btn shadow-lg">Parent mode</button>
-  <button class="btn custom-btn shadow-lg" (click)="formModal.show()">Edit</button>
+  <button *ngIf="isAssociate == false" class="btn custom-btn shadow-lg" (click)="codeModal.show(); sendEmail()">Parental mode</button>
+  <button *ngIf="isKid == false" class="btn custom-btn shadow-lg" (click)="formModal.show() ">Edit</button>
 </div>
 
 <app-modal size="lg" #formModal>
-  <app-user-form [user]="profileService.user$()" [action]="'profileEdit'" [title]="'Update User'">
+  <app-user-form [auxUser]="profileService.user$()" [action]="'profileEdit'" [title]="'Update User'">
   </app-user-form>
+</app-modal>
+
+<app-modal size="lg" #codeModal>
+  <app-code-checker [auxUser]="profileService.user$()" [action]="'edit'" [title]="'Activate Mode'">
+  </app-code-checker>
 </app-modal>

@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -6,7 +6,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
   standalone: true,
   imports: [],
   template: `
-    <ng-template #modal >
+    <ng-template #modal>  
       <div class="base-modal">
         <button type="button" (click)="hide()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -15,7 +15,8 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
       </div>
     </ng-template>
   `,
-  styleUrl: "./modal.component.scss"
+  styleUrl: "./modal.component.scss",
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class ModalComponent {
   @Input() size?: string;
