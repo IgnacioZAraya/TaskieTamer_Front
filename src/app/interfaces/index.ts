@@ -22,7 +22,7 @@ export interface IUser {
   experience?: number;
   foodUser?: number;
   cleanerUser?: number;
-  isKid?: boolean;
+  kid?: boolean;
 }
 
 export interface ILevel {
@@ -31,7 +31,7 @@ export interface ILevel {
 }
 
 export interface IUserSpec {
-  id?: number ;
+  id?: number;
   name?: string;
   lastname?: string;
   email?: string;
@@ -42,6 +42,7 @@ export interface IUserSpec {
   foodUser?: number;
   cleanerUser?: number;
   privateCode?: number;
+  kid?: boolean;
 }
 
 export interface IAuthority {

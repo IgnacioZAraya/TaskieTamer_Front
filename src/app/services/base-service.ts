@@ -45,6 +45,13 @@ export class BaseService<T> {
     return this.http.put<IResponse<T>>(this.source + "/profile/" + id, data);
   }
 
+  public editKidStats(
+    id: number | undefined,
+    data: {}
+  ): Observable<IResponse<T>> {
+    return this.http.put<IResponse<T>>(this.source + "/kid/" + id, data);
+  }
+
   public editAssociate(
     id: number | undefined,
     data: {}

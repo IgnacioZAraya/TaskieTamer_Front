@@ -54,6 +54,8 @@ export class ProfileComponent {
     this.profileService.getLoggedUserInfo();
     this.isAssociate = this.authService.hasRole(IRoleType.associate);
     this.isKid = this.checkUserAssociate();
+
+    console.log("Is this user a kid? " + this.isKid);
   }
 
   ngOnInit(): void {}
@@ -79,8 +81,8 @@ export class ProfileComponent {
 
   checkUserAssociate(): boolean {
     if (
-      this.authService.hasRole(IRoleType.associate) &&
-      this.profileService.user$().isKid
+      this.authService.hasRole(IRoleType.associate) == true &&
+      this.authService.getUser()?.kid == true
     ) {
       return true;
     }
