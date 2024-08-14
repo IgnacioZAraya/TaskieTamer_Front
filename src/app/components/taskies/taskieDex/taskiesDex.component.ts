@@ -5,7 +5,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { SpecieService } from '../../../services/specie.service';
-import { Router } from '@angular/router';
 import { ISpecie } from '../../../interfaces';
 import { TaskieDexModalComponent } from '../../modal/taskieModal.component';
 import { AddSpecieComponent } from '../speciesForm/speciesForm.component';
@@ -26,9 +25,9 @@ export class TaskieDexComponent implements OnInit {
   private injector = inject(Injector);
 
   constructor(
-    private specieService: SpecieService,
-    private router: Router,
+   private specieService: SpecieService,
     private dialog: MatDialog
+   
   ) {
     runInInjectionContext(this.injector, () => {
       effect(() => {
@@ -38,7 +37,8 @@ export class TaskieDexComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.specieService.getAllSignal();
+    this.specieService.getAllSpecies();
+  
   }
 
   openSpecieModal(specie: ISpecie): void {
@@ -59,10 +59,8 @@ export class TaskieDexComponent implements OnInit {
  
 
   deleteSpecie(specie: ISpecie): void {
-    if (confirm(`Are you sure you want to delete the specie ${specie.name}?`)) {
-      this.specieService.deleteSpecie(specie.id).subscribe(() => {
-      
-      });
-    }
+    this.specieService.deleteSpecie(specie.id).subscribe(() => {
+
+    });
   }
 }

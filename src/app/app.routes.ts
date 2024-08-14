@@ -18,6 +18,7 @@ import { TaskieDexComponent } from './components/taskies/taskieDex/taskiesDex.co
 
 import { TaskHistoryComponent } from './pages/task-history/task-history.component';
 import { TaskNextComponent } from './pages/task-next/task-next.component';
+import { UserTaskieListComponent } from './components/taskies/userTaskies/userTaskie.component';
 
 
 
@@ -94,6 +95,14 @@ export const routes: Routes = [
         data: {
           authorities: [IRoleType.admin, IRoleType.superAdmin, IRoleType.user],
           name: "TaskieDex",
+        },
+      },{
+        path: "Taskies",
+        component: UserTaskieListComponent,
+        canActivate:[AuthGuard],
+        data: {
+          authorities: [IRoleType.user],
+          name: "Taskie",
         },
       },
       {

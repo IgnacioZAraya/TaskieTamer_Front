@@ -3,6 +3,8 @@
     <h2 mat-dialog-title>{{ data.name }}</h2>
       <img [src]="data.sprite" alt="{{ data.name }} Image" class="taskie-modal-image"/>
       <p>{{ data.description }}</p>
+      <p>Evolution</p>
+      <img [src]="data.evolution" alt="{{ data.name }} Image" class="taskie-modal-image"/>
     </div>
     <div mat-dialog-actions>
     <button mat-button (click)="onClose()">Close</button>

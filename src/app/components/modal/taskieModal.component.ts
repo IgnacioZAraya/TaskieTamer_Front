@@ -42,7 +42,7 @@ export class TaskieDexModalComponent {
   
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.specieService.updateSpecie(specie.id, result.name, result.description, result.selectedFile || undefined).subscribe();
+          this.specieService.updateSpecie(specie.id, result.name, result.description, result.selectedFile || undefined, result.selectedEvolution || undefined).subscribe();
         }
       });
     }
