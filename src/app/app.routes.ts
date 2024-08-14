@@ -37,8 +37,13 @@ export const routes: Routes = [
     component: AccessDeniedComponent,
   },
   {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [GuestGuard],
+  },
+  {
     path: '',
-    redirectTo: 'app/home',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
@@ -47,7 +52,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'app',
-        redirectTo: 'home',
+        redirectTo: '/home',
         pathMatch: 'full',
       },
       {
@@ -113,7 +118,9 @@ export const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
+        canActivate: [AuthGuard],
         data: {
+          
           name: 'Home'
         }
       }
