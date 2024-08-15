@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-taskie-form',
@@ -27,6 +28,7 @@ export class CreateTaskieComponent implements OnInit {
   public taskieService = inject(TaskieService);
   public profileService = inject(ProfileService);
   public speciesService = inject(SpecieService);
+  toastSvc = inject(ToastrService);
 
   constructor(private fb: FormBuilder) {
     this.taskieForm = this.fb.group({
@@ -55,7 +57,7 @@ export class CreateTaskieComponent implements OnInit {
           const selectedSpecies = this.speciesList.find(specie => specie.id === parseInt(selectedSpeciesId, 10));
           
           if (!selectedSpecies) {
-            console.error('Error: Specie not found');
+            this.toastSvc.warning("Specie not selected!")
             return;
           }
 
@@ -68,12 +70,12 @@ export class CreateTaskieComponent implements OnInit {
           console.log('Taskie Data:', taskieData);
 
           this.taskieService.saveTaskieSignal(taskieData).subscribe(response => {
-            console.log('Taskie creado:', response);
+            this.toastSvc.success("Taskie Created!");
           }, error => {
-            console.error('Error al crear el Taskie:', error);
+            this.toastSvc.error("Failed Creating Taskie");
           });
         } else {
-          console.error('Error: ID de usuario no encontrado.');
+          this.toastSvc.success("User not Found!");
         }
       });
     });

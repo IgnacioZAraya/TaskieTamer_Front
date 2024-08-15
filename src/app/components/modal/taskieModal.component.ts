@@ -1,13 +1,13 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { ISpecie } from '../../interfaces';
+import { IRoleType, ISpecie } from '../../interfaces';
 import { AddSpecieComponent } from '../taskies/speciesForm/speciesForm.component';
 import { SpecieService } from '../../services/specie.service';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-taskie-dex-modal',
@@ -22,13 +22,17 @@ import { MatButtonModule } from '@angular/material/button';
 
 })
 export class TaskieDexModalComponent {
+    public hasRole: boolean;
     constructor(
       @Inject(MAT_DIALOG_DATA) public data: ISpecie,
       private dialogRef: MatDialogRef<TaskieDexModalComponent>,
       private specieService: SpecieService,
-      private router: Router,
+      private authService: AuthService,
       private dialog: MatDialog
-    ) {}
+    ) {
+      this.hasRole = this.authService.hasRole(IRoleType.user);
+
+    }
   
     onClose(): void {
       this.dialogRef.close();

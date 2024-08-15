@@ -1,4 +1,5 @@
-import { Component, Inject } from '@angular/core';
+import { IRole, IRoleType } from './../../../interfaces/index';
+import { Component, inject, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { SpecieService } from '../../../services/specie.service';
 import { ISpecie } from '../../../interfaces';
@@ -7,6 +8,9 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ToastrService } from 'ngx-toastr';
+import { AuthGuard } from '../../../guards/auth.guard';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-add-specie',
@@ -27,7 +31,8 @@ export class AddSpecieComponent {
   selectedEvolution: File | null = null;
   isEditing: boolean = false;
   specieId: number | null = null;
-
+  toastSvc = inject(ToastrService);
+ 
   constructor(
     private specieService: SpecieService,
     private dialog: MatDialog,
@@ -40,6 +45,7 @@ export class AddSpecieComponent {
       this.name = data.name;
       this.description = data.description;
     }
+    
   }
 
   onFileSelected(event: any): void {
@@ -55,17 +61,17 @@ export class AddSpecieComponent {
         .updateSpecie(this.specieId, this.name, this.description, this.selectedFile || undefined, this.selectedEvolution || undefined)
         .subscribe({
           next: () => this.dialogRef.close(),
-          error: (error) => console.error('Error updating specie', error),
+          error: (error) => this.toastSvc.error("Error updating specie"),
         });
     } else if (this.name && this.description && this.selectedFile && this.selectedEvolution) {
       this.specieService
         .saveSpecieWithImage(this.name, this.description, this.selectedFile, this.selectedEvolution)
         .subscribe({
           next: () => this.dialogRef.close(),
-          error: (error) => console.error('Error saving specie', error),
+          error: (error) => this.toastSvc.error("Error saving specie"),
         });
     } else {
-      alert('Please fill in all fields.');
+      this.toastSvc.warning("Please Fill all the fields");
     }
   }
 
@@ -79,7 +85,7 @@ export class AddSpecieComponent {
         next: () => {
           this.dialog.closeAll();
         },
-        error: (error) => console.error('Error deleting specie', error),
+        error: (error) => this.toastSvc.error("Error deleting specie"),
       });
     }
   }

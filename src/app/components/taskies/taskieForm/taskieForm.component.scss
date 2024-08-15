@@ -1,36 +1,44 @@
-.taskie-form-container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f7f7f7;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 24px;
-      color: #333;
+form {
+  padding: 20px;
+
+  div {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
     }
-  
-    mat-form-field {
+
+    input,
+    select {
+      display: block;
       width: 100%;
-      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-top: 5px;
     }
-  
-    .form-actions {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-  
-      button {
-        width: 48%;
-      }
-  
-      button[type="button"] {
-        background-color: #757575;
-        color: white;
-      }
+
+    select {
+      appearance: none;
+      background-size: 12px;
     }
   }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+  
+  }
+}
+
   

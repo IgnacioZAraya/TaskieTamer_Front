@@ -5,9 +5,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { SpecieService } from '../../../services/specie.service';
-import { ISpecie } from '../../../interfaces';
+import { IRoleType, ISpecie } from '../../../interfaces';
 import { TaskieDexModalComponent } from '../../modal/taskieModal.component';
 import { AddSpecieComponent } from '../speciesForm/speciesForm.component';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-taskie-dex',
@@ -23,9 +24,11 @@ import { AddSpecieComponent } from '../speciesForm/speciesForm.component';
 export class TaskieDexComponent implements OnInit {
   species: ISpecie[] = [];
   private injector = inject(Injector);
-
+  public hasRole: boolean;
+  
   constructor(
    private specieService: SpecieService,
+   private authService : AuthService,
     private dialog: MatDialog
    
   ) {
@@ -34,6 +37,7 @@ export class TaskieDexComponent implements OnInit {
         this.species = this.specieService.species$();
       });
     });
+    this.hasRole = this.authService.hasRole(IRoleType.user);
   }
 
   ngOnInit(): void {
