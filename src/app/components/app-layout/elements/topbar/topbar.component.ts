@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../../../services/auth.service';
 import { IUser } from '../../../../interfaces';
+import { AuthService } from '../../../../services/auth.service';
 import { LayoutService } from '../../../../services/layout.service';
 import { MyAccountComponent } from '../../../my-account/my-account.component';
 
@@ -32,6 +32,6 @@ export class TopbarComponent implements OnInit {
 
   public logout(): void {
     this.authService.logout();
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/home');
   }
 }

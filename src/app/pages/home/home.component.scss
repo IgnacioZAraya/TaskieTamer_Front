@@ -28,13 +28,21 @@ h2 {
     font-size: 35px;
 }
 
-Body {
-    max-width: 1500px;
+h3 {
+    font-family: 'QuiteMagical';
+    text-shadow: #ffc70f 1px 0 10px;
+    color: #48322a;
+    font-size: 30px;
 }
 
 .introText{
     width: 50%;
     min-width: 300px;
+    font-size: 30px;
+}
+
+.footer {
+    text-align: center;
 }
 
 Button {
@@ -57,4 +65,70 @@ Button {
 .top {
     background-image: url("../../../assets/icons/stockImg3.png");
     background-position: left;
+    width: 100%;
+    padding-bottom: 150px;
+}
+
+@media screen and (max-width: 730px) {
+    .bullet {
+      min-width: 0;
+      width: 300px;
+    }
+    h1 {
+        width: 440px;
+    }
+    h2 {
+        width: 335px;
+    }    
+}
+
+@mixin faded($offset, $blur-radius, $spread-radius)
+{
+
+    &.faded-bottom:after {
+        box-shadow: inset 0 (-$offset) $blur-radius (-$spread-radius);
+    }
+
+    &.faded-all:after, &.faded-left.faded-top.faded-right.faded-bottom:after {
+        box-shadow: inset 0 0 $blur-radius $spread-radius;
+    }
+}
+
+$faded-offset: 40px !default;
+$faded-blur-radius: 40px !default;
+$faded-spread-radius: 16px !default;
+
+$faded-narrow-offset: 20px !default;
+$faded-narrow-blur-radius: 20px !default;
+$faded-narrow-spread-radius: 10px !default;
+
+$faded-wide-offset: 80px !default;
+$faded-wide-blur-radius: 100px !default;
+$faded-wide-spread-radius: 8px !default;
+
+.faded {
+    position: relative;
+    display: inline-block;
+    color: #00a0b0;
+
+    &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-collapse: separate;
+    }
+
+    @include faded($faded-offset, $faded-blur-radius, $faded-spread-radius);
+
+    &.faded-narrow {
+        @include faded($faded-narrow-offset, $faded-narrow-blur-radius, $faded-narrow-spread-radius);
+    }
+
+    &.faded-wide {
+        @include faded($faded-wide-offset, $faded-wide-blur-radius, $faded-wide-spread-radius);
+    }
 }
