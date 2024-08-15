@@ -21,6 +21,7 @@ import { TaskService } from '../../../services/task.service';
 export class TaskListComponent {
   public search: String = '';
   public taskList: ITask[] = [];
+  public filteredTaskList: ITask[] = [];
   private service = inject(TaskService);
   private snackBar = inject(MatSnackBar);
   public currentTask: ITask = {
@@ -35,12 +36,21 @@ export class TaskListComponent {
     this.loadTasks();
   }
 
+  filterTask($event:Event) {
+    const input = $event.target as HTMLInputElement;
+
+    this.filteredTaskList = this.taskList.filter((task) => task.name?.toLowerCase().includes(input.value.toLowerCase())|| task.priority?.toLowerCase().includes(input.value.toLowerCase()));
+  }
+
   loadTasks() {
     this.service.getHistoryForCurrentUser();
     effect(() => {      
       this.taskList = this.service.tasks$();
+      this.filteredTaskList = this.service.tasks$();
     });
   }
+
+  
 
   showDetail(task: ITask, modal: any) {
     this.currentTask = {...task}; 
