@@ -97,20 +97,24 @@ export interface ITaskie {
   id: number;
   name: string;
   specie: ISpecie;
-  alive: IStatus;
+  status: IStatus;
   user: IUser;
   visible: boolean;
   experience: number;
-  sprite: string;
   life: number;
   cleanse: number;
   hunger: number;
   energy: number;
-  lvlTaskie: ITaskieLevel[];
+}
+export interface ITaskieSpec {
+  name: string;
+  specieId: number;
+  userId: number;
 }
 export interface IStatus {
   id: number;
   name: string;
+  description: string;
 }
 export interface ITaskieLevel {
   id: number;
@@ -127,6 +131,9 @@ export interface ICosmetic {
 export interface ISpecie {
   id: number;
   name: string;
+  description: string;
+  sprite: string;
+  evolution: string;
 }
 
 export interface ITaskSpec {

@@ -1,0 +1,8 @@
+<div class="taskie-dex">
+    <h2>Taskie</h2>
+    <div *ngFor="let taskie of taskies" (click)="viewTaskieDetail(taskie.id)" class="taskie-card">
+      <h3>{{ taskie.name }}</h3>
+      <img [src]="taskie.specie.sprite" alt="{{ taskie.name }} Image" class="taskie-image"/>
+    </div>
+    <button mat-raised-button color="primary" (click)="openTaskieForm()">Create New Taskie</button>
+  </div>

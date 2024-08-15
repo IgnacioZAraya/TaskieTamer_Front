@@ -1,3 +1,4 @@
+import { ProfileService } from './../../../services/profile.service';
 import { Component, effect, inject, Injector, Input, OnInit, runInInjectionContext, Renderer2 } from '@angular/core';
 import { ICosmetic, IFeedBackMessage, ITaskie, IUser, IUserSpec } from '../../../interfaces';
 import { CommonModule, Location } from '@angular/common';
@@ -6,7 +7,7 @@ import { TaskieService } from '../../../services/taskie.service';
 import { ActivatedRoute } from '@angular/router';
 import { CosmeticService } from '../../../services/cosmetic.service';
 import { ToastrService } from 'ngx-toastr';
-import { ProfileService } from "../../../services/profile.service";
+import { DialogModule } from '@angular/cdk/dialog';
 
 
 @Component({
@@ -14,7 +15,8 @@ import { ProfileService } from "../../../services/profile.service";
   standalone: true,
   imports: [
     CommonModule,
-    DragDropModule
+    DragDropModule,
+    DialogModule
   ],
   templateUrl: './taskies-card.component.html',
   styleUrls: ['./taskies-card.component.scss']
@@ -44,8 +46,12 @@ export class TaskieViewComponent implements OnInit {
     private taskieService: TaskieService,
     private cosmeticService: CosmeticService,
     private renderer: Renderer2,
-    private location: Location
-  ) {
+    private location: Location,
+ 
+  ) 
+  
+  
+  {
     runInInjectionContext(this.injector, () => {
       effect(() => {
         this.cosmetics = this.cosmeticService.cosmetics$();
@@ -122,4 +128,3 @@ export class TaskieViewComponent implements OnInit {
     }
   }
 }
-
