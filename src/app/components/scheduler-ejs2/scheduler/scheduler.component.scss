@@ -1,11 +1,19 @@
 @import "../../../../../node_modules/@syncfusion/ej2-material-theme/styles/material.css";
 @import "../../../../../node_modules/@syncfusion/ej2-calendars/styles/material.css";
 
-.quick-info-popup.e-schedule .e-quick-popup-wrapper .e-event-popup .e-popup-header {
+.quick-info-popup.e-schedule
+  .e-quick-popup-wrapper
+  .e-event-popup
+  .e-popup-header {
   background: #ffff;
 }
 
-.quick-info-popup.e-schedule .e-quick-popup-wrapper .e-event-popup .e-popup-header .e-header-icon-wrapper .e-close {
+.quick-info-popup.e-schedule
+  .e-quick-popup-wrapper
+  .e-event-popup
+  .e-popup-header
+  .e-header-icon-wrapper
+  .e-close {
   color: black;
 }
 
@@ -23,14 +31,26 @@
   background: #fff;
 }
 
-.e-popup-header, .e-cell-popup, .e-quick-popup-wrapper .e-lib .e-popup .e-control .e-popup-open .yellow .e-ddl.e-input-group.e-control-wrapper .e-input .e-dropdownbase .e-list-item, .e-dropdownbase .e-list-item.e-item-focus{
+.e-popup-header,
+.e-cell-popup,
+.e-quick-popup-wrapper
+  .e-lib
+  .e-popup
+  .e-control
+  .e-popup-open
+  .yellow
+  .e-ddl.e-input-group.e-control-wrapper
+  .e-input
+  .e-dropdownbase
+  .e-list-item,
+.e-dropdownbase .e-list-item.e-item-focus {
   background-color: #ecd381;
 }
 
 .custom-border {
   border-style: ridge;
   border: 3px solid #6a4a3d;
-  border-bottom: 3px solid #6a4a3d; 
+  border-bottom: 3px solid #6a4a3d;
 }
 
 .custom-btn {
@@ -54,7 +74,7 @@
   width: 100%;
 }
 
-.diss{
+.diss {
   display: none;
 }
 
@@ -70,6 +90,6 @@
   background-color: #ec6841;
 }
 
-.white{
+.white {
   background-color: #fff;
 }
