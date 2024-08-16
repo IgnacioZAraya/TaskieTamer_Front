@@ -1,16 +1,14 @@
 <div class="container-fluid">
     <div>
-      <h1>Upcoming Task</h1>
+      <h1>Task for Complete</h1>
     </div>
     <div>
       @defer {
       <div class="d-flex justify-content-end pb-2">
       </div>
-      <app-task-next-list></app-task-next-list>
+      <app-task-complete-list></app-task-complete-list>
       } @loading (after 100ms; minimum 1s){
       <app-loader></app-loader>
       }
     </div>
 </div>
-
-  

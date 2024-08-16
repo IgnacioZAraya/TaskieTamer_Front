@@ -33,6 +33,7 @@ import { AuthService } from "../../services/auth.service";
 export class ProfileComponent {
   toastSvc = inject(ToastrService);
   public profileService = inject(ProfileService);
+  public user!: IUser;
   public UserService = inject(UserService);
   public authService = inject(AuthService);
 
@@ -56,7 +57,9 @@ export class ProfileComponent {
     this.isKid = this.checkUserAssociate();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.profileService.getLoggedUserInfo(); 
+  }
 
   public level() {
     this.profileService.user$().level?.value;

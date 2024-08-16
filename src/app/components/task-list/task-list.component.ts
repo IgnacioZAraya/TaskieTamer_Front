@@ -25,7 +25,7 @@ export class TaskListComponent {
   private snackBar = inject(MatSnackBar);
   public currentTask: ITask = {
     name: '',
-    priority: 0,
+    priority: '',
     startDate: new Date(),
     endDate: new Date(),
     description: '',

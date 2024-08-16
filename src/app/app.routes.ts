@@ -17,6 +17,9 @@ import { UsersComponent } from './pages/users/users.component';
 import { TaskieComponent } from './pages/taskies/taskiescard.component';
 import { TaskieDexComponent } from './components/taskies/taskieDex/taskiesDex.component';
 
+import {TaskCompleteComponent } from './pages/task-complete/task-complete.component';
+import {TaskVerifyComponent } from './pages/task-verify/task-verify.component';
+
 import { TaskHistoryComponent } from './pages/task-history/task-history.component';
 import { TaskNextComponent } from './pages/task-next/task-next.component';
 import { UserTaskieListComponent } from './components/taskies/userTaskies/userTaskie.component';
@@ -64,6 +67,32 @@ export const routes: Routes = [
         data: {
           authorities: [IRoleType.superAdmin],
           name: "Users",
+        },
+      },
+      {
+        path: "taskForVerify",
+        canActivate: [AuthGuard],
+        component: TaskVerifyComponent,
+        data: {
+          authorities: [
+            IRoleType.associate,
+            IRoleType.superAdmin,
+            IRoleType.base,
+          ],
+          name: "Task for Verify",
+        },
+      },
+      {
+        path: "taskForComplete",
+        canActivate: [AuthGuard],
+        component: TaskCompleteComponent,
+        data: {
+          authorities: [
+            IRoleType.associate,
+            IRoleType.superAdmin,
+            IRoleType.base,
+          ],
+          name: "Task for Complete",
         },
       },
       {
@@ -122,7 +151,7 @@ export const routes: Routes = [
         component: UserTaskieListComponent,
         canActivate:[AuthGuard],
         data: {
-          authorities: [IRoleType.user],
+          authorities: [IRoleType.base, IRoleType.associate],
           name: "Taskie",
         },
       },

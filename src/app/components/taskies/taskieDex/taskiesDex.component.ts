@@ -37,7 +37,7 @@ export class TaskieDexComponent implements OnInit {
         this.species = this.specieService.species$();
       });
     });
-    this.hasRole = this.authService.hasRole(IRoleType.user);
+    this.hasRole = this.authService.hasRole(IRoleType.base);
   }
 
   ngOnInit(): void {

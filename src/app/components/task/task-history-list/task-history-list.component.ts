@@ -7,7 +7,7 @@ import { ITask } from '../../../interfaces';
 import { TaskService } from '../../../services/task.service';
 
 @Component({
-  selector: 'app-task-list',
+  selector: 'app-task-history-list',
   standalone: true,
   imports: [
     CommonModule, 
@@ -18,7 +18,7 @@ import { TaskService } from '../../../services/task.service';
   templateUrl: './task-history-list.component.html',
   styleUrl: './task-history-list.component.scss'
 })
-export class TaskListComponent {
+export class TaskHistoryListComponent {
   public search: String = '';
   public taskList: ITask[] = [];
   public filteredTaskList: ITask[] = [];
