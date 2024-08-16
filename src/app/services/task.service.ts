@@ -99,6 +99,59 @@ export class TaskService extends BaseService<ITask> {
     }
   }
 
+  public getFutureForCurrentUser() {
+    const userId = this.authService.getUser()?.id;
+    if (userId) {
+      this.findFutureTask(userId).subscribe({
+        next: (response: any) => {
+          response.reverse();
+          this.taskListSignal.set(response);
+        },
+        error: (error: any) => {
+          console.error('Error in get future tasks for current user request', error);
+          this.snackBar.open(error.error.description, 'Close', {
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
+    } else {
+      console.error('User ID is not defined');
+      this.snackBar.open('User ID is not defined', 'Close', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      });
+    }
+  }
+
+  public getCompletedForCurrentUser() {
+    const userId = this.authService.getUser()?.id;
+    if (userId) {
+      this.findCompleteTask(userId).subscribe({
+        next: (response: any) => {
+          response.reverse();
+          this.taskListSignal.set(response);
+        },
+        error: (error: any) => {
+          console.error('Error in get completed tasks for current user request', error);
+          this.snackBar.open(error.error.description, 'Close', {
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
+    } else {
+      console.error('User ID is not defined');
+      this.snackBar.open('User ID is not defined', 'Close', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      });
+    }
+  }
 
   getAllSignal() {
     this.findAll().subscribe({
@@ -142,6 +195,39 @@ export class TaskService extends BaseService<ITask> {
       }),
       catchError((error) => {
         console.error("Error saving task", error);
+        return throwError(error);
+      }),
+      finalize(() => {
+        this.getTasksForCurrentUser();
+      })
+    );
+  }
+
+    
+  completeTaskSignal(task: ITask): Observable<any> {
+    return this.completeTask(task.id).pipe(
+      tap((response: any) => {
+        const updatedTasks = this.taskListSignal().filter(t => t.id !== task.id);
+        this.taskListSignal.set(updatedTasks);
+      }),
+      catchError((error) => {
+        console.error("Error completing task", error);
+        return throwError(error);
+      }),
+      finalize(() => {
+        this.getTasksForCurrentUser();
+      })
+    );
+  }
+
+  verifyTaskSignal(task: ITask): Observable<any> {
+    return this.verifyTask(task.id).pipe(
+      tap((response: any) => {
+        const updatedTasks = this.taskListSignal().filter(t => t.id !== task.id);
+        this.taskListSignal.set(updatedTasks);
+      }),
+      catchError((error) => {
+        console.error("Error verifying task", error);
         return throwError(error);
       }),
       finalize(() => {

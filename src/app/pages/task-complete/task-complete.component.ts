@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
-import { TaskHistoryListComponent } from '../../components/task/task-history-list/task-history-list.component';
+import { TaskCompleteListComponent } from '../../components/task/task-complete-list/task-complete-list.component';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-task-history',
+  selector: 'app-task-completion',
   standalone: true,
   imports: [
-    TaskHistoryListComponent,
+    TaskCompleteListComponent,
     LoaderComponent,
     ModalComponent,
     CommonModule
   ],
-  templateUrl: './task-history.component.html',
-  styleUrl: './task-history.component.scss'
+  templateUrl: './task-complete.component.html',
+  styleUrl: './task-complete.component.scss'
 })
-export class TaskHistoryComponent {
-
+export class TaskCompleteComponent {
 }

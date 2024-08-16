@@ -30,7 +30,7 @@ export class TaskieDexModalComponent {
       private authService: AuthService,
       private dialog: MatDialog
     ) {
-      this.hasRole = this.authService.hasRole(IRoleType.user);
+      this.hasRole = this.authService.hasRole(IRoleType.base);
 
     }
   

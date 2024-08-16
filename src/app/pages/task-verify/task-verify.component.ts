@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
-import { TaskHistoryListComponent } from '../../components/task/task-history-list/task-history-list.component';
+import { TaskVerifyListComponent } from '../../components/task/task-verify-list/task-verify-list.component';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-task-history',
+  selector: 'app-task-verify',
   standalone: true,
   imports: [
-    TaskHistoryListComponent,
+    TaskVerifyListComponent,
     LoaderComponent,
     ModalComponent,
     CommonModule
   ],
-  templateUrl: './task-history.component.html',
-  styleUrl: './task-history.component.scss'
+  templateUrl: './task-verify.component.html',
+  styleUrl: './task-verify.component.scss'
 })
-export class TaskHistoryComponent {
-
+export class TaskVerifyComponent {
 }

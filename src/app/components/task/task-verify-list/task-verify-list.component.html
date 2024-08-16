@@ -9,6 +9,7 @@
           <th scope="col">Start Date</th>
           <th scope="col">End Date</th>
           <th scope="col">Description</th>
+          <th class="text-center" scope="col">Verify task</th>
         </tr>
       </thead>
       <tbody>
@@ -20,9 +21,16 @@
           <td>{{item.startDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
           <td>{{item.endDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
           <td>{{item.description}}</td>
+          <td>
+            <div class="d-flex justify-content-evenly align-items-center">
+              <button type="button" (click)="verifyTask(item)" class="btn btn-success">
+                <i class="fa-solid fa-check white"
+                ></i>
+              </button>
+            </div>
+          </td>
         </tr>
         }
       </tbody>
     </table>
   </div>
-
