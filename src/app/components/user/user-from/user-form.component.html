@@ -5,6 +5,7 @@
   class="add-user-container"
 >
   <h2 class="mb-5 px-5">{{ title }}</h2>
+  @if(action != 'kidMode') {
   <div class="border-bottom pb-3 mb-3 px-5">
     <div class="row">
       <div class="col-6">
@@ -77,6 +78,7 @@
       }
     </div>
   </div>
+  }
   @if(action == 'add') {
   <div class="border-bottom pb-3 mb-3">
     <div class="px-5">
@@ -93,7 +95,7 @@
       }
     </div>
   </div>
-  } @else if (action == "profileEdit") {
+  } @else if (action == "profileEdit" || action == "kidMode") {
     <div class="border-bottom pb-3 mb-3">
       <div class="px-5">
         <label for="password" class="form-label mb-2 custom-label"> To know it's you, type down your Password! </label>

@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div>
+      <h1>Cosmetics</h1>
+    </div>
+    <div>
+      @defer {
+      <div class="d-flex justify-content-end pb-2">
+        <button
+          type="button"
+          class="btn d-flex align-items-center custom-btn"
+          (click)="formModal.show()"
+        >
+          <i class="fa-solid fa-plus white"></i>
+          <p class="mb-0">Add cosmetic</p>
+        </button>
+      </div>
+      <app-cosmetic-list></app-cosmetic-list>
+      } @loading (after 100ms; minimum 1s){
+      <app-loader></app-loader>
+      }
+    </div>
+  </div>
+  
+  <app-modal size="lg" #formModal>
+    <app-cosmetic-form [title]="'Add Cosmetic'"></app-cosmetic-form>
+  </app-modal>

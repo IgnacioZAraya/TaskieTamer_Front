@@ -4,7 +4,6 @@ import { FormsModule, NgForm } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { IFeedBackMessage, IUser, IUserSpec } from "../../../interfaces";
 import { UserService } from "../../../services/user.service";
-import { ProfileService } from "../../../services/profile.service";
 
 @Component({
   selector: "app-user-form",
@@ -45,34 +44,55 @@ export class UserFormComponent {
     } else {
       this.setUserUpdt();
 
-      if (this.action != "profileEdit") {
-        this.service[
-          this.action == "add" ? "saveUserSignal" : "updateUserSignal"
-        ](this.userSpec).subscribe({
-          next: () => {
-            this.feedbackMessage.message = `User successfully ${
-              this.action == "add" ? "added" : "updated"
-            }`;
-            this.toastSvc.success(this.feedbackMessage.message, "SUCCES!!!");
-          },
-          error: (error: any) => {
-            this.feedbackMessage.message = error.message;
-            this.toastSvc.error(this.feedbackMessage.message, "OH NO!");
-          },
-        });
-      } else {
-        this.service.updateUserProfileSignal(this.userSpec).subscribe({
-          next: () => {
-            this.feedbackMessage.message = `User successfully ${
-              this.action == "add" ? "added" : "updated"
-            }`;
-            this.toastSvc.success(this.feedbackMessage.message, "SUCCES!!!");
-          },
-          error: (error: any) => {
-            this.feedbackMessage.message = error.message;
-            this.toastSvc.error(this.feedbackMessage.message, "OH NO!");
-          },
-        });
+      switch(this.action){
+        case "profileEdit" : {
+          this.service.updateUserProfileSignal(this.userSpec).subscribe({
+            next: () => {
+              this.feedbackMessage.message = `User successfully ${
+                this.action == "add" ? "added" : "updated"
+              }`;
+              this.toastSvc.success(this.feedbackMessage.message, "SUCCES!!!");
+            },
+            error: (error: any) => {
+              this.feedbackMessage.message = error.message;
+              this.toastSvc.error(this.feedbackMessage.message, "OH NO!");
+            },
+          });
+          break;
+        }
+        case "kidMode": {
+          this.service.updateKidStatusSignal(this.userSpec).subscribe({
+            next: () => {
+              this.feedbackMessage.message = `User successfully ${
+                this.action == "add" ? "added" : "updated"
+              }`;
+              this.toastSvc.success(this.feedbackMessage.message, "SUCCES!!!");
+            },
+            error: (error: any) => {
+              this.feedbackMessage.message = error.message;
+              this.toastSvc.error(this.feedbackMessage.message, "OH NO!");
+            },
+          });
+          break;
+        }
+
+        default : {
+          this.service[
+            this.action == "add" ? "saveUserSignal" : "updateUserSignal"
+          ](this.userSpec).subscribe({
+            next: () => {
+              this.feedbackMessage.message = `User successfully ${
+                this.action == "add" ? "added" : "updated"
+              }`;
+              this.toastSvc.success(this.feedbackMessage.message, "SUCCES!!!");
+            },
+            error: (error: any) => {
+              this.feedbackMessage.message = error.message;
+              this.toastSvc.error(this.feedbackMessage.message, "OH NO!");
+            },
+          });
+          break;
+        }
       }
     }
   }
@@ -81,7 +101,7 @@ export class UserFormComponent {
     this.userSpec.id = this.auxUser.id;
     this.userSpec.name = this.auxUser.name;
     this.userSpec.lastname = this.auxUser.lastname;
-    if (this.action != "profileEdit") {
+    if (this.action == "add") {
       this.userSpec.password = this.auxUser.password;
     }
     this.userSpec.email = this.auxUser.email;

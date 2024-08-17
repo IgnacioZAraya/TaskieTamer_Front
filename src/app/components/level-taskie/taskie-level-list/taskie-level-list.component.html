@@ -1,0 +1,59 @@
+<div class="table-container table-responsive">
+    <table class="table table-striped">
+      <thead class="brown">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Value</th>
+          <th scope="col">Evolution</th>
+          <th scope="col">Cosmetic</th>
+          <th scope="col">Created</th>
+          <th scope="col">Updated</th>
+          <th class="text-center" scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of taskieLvlList; track item.id) {
+        <tr>
+          <th scope="row">{{item.id}}</th>
+          <td>{{item.name}}</td>
+          <td>{{item.value}}</td>
+          <td>{{item.hasEvolution}}</td>
+          <td>{{item.cosmetic?.name}}</td>
+          <td>{{item.createdAt | date: 'dd/MM/yyyy HH:mm'}}</td>
+          <td>{{item.updatedAt | date: 'dd/MM/yyyy HH:mm'}}</td>
+          <td>
+            <div class="d-flex justify-content-evenly align-items-center">
+              <button type="button" (click)="showDetail(item, formModal)" class="btn btn-secondary">
+                <i class="fa-solid fa-eye white"
+                ></i>
+              </button>
+              <button type="button" (click)="showConfirmation(item, confirmationModal)" class="btn btn-danger">
+                <i class="fa-solid fa-trash white"
+                ></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  
+  <app-modal size="lg" #formModal>
+    <app-taskie-level-form 
+    [level]="currentLevel" 
+    [action]="'edit'"
+    [title]="'Update Level'"
+    >
+  </app-taskie-level-form>
+  </app-modal>
+  
+  <app-modal size="lg" #confirmationModal>
+    <app-confirmation 
+    [taskieLvl]="currentLevel" 
+    [title]="'Delete Taskie Level'"
+    >
+  </app-confirmation>
+  
+  </app-modal>

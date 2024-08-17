@@ -22,7 +22,7 @@ export interface IUser {
   experience?: number;
   foodUser?: number;
   cleanerUser?: number;
-  isKid?: boolean;
+  kid?: boolean;
 }
 
 export interface ILevel {
@@ -31,7 +31,7 @@ export interface ILevel {
 }
 
 export interface IUserSpec {
-  id?: number ;
+  id?: number;
   name?: string;
   lastname?: string;
   email?: string;
@@ -42,6 +42,7 @@ export interface IUserSpec {
   foodUser?: number;
   cleanerUser?: number;
   privateCode?: number;
+  kid?: boolean;
 }
 
 export interface IAuthority {
@@ -117,10 +118,15 @@ export interface IStatus {
   description: string;
 }
 export interface ITaskieLevel {
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
+  value?: number;
+  cosmetic?: ICosmetic;
+  hasEvolution?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }
-export interface ICosmetic {
+export interface IInteractable {
   id: number;
   name: string;
   sprite: string;
@@ -147,4 +153,12 @@ export interface ITaskSpec {
   visible?: boolean;
   recurrent?: string;
   repeatTimes?: number;
+}
+
+export interface ICosmetic {
+  id?: number;
+  name?: string;
+  sprite?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

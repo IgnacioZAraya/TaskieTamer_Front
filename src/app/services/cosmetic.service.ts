@@ -1,7 +1,7 @@
 import { Injectable, signal } from "@angular/core";
 import { BaseService } from "./base-service";
 import { ICosmetic } from "../interfaces";
-import { Observable, catchError, tap, throwError } from "rxjs";
+import { catchError, Observable, tap, throwError } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -9,8 +9,6 @@ import { Observable, catchError, tap, throwError } from "rxjs";
 export class CosmeticService extends BaseService<ICosmetic> {
   protected override source: string = "cosmetic";
   private cosmeticListSignal = signal<ICosmetic[]>([]);
-
- 
 
   get cosmetics$() {
     return this.cosmeticListSignal;
@@ -20,19 +18,18 @@ export class CosmeticService extends BaseService<ICosmetic> {
     this.findAll().subscribe({
       next: (response: any) => {
         response.reverse();
-        console.log('Cosmetics fetched:', response);
         this.cosmeticListSignal.set(response);
       },
       error: (error: any) => {
-        console.error('Error fetching cosmetics', error);
-      }
+        console.error("Error fetching cosmetics", error);
+      },
     });
   }
 
   saveCosmeticSignal(cosmetic: ICosmetic): Observable<any> {
     return this.add(cosmetic).pipe(
       tap((response: any) => {
-        this.cosmeticListSignal.update((cosmetics) => [response.data, ...cosmetics]);
+        this.cosmeticListSignal.update((cosmetics) => [response, ...cosmetics]);
       }),
       catchError((error) => {
         console.error("Error saving cosmetic", error);
@@ -45,7 +42,7 @@ export class CosmeticService extends BaseService<ICosmetic> {
     return this.edit(cosmetic.id, cosmetic).pipe(
       tap((response: any) => {
         const updatedCosmetics = this.cosmeticListSignal().map((c) =>
-          c.id === cosmetic.id ? response.data : c
+          c.id === cosmetic.id ? response : c
         );
         this.cosmeticListSignal.set(updatedCosmetics);
       }),
@@ -70,6 +67,4 @@ export class CosmeticService extends BaseService<ICosmetic> {
       })
     );
   }
-
- 
 }

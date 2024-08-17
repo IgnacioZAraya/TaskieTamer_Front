@@ -24,6 +24,8 @@ import { TaskHistoryComponent } from './pages/task-history/task-history.componen
 import { TaskNextComponent } from './pages/task-next/task-next.component';
 import { UserTaskieListComponent } from './components/taskies/userTaskies/userTaskie.component';
 import { AssociateRoleGuard } from "./guards/associate-role.guard";
+import { CosmeticComponent } from "./pages/cosmetic/cosmetic.component";
+import { TaskieLevelComponent } from "./pages/taskie-level/taskie-level.component";
 
 export const routes: Routes = [
   {
@@ -70,6 +72,23 @@ export const routes: Routes = [
         },
       },
       {
+        path: "cosmetic",
+        component: CosmeticComponent,
+        canActivate: [AdminRoleGuard],
+        data: {
+          authorities: [IRoleType.superAdmin],
+          name: "Cosmetics",
+        },
+      },
+      {
+        path: "taskieLevel",
+        component: TaskieLevelComponent,
+        canActivate: [AdminRoleGuard],
+        data: {
+          authorities: [IRoleType.superAdmin],
+          name: "Taskie Levels",
+        },
+      },
         path: "taskForVerify",
         canActivate: [AuthGuard],
         component: TaskVerifyComponent,
@@ -93,6 +112,7 @@ export const routes: Routes = [
             IRoleType.base,
           ],
           name: "Task for Complete",
+
         },
       },
       {
