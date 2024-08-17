@@ -35,7 +35,7 @@ export class LoginComponent {
     }
     if (this.emailModel.valid && this.passwordModel.valid) {
       this.authService.login(this.loginForm).subscribe({
-        next: () => this.router.navigateByUrl("/app/calendar"),
+        next: () => this.router.navigateByUrl("/app/home"),
         error: (err: any) =>
           this.toastSvc.error(err.error.description, "Oh No!"),
       });

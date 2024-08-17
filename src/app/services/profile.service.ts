@@ -16,7 +16,7 @@ export class ProfileService extends BaseService<IUser> {
   getLoggedUserInfo() {
     this.findAll().subscribe({
       next: (response: any) => {
-        console.log('response', response);
+        
         this.userSignal.set(response);
       },
     });

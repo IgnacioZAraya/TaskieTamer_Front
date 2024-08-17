@@ -11,13 +11,18 @@ import { RegisterComponent } from "./pages/auth/register/register.component";
 import { CalendarComponent } from "./pages/calendar/calendar.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { ProfileComponent } from "./pages/profile/profile.component";
-import { UsersComponent } from "./pages/users/users.component";
 
-import { TaskieComponent } from "./pages/taskies/taskiescard.component";
-import { TaskieDexComponent } from "./components/taskies/taskieDex/taskiesDex.component";
+import { UsersComponent } from './pages/users/users.component';
 
-import { TaskHistoryComponent } from "./pages/task-history/task-history.component";
-import { TaskNextComponent } from "./pages/task-next/task-next.component";
+import { TaskieComponent } from './pages/taskies/taskiescard.component';
+import { TaskieDexComponent } from './components/taskies/taskieDex/taskiesDex.component';
+
+import {TaskCompleteComponent } from './pages/task-complete/task-complete.component';
+import {TaskVerifyComponent } from './pages/task-verify/task-verify.component';
+
+import { TaskHistoryComponent } from './pages/task-history/task-history.component';
+import { TaskNextComponent } from './pages/task-next/task-next.component';
+import { UserTaskieListComponent } from './components/taskies/userTaskies/userTaskie.component';
 import { AssociateRoleGuard } from "./guards/associate-role.guard";
 import { CosmeticComponent } from "./pages/cosmetic/cosmetic.component";
 import { TaskieLevelComponent } from "./pages/taskie-level/taskie-level.component";
@@ -38,18 +43,24 @@ export const routes: Routes = [
     component: AccessDeniedComponent,
   },
   {
-    path: "",
-    redirectTo: "app/home",
-    pathMatch: "full",
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [GuestGuard],
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
   },
   {
     path: "app",
     component: AppLayoutComponent,
     children: [
       {
-        path: "app",
-        redirectTo: "home",
-        pathMatch: "full",
+        path: 'app',
+        redirectTo: '/home',
+        pathMatch: 'full',
+
       },
       {
         path: "users",
@@ -76,6 +87,32 @@ export const routes: Routes = [
         data: {
           authorities: [IRoleType.superAdmin],
           name: "Taskie Levels",
+        },
+      },
+        path: "taskForVerify",
+        canActivate: [AuthGuard],
+        component: TaskVerifyComponent,
+        data: {
+          authorities: [
+            IRoleType.associate,
+            IRoleType.superAdmin,
+            IRoleType.base,
+          ],
+          name: "Task for Verify",
+        },
+      },
+      {
+        path: "taskForComplete",
+        canActivate: [AuthGuard],
+        component: TaskCompleteComponent,
+        data: {
+          authorities: [
+            IRoleType.associate,
+            IRoleType.superAdmin,
+            IRoleType.base,
+          ],
+          name: "Task for Complete",
+
         },
       },
       {
@@ -129,6 +166,14 @@ export const routes: Routes = [
           ],
           name: "TaskieDex",
         },
+      },{
+        path: "Taskies",
+        component: UserTaskieListComponent,
+        canActivate:[AuthGuard],
+        data: {
+          authorities: [IRoleType.base, IRoleType.associate],
+          name: "Taskie",
+        },
       },
       {
         path: "profile",
@@ -150,9 +195,10 @@ export const routes: Routes = [
       {
         path: "home",
         component: HomeComponent,
+        canActivate: [AuthGuard],
         data: {
-          name: "Home",
-        },
+          name: 'Home'
+        }
       },
     ],
   },

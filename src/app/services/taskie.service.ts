@@ -2,7 +2,9 @@
 
 import { Injectable, signal } from "@angular/core";
 import { BaseService } from "./base-service";
-import { IInteractable, ITaskie } from "../interfaces";
+
+import { IInteractable, ITaskie} from "../interfaces";
+
 import { Observable, catchError, tap, throwError } from "rxjs";
 
 
@@ -27,7 +29,7 @@ export class TaskieService extends BaseService<ITaskie> {
     this.findAll().subscribe({
       next: (response: any) => {
         response.reverse();
-        console.log('Taskies fetched:', response);
+        
         this.taskieListSignal.set(response);
       },
       error: (error: any) => {
@@ -36,7 +38,7 @@ export class TaskieService extends BaseService<ITaskie> {
     });
   }
 
-  saveTaskieSignal(taskie: ITaskie): Observable<any> {
+  saveTaskieSignal(taskie: ITaskieSpec): Observable<any> {
     return this.add(taskie).pipe(
       tap((response: any) => {
         this.taskieListSignal.update((taskies) => [response, ...taskies]);

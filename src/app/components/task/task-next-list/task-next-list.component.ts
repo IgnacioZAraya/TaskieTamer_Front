@@ -7,7 +7,7 @@ import { ITask } from '../../../interfaces';
 import { TaskService } from '../../../services/task.service';
 
 @Component({
-  selector: 'app-task-list',
+  selector: 'app-task-next-list',
   standalone: true,
   imports: [
     CommonModule, 
@@ -18,9 +18,10 @@ import { TaskService } from '../../../services/task.service';
   templateUrl: './task-next-list.component.html',
   styleUrl: './task-next-list.component.scss'
 })
-export class TaskListComponent {
+export class TaskNextListComponent {
   public search: String = '';
   public taskList: ITask[] = [];
+  public filteredTaskList: ITask[] = [];
   private service = inject(TaskService);
   private snackBar = inject(MatSnackBar);
   public currentTask: ITask = {
@@ -35,10 +36,18 @@ export class TaskListComponent {
     this.loadTasks();
   }
 
+
+  filterTask($event:Event) {
+    const input = $event.target as HTMLInputElement;
+
+    this.filteredTaskList = this.taskList.filter((task) => task.name?.toLowerCase().includes(input.value.toLowerCase()) || task.priority?.toLowerCase().includes(input.value.toLowerCase()));
+  }
+
   loadTasks() {
     this.service.getNextTaskForCurrentUser();
     effect(() => {      
       this.taskList = this.service.tasks$();
+      this.filteredTaskList = this.service.tasks$();
     });
   }
 

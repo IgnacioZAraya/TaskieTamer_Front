@@ -20,9 +20,10 @@
       </div>
     </div>
   </div>
+
   <button *ngIf="isAssociate == false" class="btn custom-btn shadow-lg" (click)="codeModal.show(); sendEmail()">Parental Activation</button>
   <button *ngIf="isAssociate == true" class="btn custom-btn shadow-lg" (click)="kidModal.show()">Kid mode: {{isKid}}</button>
-  <button *ngIf="isKid == false" class="btn custom-btn shadow-lg" (click)="formModal.show() ">Edit</button>
+
 </div>
 
 <app-modal size="lg" #formModal>

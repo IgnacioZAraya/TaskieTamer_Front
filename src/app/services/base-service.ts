@@ -30,6 +30,22 @@ export class BaseService<T> {
     return this.http.get<IResponse<T[]>>(`${this.source}/nextTask/${userId}`);
   }
 
+  public findFutureTask(userId: number): Observable<IResponse<T[]>> {
+    return this.http.get<IResponse<T[]>>(`${this.source}/futureTasks/${userId}`);
+  }
+
+  public completeTask(id: any): Observable<IResponse<T>> {
+    return this.http.patch<IResponse<T>>(`${this.source}/complete/${id}`, {});
+  }
+
+  public findCompleteTask(id: any): Observable<IResponse<T[]>> {
+    return this.http.get<IResponse<T[]>>(`${this.source}/verifiedTask/${id}`);
+  }
+
+  public verifyTask(id: any): Observable<IResponse<T>> {
+    return this.http.put<IResponse<T>>(`${this.source}/verified/${id}`, {});
+  }
+
   public add(data: {}): Observable<IResponse<T>> {
     return this.http.post<IResponse<T>>(this.source, data);
   }
@@ -69,4 +85,6 @@ export class BaseService<T> {
   public del(id: any): Observable<IResponse<T>> {
     return this.http.delete<IResponse<T>>(this.source + "/" + id);
   }
+
+
 }

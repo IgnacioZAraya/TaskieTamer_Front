@@ -1,0 +1,34 @@
+<div class="modal-content">
+  <h2>Specie</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="name" name="name" required>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="description" name="description" required></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <label for="sprite">Choose Sprite:</label>
+      <input type="file" id="sprite" (change)="onFileSelected($event)">
+    </div>
+
+    <div class="form-group">
+      <label for="evolution">Choose Evolution:</label>
+      <input type="file" id="evolution" (change)="onEvolutionFileSelected($event)">
+    </div>
+
+    <div class="modal-actions">
+      <button mat-button type="submit">{{ isEditing ? 'Update Specie' : 'Add Specie' }}</button>
+      <button mat-button type="button" (click)="cancel()">Cancel</button>
+      <button *ngIf="isEditing" mat-button color="warn" (click)="deleteSpecie()">Delete</button>
+    </div>
+  </form>
+</div>
