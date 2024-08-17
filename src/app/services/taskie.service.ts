@@ -2,7 +2,7 @@
 
 import { Injectable, signal } from "@angular/core";
 import { BaseService } from "./base-service";
-import { ICosmetic, ITaskie } from "../interfaces";
+import { IInteractable, ITaskie } from "../interfaces";
 import { Observable, catchError, tap, throwError } from "rxjs";
 
 

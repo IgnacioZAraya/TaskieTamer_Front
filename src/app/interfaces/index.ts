@@ -114,10 +114,15 @@ export interface IStatus {
   name: string;
 }
 export interface ITaskieLevel {
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
+  value?: number;
+  cosmetic?: ICosmetic;
+  hasEvolution?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }
-export interface ICosmetic {
+export interface IInteractable {
   id: number;
   name: string;
   sprite: string;
@@ -141,4 +146,12 @@ export interface ITaskSpec {
   visible?: boolean;
   recurrent?: string;
   repeatTimes?: number;
+}
+
+export interface ICosmetic {
+  id?: number;
+  name?: string;
+  sprite?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

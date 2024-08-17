@@ -4,7 +4,6 @@ import { FormsModule, NgForm } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { IFeedBackMessage, IUser, IUserSpec } from "../../../interfaces";
 import { UserService } from "../../../services/user.service";
-import { ProfileService } from "../../../services/profile.service";
 
 @Component({
   selector: "app-user-form",

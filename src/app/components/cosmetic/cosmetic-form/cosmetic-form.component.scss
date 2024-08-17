@@ -1,0 +1,39 @@
+.add-cosmetic-container {
+    padding: 30px 0px;
+    background-color: #ef9174;
+  }
+  
+  div {
+    background-color: #ef9174;
+  }
+  
+  p {
+    color: #edc951;
+  }
+  
+  .custom-label {
+    color: red;
+    text-shadow: #edc951 1px 0 10px;
+  }
+  
+  h1, h2, .customlabel {
+    color: #6a4a3d;
+  }
+  
+  h2{
+    font-family: "PuppyBellies";
+    font-size: 30px;
+  }
+  
+  input {
+    background-color: #edc951;
+    color: #6a4a3d;
+    font-size: 1.5rem;
+    padding: 3px;
+    margin-bottom: 5px;
+  }
+  
+  ::placeholder {
+    color: #6a4a3d89;
+  } 
+  

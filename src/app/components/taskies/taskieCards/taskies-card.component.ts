@@ -1,10 +1,10 @@
 import { Component, effect, inject, Injector, Input, OnInit, runInInjectionContext, Renderer2 } from '@angular/core';
-import { ICosmetic, IFeedBackMessage, ITaskie, IUser, IUserSpec } from '../../../interfaces';
+import { IInteractable, IFeedBackMessage, ITaskie, IUser, IUserSpec } from '../../../interfaces';
 import { CommonModule, Location } from '@angular/common';
 import { DragDropModule, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TaskieService } from '../../../services/taskie.service';
 import { ActivatedRoute } from '@angular/router';
-import { CosmeticService } from '../../../services/cosmetic.service';
+import { InteractableService } from '../../../services/interactable.service';
 import { ToastrService } from 'ngx-toastr';
 import { ProfileService } from "../../../services/profile.service";
 
@@ -21,7 +21,7 @@ import { ProfileService } from "../../../services/profile.service";
 })
 export class TaskieViewComponent implements OnInit {
   @Input() taskie!: ITaskie;
-  cosmetics: ICosmetic[] = [];
+  interactables: IInteractable[] = [];
   private dragImage: HTMLImageElement | null = null;
   feedbackMessage: IFeedBackMessage = {
     message: "",
@@ -42,13 +42,13 @@ export class TaskieViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private taskieService: TaskieService,
-    private cosmeticService: CosmeticService,
+    private interactableService: InteractableService,
     private renderer: Renderer2,
     private location: Location
   ) {
     runInInjectionContext(this.injector, () => {
       effect(() => {
-        this.cosmetics = this.cosmeticService.cosmetics$();
+        this.interactables = this.interactableService.interactables$();
     
       });
     });
@@ -58,7 +58,7 @@ export class TaskieViewComponent implements OnInit {
   ngOnInit(): void {
     const taskieId = +this.route.snapshot.paramMap.get('id')!;
     this.taskieService.getAllSignal();
-    this.cosmeticService.getAllSignal();
+    this.interactableService.getAllSignal();
 
     runInInjectionContext(this.injector, () => {
       effect(() => {
@@ -68,12 +68,12 @@ export class TaskieViewComponent implements OnInit {
       });
     });
   }
-  onDragStart(event: DragEvent, cosmetic: ICosmetic): void {
-    event.dataTransfer?.setData('application/json', JSON.stringify(cosmetic));
-    console.log('Drag started:', cosmetic);
+  onDragStart(event: DragEvent, interactable: IInteractable): void {
+    event.dataTransfer?.setData('application/json', JSON.stringify(interactable));
+    console.log('Drag started:', interactable);
 
     this.dragImage = new Image();
-    this.dragImage.src = cosmetic.sprite;
+    this.dragImage.src = interactable.sprite;
     this.dragImage.style.width = '50px';
     this.dragImage.style.height = '50px';
     document.body.appendChild(this.dragImage);
@@ -89,12 +89,11 @@ export class TaskieViewComponent implements OnInit {
     event.preventDefault();
     const data = event.dataTransfer?.getData('application/json');
     if (data) {
-      const cosmetic: ICosmetic = JSON.parse(data);
-      console.log('Dropped cosmetic:', cosmetic);
+      const interactable: IInteractable = JSON.parse(data);
 
-      this.taskieService.applyCosmetic(this.taskie.id, cosmetic.id).subscribe({
+      this.taskieService.applyCosmetic(this.taskie.id, interactable.id).subscribe({
         next: (updatedTaskie: ITaskie) => {
-         this.updateUserInteractable(cosmetic);
+         this.updateUserInteractable(interactable);
           this.toastSvc.success(this.feedbackMessage.message, "Taskie Updated!");
           this.taskie = updatedTaskie;
         },
@@ -112,8 +111,8 @@ export class TaskieViewComponent implements OnInit {
     this.location.back();
   }
 
-  updateUserInteractable(cosmetic: ICosmetic): void {
-    if(cosmetic.name == 'FOOD'){
+  updateUserInteractable(interactable: IInteractable): void {
+    if(interactable.name == 'FOOD'){
       this.userSpec.foodUser = 100;
       console.log(this.userSpec.foodUser);
     }else{

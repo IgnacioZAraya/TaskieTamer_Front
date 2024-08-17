@@ -1,0 +1,72 @@
+<form
+  (ngSubmit)="handleAction(frm)"
+  autocomplete="off"
+  #frm="ngForm"
+  class="add-cosmetic-container"
+>
+  <h2 class="mb-5 px-5">{{ title }}</h2>
+
+  <div class="border-bottom pb-3 mb-3 px-5">
+    <div class="row">
+      <div class="col-6">
+        <label for="name" class="form-label mb-2"> Name </label>
+        <input
+          #name="ngModel"
+          type="text"
+          class="form-control shadow rounded"
+          id="name"
+          name="name"
+          placeholder="STANDARD_OUTFIT"
+          [(ngModel)]="cosmetic.name"
+          [ngClass]="{
+            'is-invalid': name.invalid && name.touched,
+            'is-valid': name.valid && name.touched
+          }"
+          required
+        />
+        @if (name.invalid) {
+        <div *ngIf="name.invalid" class="invalid-feedback">
+          Please add a valid name
+        </div>
+        }
+      </div>
+      <div class="col-6">
+        <label for="sprite" class="form-label mb-2"> Sprite </label>
+        <input
+          #sprite="ngModel"
+          type="text"
+          class="form-control shadow rounded"
+          id="sprite"
+          name="sprite"
+          placeholder="Add here the cosmetic image"
+          [(ngModel)]="cosmetic.sprite"
+          [ngClass]="{
+            'is-invalid': sprite.invalid && sprite.touched,
+            'is-valid': sprite.valid && sprite.touched
+          }"
+          required
+        />
+        @if (sprite.invalid) {
+        <div *ngIf="sprite.invalid" class="invalid-feedback">
+          Please add a valid sprite image
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="pb-3 mb-3 d-flex justify-content-center align-items-center">
+    <button
+      type="submit"
+      class="shadow btn btn-primary d-flex align-items-center custom-btn"
+    >
+      <i
+        class="fa-solid white me-2"
+        [ngClass]="{
+          'fa-plus': action == 'add',
+          'fa-pencil': action == 'edit'
+        }"
+      ></i>
+      <p class="mb-0">{{ title }}</p>
+    </button>
+  </div>
+</form>
