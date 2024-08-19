@@ -88,7 +88,7 @@ export const routes: Routes = [
           authorities: [IRoleType.superAdmin],
           name: "Taskie Levels",
         },
-      },
+      },{
         path: "taskForVerify",
         canActivate: [AuthGuard],
         component: TaskVerifyComponent,

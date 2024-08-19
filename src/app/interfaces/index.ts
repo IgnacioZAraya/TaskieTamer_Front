@@ -73,12 +73,6 @@ export enum IRoleType {
   superAdmin = "ROLE_SUPER_ADMIN",
 }
 
-export interface ITaskieImg {
-  src: string;
-  alt: string;
-  title: string;
-}
-
 export interface ITask {
   id?: number;
   name?: string;

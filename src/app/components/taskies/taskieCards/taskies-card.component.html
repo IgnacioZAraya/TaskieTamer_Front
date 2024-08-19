@@ -18,6 +18,8 @@
          (dragstart)="onDragStart($event, interactable)" (dragend)="onDragEnd($event)">
       <img [src]="interactable.sprite" alt="{{ interactable.name }} Image" class="interactable-image"/>
       <p>{{ interactable.name }}</p>
+      <p *ngIf="interactable.name === 'FOOD' ">{{userSpec.foodUser}}</p>
+      <p *ngIf="interactable.name === 'SHAMPOO' ">{{userSpec.cleanerUser}}</p>
     </div>
   </div>
 </div>
