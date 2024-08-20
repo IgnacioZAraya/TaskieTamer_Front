@@ -4,12 +4,11 @@ import { CommonModule, Location } from '@angular/common';
 import { Component, effect, inject, Injector, OnInit, runInInjectionContext } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { IFeedBackMessage, IInteractable, ITaskie, IUserSpec } from '../../../interfaces';
+import { IFeedBackMessage, IInteractable, ITaskie, IUserDTO, IUserSpec } from '../../../interfaces';
 import { InteractableService } from '../../../services/interactable.service';
 import { TaskieService } from '../../../services/taskie.service';
 import { UserService } from '../../../services/user.service';
 import { ProfileService } from './../../../services/profile.service';
-
 
 @Component({
   selector: 'app-taskies-card',
@@ -31,7 +30,7 @@ export class TaskieViewComponent implements OnInit {
 
   private injector = inject(Injector);
   public profileService = inject(ProfileService);
-  public userSpec!: IUserSpec;
+  public userDTO!: IUserDTO;
   toastSvc = inject(ToastrService);
 
   public userService = inject(UserService);
@@ -52,7 +51,7 @@ export class TaskieViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadUserSpec();
+    this.loadUserDTO();
     const taskieId = +this.route.snapshot.paramMap.get('id')!;
     this.taskieService.getAllSignal();
     this.interactableService.getAllSignal();
@@ -70,12 +69,12 @@ export class TaskieViewComponent implements OnInit {
 
   }
 
-  loadUserSpec(): void {
+  loadUserDTO(): void {
     runInInjectionContext(this.injector, () => {
       effect(() => {
         const user = this.profileService.user$();
         if (user && user.id) {
-          this.userSpec = {
+          this.userDTO = {
             ...user,
             foodUser: user.foodUser || 0,
             cleanerUser: user.cleanerUser || 0
@@ -139,19 +138,25 @@ export class TaskieViewComponent implements OnInit {
   }
 
   updateUserInteractable(interactable: IInteractable): void {
-    if(interactable.name == 'FOOD'){
-      this.userSpec.foodUser = 100;
-      console.log(this.userSpec.foodUser);
-    }else{
-      this.userSpec.cleanerUser = 100;
-      console.log(this.userSpec.cleanerUser);
+    if (interactable.name === 'FOOD') {
+      this.userDTO.foodUser = (this.userDTO.foodUser || 0) - 1;
+    } else if (interactable.name === 'SHAMPOO') {
+      this.userDTO.cleanerUser = (this.userDTO.cleanerUser || 0) - 1;
     }
+    this.userService.updateUserSignal(this.userDTO).subscribe({
+      next: () => {
+        console.log('User updated successfully');
+      },
+      error: (error) => {
+        console.error('Error updating user:', error);
+      }
+    });
   }
 
   interactableChck(interactable: IInteractable): boolean {
-    if (interactable.name === 'FOOD' && this.userSpec.foodUser !== undefined && this.userSpec.foodUser <= 0) {
+    if (interactable.name === 'FOOD' && this.userDTO.foodUser !== undefined && this.userDTO.foodUser <= 0) {
       return false;
-    } else if (interactable.name === 'SHAMPOO' && this.userSpec.cleanerUser !== undefined && this.userSpec.cleanerUser <= 0) {
+    } else if (interactable.name === 'SHAMPOO' && this.userDTO.cleanerUser !== undefined && this.userDTO.cleanerUser <= 0) {
       return false;
     } else {
       return true;
