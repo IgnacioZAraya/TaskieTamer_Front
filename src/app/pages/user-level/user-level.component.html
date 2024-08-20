@@ -1,0 +1,27 @@
+<div class="container-fluid">
+    <div>
+      <h1>User Levels</h1>
+    </div>
+    <div>
+      @defer {
+      <div class="d-flex justify-content-end pb-2">
+        <button
+          type="button"
+          class="btn d-flex align-items-center custom-btn"
+          (click)="formModal.show()"
+        >
+          <i class="fa-solid fa-plus white"></i>
+          <p class="mb-0">Add level</p>
+        </button>
+      </div>
+      <app-user-level-list></app-user-level-list>
+      } @loading (after 100ms; minimum 1s){
+      <app-loader></app-loader>
+      }
+    </div>
+  </div>
+  
+  <app-modal size="lg" #formModal>
+    <app-user-level-form [title]="'Add Level'"></app-user-level-form>
+  </app-modal>
+

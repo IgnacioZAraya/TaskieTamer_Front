@@ -1,14 +1,14 @@
-import { ProfileService } from './../../../services/profile.service';
-import { Component, effect, inject, Injector, Input, OnInit, runInInjectionContext, Renderer2 } from '@angular/core';
-import { IInteractable, IFeedBackMessage, ITaskie, IUser, IUserSpec } from '../../../interfaces';
-import { CommonModule, Location } from '@angular/common';
-import { DragDropModule, CdkDragDrop } from '@angular/cdk/drag-drop';
-import { TaskieService } from '../../../services/taskie.service';
-import { ActivatedRoute } from '@angular/router';
-import { InteractableService } from '../../../services/interactable.service';
-import { ToastrService } from 'ngx-toastr';
 import { DialogModule } from '@angular/cdk/dialog';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CommonModule, Location } from '@angular/common';
+import { Component, effect, inject, Injector, OnInit, runInInjectionContext } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { IFeedBackMessage, IInteractable, ITaskie, IUserSpec } from '../../../interfaces';
+import { InteractableService } from '../../../services/interactable.service';
+import { TaskieService } from '../../../services/taskie.service';
 import { UserService } from '../../../services/user.service';
+import { ProfileService } from './../../../services/profile.service';
 
 
 @Component({
@@ -33,7 +33,9 @@ export class TaskieViewComponent implements OnInit {
   public profileService = inject(ProfileService);
   public userSpec!: IUserSpec;
   toastSvc = inject(ToastrService);
+
   public userService = inject(UserService);
+  public isEvolved!: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -60,8 +62,12 @@ export class TaskieViewComponent implements OnInit {
         const taskies = this.taskieService.taskies$();
         this.taskie = taskies.find(t => t.id === taskieId) || {} as ITaskie;
         this.profileService.getLoggedUserInfo();
+        this.isEvolved = this.taskie.evolved;
+
       });
     });
+
+
   }
 
   loadUserSpec(): void {
@@ -133,19 +139,13 @@ export class TaskieViewComponent implements OnInit {
   }
 
   updateUserInteractable(interactable: IInteractable): void {
-    if (interactable.name === 'FOOD') {
-      this.userSpec.foodUser = (this.userSpec.foodUser || 0) - 1;
-    } else if (interactable.name === 'SHAMPOO') {
-      this.userSpec.cleanerUser = (this.userSpec.cleanerUser || 0) - 1;
+    if(interactable.name == 'FOOD'){
+      this.userSpec.foodUser = 100;
+      console.log(this.userSpec.foodUser);
+    }else{
+      this.userSpec.cleanerUser = 100;
+      console.log(this.userSpec.cleanerUser);
     }
-    this.userService.updateUserSignal(this.userSpec).subscribe({
-      next: () => {
-        console.log('User updated successfully');
-      },
-      error: (error) => {
-        console.error('Error updating user:', error);
-      }
-    });
   }
 
   interactableChck(interactable: IInteractable): boolean {

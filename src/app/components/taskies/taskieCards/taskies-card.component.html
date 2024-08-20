@@ -4,7 +4,9 @@
     <h2>{{ taskie.name }}</h2>
     <div class="taskie-content">
       <img [src]="taskie.specie.sprite" alt="{{ taskie.name }} Image" class="taskie-image"
-           (drop)="onDrop($event)" (dragover)="onDragOver($event)" />
+      (drop)="onDrop($event)" (dragover)="onDragOver($event)" *ngIf="isEvolved == false" />
+      <img [src]="taskie.specie.evolution" alt="{{ taskie.name }} Image" class="taskie-image"
+           (drop)="onDrop($event)" (dragover)="onDragOver($event)" *ngIf="isEvolved == true" />
       <div class="taskie-stats">
         <p>Life: {{ taskie.life }}</p>
         <p>Energy: {{ taskie.energy }}</p>
