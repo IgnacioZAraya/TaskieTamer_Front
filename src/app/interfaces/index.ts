@@ -50,7 +50,12 @@ export interface IUserSpec {
   privateCode?: number;
   kid?: boolean;
 }
-
+export interface IUserDTO {
+  id?: number;
+  name?: string;
+  foodUser?: number;
+  cleanerUser?: number;
+}
 export interface IAuthority {
   authority: string;
 }
