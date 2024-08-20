@@ -14,7 +14,6 @@ import { ProfileComponent } from "./pages/profile/profile.component";
 
 import { UsersComponent } from './pages/users/users.component';
 
-import { TaskieComponent } from './pages/taskies/taskiescard.component';
 import { TaskieDexComponent } from './components/taskies/taskieDex/taskiesDex.component';
 
 import {TaskCompleteComponent } from './pages/task-complete/task-complete.component';

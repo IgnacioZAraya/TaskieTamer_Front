@@ -3,8 +3,10 @@
   <div class="taskie-info">
     <h2>{{ taskie.name }}</h2>
     <div class="taskie-content">
-      <img [src]="taskieImg" alt="{{ taskie.name }} Image" class="taskie-image"
-           (drop)="onDrop($event)" (dragover)="onDragOver($event)" />
+      <img [src]="taskie.specie.sprite" alt="{{ taskie.name }} Image" class="taskie-image"
+      (drop)="onDrop($event)" (dragover)="onDragOver($event)" *ngIf="isEvolved == false" />
+      <img [src]="taskie.specie.evolution" alt="{{ taskie.name }} Image" class="taskie-image"
+           (drop)="onDrop($event)" (dragover)="onDragOver($event)" *ngIf="isEvolved == true" />
       <div class="taskie-stats">
         <p>Life: {{ taskie.life }}</p>
         <p>Energy: {{ taskie.energy }}</p>
@@ -18,6 +20,8 @@
          (dragstart)="onDragStart($event, interactable)" (dragend)="onDragEnd($event)">
       <img [src]="interactable.sprite" alt="{{ interactable.name }} Image" class="interactable-image"/>
       <p>{{ interactable.name }}</p>
+      <p *ngIf="interactable.name === 'FOOD' ">{{userSpec.foodUser}}</p>
+      <p *ngIf="interactable.name === 'SHAMPOO' ">{{userSpec.cleanerUser}}</p>
     </div>
   </div>
 </div>

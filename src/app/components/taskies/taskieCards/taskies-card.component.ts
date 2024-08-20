@@ -1,13 +1,14 @@
-import { ProfileService } from './../../../services/profile.service';
-import { Component, effect, inject, Injector, Input, OnInit, runInInjectionContext, Renderer2 } from '@angular/core';
-import { IInteractable, IFeedBackMessage, ITaskie, IUser, IUserSpec } from '../../../interfaces';
-import { CommonModule, Location } from '@angular/common';
-import { DragDropModule, CdkDragDrop } from '@angular/cdk/drag-drop';
-import { TaskieService } from '../../../services/taskie.service';
-import { ActivatedRoute } from '@angular/router';
-import { InteractableService } from '../../../services/interactable.service';
-import { ToastrService } from 'ngx-toastr';
 import { DialogModule } from '@angular/cdk/dialog';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CommonModule, Location } from '@angular/common';
+import { Component, effect, inject, Injector, OnInit, runInInjectionContext } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { IFeedBackMessage, IInteractable, ITaskie, IUserSpec } from '../../../interfaces';
+import { InteractableService } from '../../../services/interactable.service';
+import { TaskieService } from '../../../services/taskie.service';
+import { UserService } from '../../../services/user.service';
+import { ProfileService } from './../../../services/profile.service';
 
 
 @Component({
@@ -21,49 +22,37 @@ import { DialogModule } from '@angular/cdk/dialog';
   templateUrl: './taskies-card.component.html',
   styleUrls: ['./taskies-card.component.scss']
 })
+
 export class TaskieViewComponent implements OnInit {
-  @Input() taskie!: ITaskie;
+  taskie!: ITaskie;
   interactables: IInteractable[] = [];
   private dragImage: HTMLImageElement | null = null;
-  feedbackMessage: IFeedBackMessage = {
-    message: "",
-  };
+  feedbackMessage: IFeedBackMessage = { message: "" };
 
   private injector = inject(Injector);
   public profileService = inject(ProfileService);
+  public userSpec!: IUserSpec;
   toastSvc = inject(ToastrService);
 
-  public userSpec : IUserSpec = {
-    email: "",
-    lastname: "",
-    password: "",
-    name: "",
-  };
-
-  public taskieImg!: string;
-
+  public userService = inject(UserService);
+  public isEvolved!: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private taskieService: TaskieService,
     private interactableService: InteractableService,
-    private renderer: Renderer2,
-    private location: Location,
- 
+    private location: Location
   ) 
-  
-  
   {
     runInInjectionContext(this.injector, () => {
       effect(() => {
         this.interactables = this.interactableService.interactables$();
-    
       });
     });
-
   }
 
   ngOnInit(): void {
+    this.loadUserSpec();
     const taskieId = +this.route.snapshot.paramMap.get('id')!;
     this.taskieService.getAllSignal();
     this.interactableService.getAllSignal();
@@ -72,16 +61,34 @@ export class TaskieViewComponent implements OnInit {
       effect(() => {
         const taskies = this.taskieService.taskies$();
         this.taskie = taskies.find(t => t.id === taskieId) || {} as ITaskie;
-       
+        this.profileService.getLoggedUserInfo();
+        this.isEvolved = this.taskie.evolved;
+
       });
     });
 
-    this.setTaskieImg(this.taskie);
+
   }
+
+  loadUserSpec(): void {
+    runInInjectionContext(this.injector, () => {
+      effect(() => {
+        const user = this.profileService.user$();
+        if (user && user.id) {
+          this.userSpec = {
+            ...user,
+            foodUser: user.foodUser || 0,
+            cleanerUser: user.cleanerUser || 0
+          };
+        } else {
+          console.warn('User ID is undefined');
+        }
+      });
+    });
+  }
+
   onDragStart(event: DragEvent, interactable: IInteractable): void {
     event.dataTransfer?.setData('application/json', JSON.stringify(interactable));
-    console.log('Drag started:', interactable);
-
     this.dragImage = new Image();
     this.dragImage.src = interactable.sprite;
     this.dragImage.style.width = '50px';
@@ -89,34 +96,44 @@ export class TaskieViewComponent implements OnInit {
     document.body.appendChild(this.dragImage);
     event.dataTransfer?.setDragImage(this.dragImage, 25, 25);
   }
+
   onDragEnd(event: DragEvent): void {
     if (this.dragImage) {
       document.body.removeChild(this.dragImage);
       this.dragImage = null;
     }
   }
+
   onDrop(event: DragEvent): void {
     event.preventDefault();
     const data = event.dataTransfer?.getData('application/json');
     if (data) {
       const interactable: IInteractable = JSON.parse(data);
 
-      this.taskieService.applyCosmetic(this.taskie.id, interactable.id).subscribe({
-        next: (updatedTaskie: ITaskie) => {
-         this.updateUserInteractable(interactable);
-          this.toastSvc.success(this.feedbackMessage.message, "Taskie Updated!");
-          this.taskie = updatedTaskie;
-        },
-        error: (error) => {
-          this.toastSvc.success(this.feedbackMessage.message, "Error!");
-        }
-      });
+      if (this.interactableChck(interactable)) {
+        this.taskieService.applyCosmetic(this.taskie.id, interactable.id).subscribe({
+          next: (updatedTaskie: ITaskie) => {
+            this.updateUserInteractable(interactable);
+            this.toastSvc.success(this.feedbackMessage.message, "Taskie Updated!");
+            this.taskie = updatedTaskie;
+          },
+          error: (error) => {
+            this.toastSvc.error("Error applying the cosmetic", error);
+          }
+        });
+      } else {
+        this.toastSvc.warning(
+          "You don't have enough " + interactable.name + "!",
+          "Hey!"
+        );
+      }
     }
   }
 
   onDragOver(event: DragEvent): void {
     event.preventDefault();
   }
+
   goBack(){
     this.location.back();
   }
@@ -131,12 +148,13 @@ export class TaskieViewComponent implements OnInit {
     }
   }
 
-  setTaskieImg(taskie : ITaskie){
-    if(taskie.evolved){
-      this.taskieImg = taskie.specie.evolution;
-      return;
+  interactableChck(interactable: IInteractable): boolean {
+    if (interactable.name === 'FOOD' && this.userSpec.foodUser !== undefined && this.userSpec.foodUser <= 0) {
+      return false;
+    } else if (interactable.name === 'SHAMPOO' && this.userSpec.cleanerUser !== undefined && this.userSpec.cleanerUser <= 0) {
+      return false;
+    } else {
+      return true;
     }
-
-    this.taskieImg = taskie.specie.sprite;
   }
 }
