@@ -40,6 +40,8 @@ export class TaskieViewComponent implements OnInit {
     name: "",
   };
 
+  public taskieImg!: string;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -73,6 +75,8 @@ export class TaskieViewComponent implements OnInit {
        
       });
     });
+
+    this.setTaskieImg(this.taskie);
   }
   onDragStart(event: DragEvent, interactable: IInteractable): void {
     event.dataTransfer?.setData('application/json', JSON.stringify(interactable));
@@ -125,5 +129,14 @@ export class TaskieViewComponent implements OnInit {
       this.userSpec.cleanerUser = 100;
       console.log(this.userSpec.cleanerUser);
     }
+  }
+
+  setTaskieImg(taskie : ITaskie){
+    if(taskie.evolved){
+      this.taskieImg = taskie.specie.evolution;
+      return;
+    }
+
+    this.taskieImg = taskie.specie.sprite;
   }
 }

@@ -26,8 +26,14 @@ export interface IUser {
 }
 
 export interface ILevel {
+  id?: number;
   name?: string;
   value?: number;
+  prize?: IPrize;
+}
+
+export interface IPrize {
+  priority?: string;
 }
 
 export interface IUserSpec {
@@ -106,6 +112,7 @@ export interface ITaskie {
   cleanse: number;
   hunger: number;
   energy: number;
+  evolved: boolean;
 }
 export interface ITaskieSpec {
   name: string;

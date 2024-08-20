@@ -3,7 +3,7 @@
   <div class="taskie-info">
     <h2>{{ taskie.name }}</h2>
     <div class="taskie-content">
-      <img [src]="taskie.specie.sprite" alt="{{ taskie.name }} Image" class="taskie-image"
+      <img [src]="taskieImg" alt="{{ taskie.name }} Image" class="taskie-image"
            (drop)="onDrop($event)" (dragover)="onDragOver($event)" />
       <div class="taskie-stats">
         <p>Life: {{ taskie.life }}</p>

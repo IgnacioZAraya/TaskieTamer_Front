@@ -89,6 +89,7 @@ export const routes: Routes = [
           name: "Taskie Levels",
         },
       },
+      {
         path: "taskForVerify",
         canActivate: [AuthGuard],
         component: TaskVerifyComponent,
