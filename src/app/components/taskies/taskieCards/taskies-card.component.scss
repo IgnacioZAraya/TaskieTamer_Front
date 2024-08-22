@@ -6,6 +6,7 @@
     position: relative;
     margin-bottom: 20px;
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
 
@@ -14,13 +15,16 @@
       font-size: 2em;
     }
 
+
     .taskie-stats {
       padding: 30px;
       border-radius:  2rem 8rem ;
       background-color: #edc951;
     }
 
-    .taskie-content {
+
+    .taskie-content { 
+
       position: relative;
       display: flex;
       align-items: center;
@@ -35,7 +39,7 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     .taskie-stats {
-      margin-left: 20px;
+      margin-left: 500px;
       text-align: left;
       font-size: 1.2em;
       
@@ -47,15 +51,29 @@
     .taskie-image {
       width: 400px;  
       height: auto;
+      position: absolute;
       display: block;
       border: 2px dashed transparent;
+
       padding-top: 30px;
+
       background-size: cover;
       background-position: center;
      
     }
-  }
+   .cosmetic-overlay{
+      position: absolute;
+      bottom: 14px;
+      left: 100px;
+      width: 400px;
+      height: auto;
+      display: block;
+      pointer-events: none;
+    }
 
+  }
+ 
+  
   .interactable-list {
     display: flex;
     justify-content: center;
@@ -87,6 +105,43 @@
       }
     }
   }
+
+  .cosmetics-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+    flex: 20;
+    z-index: 20;
+
+    .cosmetic-item {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .cosmetic-image {
+        width: 100px;
+        height: 100px;
+        margin-right: 10px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 1em;
+        text-align: center;
+      }
+    }
+  }
+
 }
 
 button {

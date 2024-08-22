@@ -3,7 +3,7 @@
 import { Injectable, signal } from "@angular/core";
 import { BaseService } from "./base-service";
 
-import { IInteractable, ITaskie, ITaskieSpec} from "../interfaces";
+import { ICosmetic, IInteractable, ITaskie, ITaskieImg, ITaskieSpec} from "../interfaces";
 
 import { Observable, catchError, tap, throwError } from "rxjs";
 
@@ -80,9 +80,13 @@ export class TaskieService extends BaseService<ITaskie> {
     );
   }
  
-  applyCosmetic(taskieId: number, cosmeticId: number): Observable<ITaskie> {
+  getCosmeticsForTaskie(taskieId: number): Observable<ICosmetic[]> {
+    return this.http.get<ICosmetic[]>(this.source + '/' + taskieId + '/cosmetics');
+}
+
+  applyInteractable(taskieId: number, cosmeticId: number): Observable<ITaskie> {
     const requestPayload = { cosmeticId: cosmeticId };
-    return this.http.put<ITaskie>(this.source+ '/' + taskieId + '/apply-cosmetic', requestPayload).pipe(
+    return this.http.put<ITaskie>(this.source+ '/' + taskieId + '/apply-interactable', requestPayload).pipe(
       tap((updatedTaskie: ITaskie) => {
         this.taskieListSignal.update((taskies) => {
           const index = taskies.findIndex((m: ITaskie) => m.id === taskieId);
