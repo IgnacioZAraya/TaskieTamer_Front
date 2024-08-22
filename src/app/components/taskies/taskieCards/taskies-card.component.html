@@ -1,12 +1,15 @@
 <div *ngIf="taskie" class="taskie-detail">
   <button (click)="goBack()">Back</button>
+  
   <div class="taskie-info">
     <h2>{{ taskie.name }}</h2>
     <div class="taskie-content">
       <img [src]="taskie.specie.sprite" alt="{{ taskie.name }} Image" class="taskie-image"
-      (drop)="onDrop($event)" (dragover)="onDragOver($event)" *ngIf="isEvolved == false" />
+           (drop)="onDrop($event)" (dragover)="onDragOver($event)" *ngIf="!isEvolved" />
       <img [src]="taskie.specie.evolution" alt="{{ taskie.name }} Image" class="taskie-image"
-           (drop)="onDrop($event)" (dragover)="onDragOver($event)" *ngIf="isEvolved == true" />
+           (drop)="onDrop($event)" (dragover)="onDragOver($event)" *ngIf="isEvolved" />
+           <img *ngIf="selectedCosmeticSprite" [src]="selectedCosmeticSprite" class="cosmetic-overlay" />
+
       <div class="taskie-stats">
         <p>Life: {{ taskie.life }}</p>
         <p>Energy: {{ taskie.energy }}</p>
@@ -15,13 +18,21 @@
       </div>
     </div>
   </div>
+  
   <div class="interactable-list">
     <div *ngFor="let interactable of interactables" class="interactable-item" draggable="true" 
          (dragstart)="onDragStart($event, interactable)" (dragend)="onDragEnd($event)">
       <img [src]="interactable.sprite" alt="{{ interactable.name }} Image" class="interactable-image"/>
       <p>{{ interactable.name }}</p>
-      <p *ngIf="interactable.name === 'FOOD' ">{{userDTO.foodUser}}</p>
-      <p *ngIf="interactable.name === 'SHAMPOO' ">{{userDTO.cleanerUser}}</p>
+      <p *ngIf="interactable.name === 'FOOD'">{{userDTO.foodUser}}</p>
+      <p *ngIf="interactable.name === 'SHAMPOO'">{{userDTO.cleanerUser}}</p>
+    </div>
+  </div>
+  
+  <div class="cosmetics-list">
+    <div *ngFor="let cosmetic of cosmetics" class="cosmetic-item" (click)="onCosmeticClick(cosmetic)">
+      <img [src]="cosmetic.sprite" alt="{{ cosmetic.name }} Image" class="cosmetic-image"/>
+      <p>{{ cosmetic.name }}</p>
     </div>
   </div>
 </div>

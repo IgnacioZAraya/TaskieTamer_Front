@@ -4,7 +4,7 @@ import { CommonModule, Location } from '@angular/common';
 import { Component, effect, inject, Injector, OnInit, runInInjectionContext } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { IFeedBackMessage, IInteractable, ITaskie, IUserDTO, IUserSpec } from '../../../interfaces';
+import { IFeedBackMessage, IInteractable, ITaskie, IUserDTO, IUserSpec, ICosmetic } from '../../../interfaces';
 import { InteractableService } from '../../../services/interactable.service';
 import { TaskieService } from '../../../services/taskie.service';
 import { UserService } from '../../../services/user.service';
@@ -25,14 +25,15 @@ import { ProfileService } from './../../../services/profile.service';
 export class TaskieViewComponent implements OnInit {
   taskie!: ITaskie;
   interactables: IInteractable[] = [];
+  cosmetics: ICosmetic[] = [];
+  appliedCosmetic: ICosmetic | null = null;   
   private dragImage: HTMLImageElement | null = null;
   feedbackMessage: IFeedBackMessage = { message: "" };
-
+  selectedCosmeticSprite: string | undefined;
   private injector = inject(Injector);
   public profileService = inject(ProfileService);
   public userDTO!: IUserDTO;
   toastSvc = inject(ToastrService);
-
   public userService = inject(UserService);
   public isEvolved!: boolean;
 
@@ -63,12 +64,11 @@ export class TaskieViewComponent implements OnInit {
         this.profileService.getLoggedUserInfo();
         this.isEvolved = this.taskie.evolved;
 
+        this.loadCosmeticsForTaskie();
       });
     });
-
-
   }
-
+ 
   loadUserDTO(): void {
     runInInjectionContext(this.injector, () => {
       effect(() => {
@@ -84,6 +84,29 @@ export class TaskieViewComponent implements OnInit {
         }
       });
     });
+  }
+
+  loadCosmeticsForTaskie(): void {
+    this.taskieService.getCosmeticsForTaskie(this.taskie.id).subscribe(cosmetics => {
+      this.cosmetics = cosmetics;
+    });
+  }
+
+  onCosmeticClick(cosmetic: ICosmetic): void {
+    if (this.appliedCosmetic) {
+      this.removeAppliedCosmetic();
+    }
+    this.applyCosmetic(cosmetic);
+  }
+
+  applyCosmetic(cosmetic: ICosmetic): void {
+    this.appliedCosmetic = cosmetic;
+    this.selectedCosmeticSprite = cosmetic.sprite;
+  }
+
+  removeAppliedCosmetic(): void {
+    this.appliedCosmetic = null;
+    this.selectedCosmeticSprite = undefined;
   }
 
   onDragStart(event: DragEvent, interactable: IInteractable): void {
@@ -110,7 +133,7 @@ export class TaskieViewComponent implements OnInit {
       const interactable: IInteractable = JSON.parse(data);
 
       if (this.interactableChck(interactable)) {
-        this.taskieService.applyCosmetic(this.taskie.id, interactable.id).subscribe({
+        this.taskieService.applyInteractable(this.taskie.id, interactable.id).subscribe({
           next: (updatedTaskie: ITaskie) => {
             this.updateUserInteractable(interactable);
             this.toastSvc.success(this.feedbackMessage.message, "Taskie Updated!");
