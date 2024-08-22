@@ -20,11 +20,11 @@
       </div>
     </div>
   </div>
-
-  <button *ngIf="isAssociate == false" class="btn custom-btn shadow-lg" (click)="codeModal.show(); sendEmail()">Parental Activation</button>
-  <button *ngIf="isKid == false" class="btn custom-btn shadow-lg" (click)="formModal.show()">Edit User</button>
-  <button *ngIf="isAssociate == true" class="btn custom-btn shadow-lg" (click)="kidModal.show()">Kid mode: {{isKid}}</button>
-
+  <div class="buttons">
+    <button *ngIf="isAssociate == false" class="btn custom-btn shadow-lg" (click)="codeModal.show(); sendEmail()">Parent Mode</button>
+    <button *ngIf="isKid == false" class="btn custom-btn shadow-lg" (click)="formModal.show()">Edit User</button>
+    <button *ngIf="isAssociate == true" class="btn custom-btn shadow-lg" (click)="kidModal.show()">Kid lock: {{isKid}}</button>
+  </div>
 </div>
 
 <app-modal size="lg" #formModal>

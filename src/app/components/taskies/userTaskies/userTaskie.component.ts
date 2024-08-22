@@ -6,6 +6,7 @@ import { ITaskie } from '../../../interfaces';
 import { ProfileService } from '../../../services/profile.service';
 import { CreateTaskieComponent } from '../taskieForm/taskieForm.component';
 import { MatDialog } from '@angular/material/dialog';
+import { TaskieLevelService } from '../../../services/taskie-level.service';
 
 @Component({
   selector: 'app-user-taskie-list',
@@ -19,7 +20,9 @@ export class UserTaskieListComponent implements OnInit {
   private injector = inject(Injector);
   public profileService = inject(ProfileService);
   public taskieService = inject(TaskieService);
+  public taskieLvlService = inject(TaskieLevelService);
   public progressPercentage!: string;
+  public canCreateTaskie! : boolean;
 
   constructor(
     private router: Router,
@@ -38,6 +41,7 @@ export class UserTaskieListComponent implements OnInit {
         if (user && user.id) {
           this.taskies = allTaskies.filter(taskie => taskie.user.id === user.id);
         }
+        this.setCreateTaskie(this.taskies);
       });
     });
   }
@@ -51,6 +55,14 @@ export class UserTaskieListComponent implements OnInit {
       width: '400px',
       panelClass: 'custom-dialog-container'
     });
+}
+
+setCreateTaskie(taskieList : ITaskie[]): void {
+  if(taskieList.length == 0 || taskieList.at(taskieList.length-1)?.lvlTaskie == this.taskieLvlService.taskieLevels$().at(this.taskieLvlService.taskieLevels$().length-1)){
+    this.canCreateTaskie = true;
+  }else{
+    this.canCreateTaskie = false;
+  }
 }
   
 }

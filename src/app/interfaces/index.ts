@@ -112,6 +112,7 @@ export interface ITaskie {
   hunger: number;
   energy: number;
   evolved: boolean;
+  lvlTaskie: ITaskieLevel;
 }
 export interface ITaskieSpec {
   name: string;
