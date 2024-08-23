@@ -6,6 +6,23 @@
   }
 }
 
+h1 {
+  margin: 10px 0;
+  font-size: 2rem;
+  font-family: 'PuppyBellies';
+  color: #6a4a3d;
+  text-shadow: #ffc70f 1px 0 10px;
+  text-align: center;
+  padding-top: 20px;
+}
+
+h2 {
+  margin: 10px 0 0;
+  font-size: 1.25rem;
+  font-family: 'QuiteMagical';
+  color: #6a4a3d;
+}
+
 .taskie-dex {
   display: flex;
   flex-wrap: wrap;
@@ -13,11 +30,13 @@
   gap: 15px; 
   padding: 20px; 
 }
+
 .taskie-dex h2 {
   text-align: left;
   margin-bottom: 20px;
   width: 100%;
 }
+
 .taskie-card {
   cursor: pointer;
   width: 150px;
