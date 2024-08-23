@@ -1,0 +1,10 @@
+<div class="user-taskies">
+    <h1>Taskie</h1>
+    <div *ngFor="let taskie of taskies" (click)="viewTaskieDetail(taskie.id)" class="taskie-card">
+      <div class="content-taskie">
+              <h2>{{ taskie.name }}</h2>
+      <img [src]="taskie.specie.sprite" alt="{{ taskie.name }} Image" class="taskie-image"/>
+      </div>
+    </div>
+    <button *ngIf="canCreateTaskie == true" mat-raised-button class="btn custom-btn shadow-lg " color="primary" (click)="openTaskieForm()">Create New Taskie</button>
+ </div>

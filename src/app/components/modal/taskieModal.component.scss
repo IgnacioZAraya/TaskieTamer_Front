@@ -1,0 +1,43 @@
+.modal-content {
+    text-align: center;
+    background-color: #ef9174;
+  }
+.taskie-modal-image {
+    max-width: 100%;
+  }
+  .yellow {
+    background-color: #ef9174;
+  }
+  .mat-form-field-disabled .mat-form-field-underline, button, .custom-btn, .btn-secondary {
+    background-color: #6a4a3d;
+    color: #edc951;
+    font-family: 'PuppyBellies';
+    border: 2px solid #1f1612;
+    width: 20%;
+  }
+  desc {
+    padding-bottom: 20px;
+  }
+  h1, .mat-form-field-disabled .mat-form-field-underline {
+    margin: 10px 0;
+    font-size: 2rem;
+    font-family: 'PuppyBellies';
+    color: #6a4a3d;
+    text-shadow: #ffc70f 1px 0 10px;
+    text-align: center;
+    padding-top: 20px;
+  }
+  p, .mat-form-field-disabled .mat-form-field-underline {
+    height: 50px;
+  }
+  
+  h2, .mat-form-field-disabled .mat-form-field-underline {
+    height: 50px;
+    font-size: 2rem;
+    font-family: 'QuiteMagical';
+    color: #6a4a3d;
+  }
+
+  span {
+    color: #ffc70f;
+  }

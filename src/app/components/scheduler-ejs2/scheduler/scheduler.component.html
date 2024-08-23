@@ -47,14 +47,24 @@
     </div>
     <div class="border-bottom pb-3 mb-3">
       <div class="px-5">
-        <label for="startDate" class="form-label mb-2">Start Date</label>
+        <label class="space" for="startDate" class="form-label mb-2">Start Date</label>
         <ejs-datetimepicker
+          #dateStart
+          [min]="minDate" 
+          [max]="maxDate"
           format="yyyy-MM-dd HH:mm:ss"
           id="taskStartDate"
           [value]="data.startDate"
         ></ejs-datetimepicker>
-        <label for="endDate" class="form-label mb-2"> End Date</label>
+      </div>
+    </div>
+    <div class="border-bottom pb-3 mb-3">
+      <div class="px-5">
+        <label class="space" for="endDate" class="form-label mb-2"> End Date</label>
         <ejs-datetimepicker
+          #dateEnd
+          [min]="minDate"
+          [max]="maxDate"
           format="yyyy-MM-dd HH:mm:ss"
           id="taskEndDate"
           [value]="data.endDate"

@@ -1,0 +1,13 @@
+<div mat-dialog-content class="modal-content">
+  <h1 mat-dialog-title class="mat-form-field-disabled">{{ data.name }}</h1>
+  <img [src]="data.sprite" alt="{{ data.name }} Image" class="taskie-modal-image" />
+  <p class="desc">{{ data.description }}</p>
+  <h2 mat-dialog-title class="mat-form-field-underline">Evolution</h2>
+  <img [src]="data.evolution" alt="{{ data.name }} Image" class="taskie-modal-image" />
+</div>
+<div  mat-dialog-actions class="yellow">
+  <button class="custom-btn shadow" (click)="onClose()">Close</button>
+  <div class="taskie-actions" *ngIf="hasRole === false">
+    <button (click)="openEditSpecieForm(data)" class="mat-form-field-disabled custom-btn">Edit</button>
+  </div>
+</div>

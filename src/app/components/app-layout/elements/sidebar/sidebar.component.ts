@@ -6,6 +6,7 @@ import { AuthService } from "../../../../services/auth.service";
 import { SvgIconComponent } from "../../../svg-icon/svg-icon.component";
 import { routes } from "../../../../app.routes";
 
+
 @Component({
   selector: "app-sidebar",
   standalone: true,

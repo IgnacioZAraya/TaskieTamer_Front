@@ -40,8 +40,12 @@ export class FormComponent {
   public items2: string[] = ["High", "Medium", "Low"];
   public currentUserId: number | undefined = 1;
   public showRepeatTimes: boolean = false; 
+  public minDate: Date = new Date();
+  public maxDate: Date = new Date();
   constructor(private authService: AuthService, private http: HttpClient) {
     this.currentUserId = authService.getUser()?.id;
+    this.minDate.setFullYear(this.minDate.getFullYear() - 1);
+    this.maxDate.setFullYear(this.maxDate.getFullYear() + 1);
     
   }
   @Input() task: ITask = {

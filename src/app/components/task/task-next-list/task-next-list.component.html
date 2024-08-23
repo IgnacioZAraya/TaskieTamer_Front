@@ -1,3 +1,4 @@
+<input type="text" name="search" (input)="filterTask($event)" placeholder="Search by name or prirority">
 <div class="table-container table-responsive">
     <table class="table table-striped">
       <thead class="brown">
@@ -11,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        @for (item of taskList; track item.id) {
+        @for (item of filteredTaskList; track item.id) {
         <tr>
           <th scope="row">{{item.id}}</th>
           <td>{{item.name}}</td>
@@ -24,3 +25,4 @@
       </tbody>
     </table>
   </div>
+
