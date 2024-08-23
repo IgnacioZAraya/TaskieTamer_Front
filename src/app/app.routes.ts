@@ -90,7 +90,7 @@ export const routes: Routes = [
       },
       {
         path: "taskForVerify",
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, AssociateRoleGuard],
         component: TaskVerifyComponent,
         data: {
           authorities: [

@@ -1,8 +1,8 @@
 <div class="user-taskies">
-    <h2>Taskie</h2>
+    <h1>Taskie</h1>
     <div *ngFor="let taskie of taskies" (click)="viewTaskieDetail(taskie.id)" class="taskie-card">
       <div class="content-taskie">
-              <h3>{{ taskie.name }}</h3>
+              <h2>{{ taskie.name }}</h2>
       <img [src]="taskie.specie.sprite" alt="{{ taskie.name }} Image" class="taskie-image"/>
       </div>
     </div>

@@ -10,16 +10,33 @@
     flex-direction: column;
     align-items: center;
 
-    h2 {
+
+    h1 {
       margin: 10px 0;
-      font-size: 2em;
+      padding-bottom: 30px;
+      font-size: 2.5rem;
+      font-family: 'PuppyBellies';
+      color: #6a4a3d;
+      text-shadow: #ffc70f 1px 0 10px;
     }
 
+    h2 {
+      margin: 10px 0;
+      font-size: 1.75rem;
+      font-family: 'QuiteMagical';
+      color: #6a4a3d;
+      text-shadow: #ffc70f 1px 0 10px;
+      align-self: center;
+    }
+
+    
 
     .taskie-stats {
-      padding: 30px;
-      border-radius:  2rem 8rem ;
-      background-color: #edc951;
+      padding: 30px 40px;
+      margin-right: 75px;
+      border-radius:  18px ;
+      background-color: #ef9174;
+      max-width: 200px;
     }
 
 
@@ -39,7 +56,7 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     .taskie-stats {
-      margin-left: 500px;
+
       text-align: left;
       font-size: 1.2em;
       
@@ -62,18 +79,37 @@
      
     }
    .cosmetic-overlay{
-      position: absolute;
-      bottom: 14px;
+      position: absolute;//
+      //bottom: 30px;
       left: 100px;
       width: 400px;
       height: auto;
       display: block;
       pointer-events: none;
+      padding-top: 30px;
     }
 
   }
+
+  .interactible-content {
+    background-color: #ef9174;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    margin-left: 10.5%;
+    border-radius: 8px;
+
+    h2 {
+      margin: 10px 0;
+      font-size: 1.75rem;
+      font-family: 'QuiteMagical';
+      color: #6a4a3d;
+      text-shadow: #ffc70f 1px 0 10px;
+      align-self: center;
+    }
+  }
  
-  
   .interactable-list {
     display: flex;
     justify-content: center;
@@ -82,7 +118,7 @@
     .interactable-item {
       margin: 10px;
       padding: 10px;
-      border: 1px solid #ccc;
+      background-color: #edc951;
       border-radius: 8px;
       cursor: pointer;
       transition: transform 0.3s;
@@ -110,28 +146,35 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 20px;
+    margin-left: 600px;
+    padding: 20px 40px;
     flex: 20;
     z-index: 20;
+    border-radius: 8px;
+    background-color: #ef9174;
 
     .cosmetic-item {
       margin-bottom: 10px;
       padding: 10px;
-      border: 1px solid #ccc;
+      background-color: #edc951;
       border-radius: 8px;
       cursor: pointer;
       transition: transform 0.3s;
       display: flex;
       align-items: center;
+      flex-direction: column;
 
       &:hover {
         transform: scale(1.05);
       }
 
       .cosmetic-image {
-        width: 100px;
-        height: 100px;
-        margin-right: 10px;
+        .interactable-image {
+          width: 80px;
+          height: auto;
+          display: block;
+          margin: 0 auto 10px;
+        }
       }
 
       p {
@@ -155,4 +198,8 @@ button {
   transition: background-color 0.3s;
 
 
+}
+
+.xp {
+  width: 50%;
 }

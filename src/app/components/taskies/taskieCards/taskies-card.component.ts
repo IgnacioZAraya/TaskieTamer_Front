@@ -1,10 +1,10 @@
 import { DialogModule } from '@angular/cdk/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule, Location } from '@angular/common';
-import { Component, effect, inject, Injector, OnInit, runInInjectionContext } from '@angular/core';
+import { Component, effect, inject, Injector, Input, OnInit, runInInjectionContext } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { IFeedBackMessage, IInteractable, ITaskie, IUserDTO, IUserSpec, ICosmetic } from '../../../interfaces';
+import { ICosmetic, IFeedBackMessage, IInteractable, ITaskie, IUserDTO } from '../../../interfaces';
 import { InteractableService } from '../../../services/interactable.service';
 import { TaskieService } from '../../../services/taskie.service';
 import { UserService } from '../../../services/user.service';
@@ -36,6 +36,9 @@ export class TaskieViewComponent implements OnInit {
   toastSvc = inject(ToastrService);
   public userService = inject(UserService);
   public isEvolved!: boolean;
+  public experience: number | undefined;
+  public level: number | undefined;
+  public progressPercentage!: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -91,6 +94,19 @@ export class TaskieViewComponent implements OnInit {
       this.cosmetics = cosmetics;
     });
   }
+
+  updateExperienceAndLevel(): void {
+    const experience = this.taskie.experience ?? 0;
+    const valueLevel = this.taskie.lvlTaskie?.value ?? 1;
+    this.calculateProgressTaskie(experience, valueLevel);
+
+  }
+  
+  calculateProgressTaskie(experience: number, level: number): void {
+    const percentage = (experience / level) * 100;
+    this.progressPercentage = percentage.toFixed(2) + "%";
+  }
+
 
   onCosmeticClick(cosmetic: ICosmetic): void {
     if (this.appliedCosmetic) {

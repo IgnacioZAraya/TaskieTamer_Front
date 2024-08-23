@@ -8,8 +8,6 @@
       align-items: center; 
       margin: 20px;
       padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
       transition: transform 0.3s;
       cursor: pointer;
       
@@ -30,9 +28,20 @@
         margin: 0 auto 10px;
       }
   
-      h3 {
+
+      h2 {
         margin: 10px 0 0;
-        font-size: 1.2em;
+        font-size: 1.75rem;
+        font-family: 'QuiteMagical';
+        color: #6a4a3d;
       }
     }
   }
+
+      h1 {
+        margin: 10px 0;
+        font-size: 2rem;
+        font-family: 'PuppyBellies';
+        color: #6a4a3d;
+        text-shadow: #ffc70f 1px 0 10px;
+      }
