@@ -4,6 +4,7 @@ import { CommonModule, Location } from '@angular/common';
 import { Component, effect, inject, Injector, Input, OnInit, runInInjectionContext } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { interval } from 'rxjs';
 import { ICosmetic, IFeedBackMessage, IInteractable, ITaskie, IUserDTO } from '../../../interfaces';
 import { InteractableService } from '../../../services/interactable.service';
 import { TaskieService } from '../../../services/taskie.service';
@@ -39,6 +40,7 @@ export class TaskieViewComponent implements OnInit {
   public experience: number | undefined;
   public level: number | undefined;
   public progressPercentage!: string;
+  private previouslyEvolved: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -63,15 +65,19 @@ export class TaskieViewComponent implements OnInit {
     runInInjectionContext(this.injector, () => {
       effect(() => {
         const taskies = this.taskieService.taskies$();
-        this.taskie = taskies.find(t => t.id === taskieId) || {} as ITaskie;
-        this.profileService.getLoggedUserInfo();
-        this.isEvolved = this.taskie.evolved;
+        const updatedTaskie = taskies.find(t => t.id === taskieId) || {} as ITaskie;
+        
+        if (updatedTaskie.evolved !== this.taskie?.evolved) {
+          
+          this.removeAppliedCosmetic();
+        }
 
+        this.taskie = updatedTaskie;
+        this.isEvolved = this.taskie.evolved;
         this.loadCosmeticsForTaskie();
       });
     });
   }
- 
   loadUserDTO(): void {
     runInInjectionContext(this.injector, () => {
       effect(() => {
@@ -91,7 +97,10 @@ export class TaskieViewComponent implements OnInit {
 
   loadCosmeticsForTaskie(): void {
     this.taskieService.getCosmeticsForTaskie(this.taskie.id).subscribe(cosmetics => {
-      this.cosmetics = cosmetics;
+      this.cosmetics = cosmetics.filter(cosmetic => {
+        const cosmeticId = cosmetic.id ?? 0; 
+        return this.isEvolved ? cosmeticId >= 3 : cosmeticId < 3;
+      });
     });
   }
 
@@ -107,23 +116,26 @@ export class TaskieViewComponent implements OnInit {
     this.progressPercentage = percentage.toFixed(2) + "%";
   }
 
-
   onCosmeticClick(cosmetic: ICosmetic): void {
-    if (this.appliedCosmetic) {
-      this.removeAppliedCosmetic();
+    if (this.appliedCosmetic && this.appliedCosmetic.id === cosmetic.id) {
+      return; 
     }
     this.applyCosmetic(cosmetic);
   }
+applyCosmetic(cosmetic: ICosmetic): void {
+  this.appliedCosmetic = cosmetic;
+  this.selectedCosmeticSprite = cosmetic.sprite;
 
-  applyCosmetic(cosmetic: ICosmetic): void {
-    this.appliedCosmetic = cosmetic;
-    this.selectedCosmeticSprite = cosmetic.sprite;
-  }
 
-  removeAppliedCosmetic(): void {
-    this.appliedCosmetic = null;
-    this.selectedCosmeticSprite = undefined;
-  }
+  setTimeout(() => {
+      this.selectedCosmeticSprite = cosmetic.sprite;
+  }, 0);
+}
+
+removeAppliedCosmetic(): void {
+  this.appliedCosmetic = null;
+  this.selectedCosmeticSprite = undefined;
+}
 
   onDragStart(event: DragEvent, interactable: IInteractable): void {
     event.dataTransfer?.setData('application/json', JSON.stringify(interactable));
