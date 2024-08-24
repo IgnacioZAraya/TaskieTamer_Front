@@ -1,7 +1,10 @@
-<div class="taskie-dex">
-  <h2>Taskies</h2>
-  <div *ngFor="let taskie of taskies" (click)="viewTaskieDetail(taskie.id)" class="taskie-card">
-    <h3>{{ taskie.name }}</h3>
-    <img [src]="taskie.sprite" alt="{{ taskie.name }} Image" class="taskie-image"/>
+<h1>TaskieDex</h1>
+<div class="taskie-dex">  
+  <div *ngFor="let specie of species" class="taskie-card" (click)="openSpecieModal(specie)" >
+    <h2>{{ specie.name }}</h2>
+    <img [src]="specie.sprite" alt="{{ specie.name }} Image" class="taskie-image"/>
+  </div>
+  <div *ngIf="hasRole === false">
+  <button (click)="openAddSpecieForm()">Add New Specie</button>
   </div>
 </div>

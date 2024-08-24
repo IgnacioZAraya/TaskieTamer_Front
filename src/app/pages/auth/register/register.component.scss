@@ -37,6 +37,10 @@
     justify-content: space-between;
   }
 
+  .form-child, .namePlace {
+    width: 100%;
+  }
+
   input {
     background-color: #edc951;
     color: #6a4a3d;
@@ -80,7 +84,7 @@
     color: #6a4a3d;
   }
 
-  @media screen and (min-width: 801px) and (max-width: 1500px) {
+  @media screen and (min-width: 801px) and (max-width: 3000px) {
     padding: 20px 5%;
     .login-card {
       width: 60%;

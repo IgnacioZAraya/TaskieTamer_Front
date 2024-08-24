@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TaskListComponent } from '../../components/task/task-history-list/task-history-list.component';
+import { TaskHistoryListComponent } from '../../components/task/task-history-list/task-history-list.component';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { CommonModule } from '@angular/common';
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-task-history',
   standalone: true,
   imports: [
-    TaskListComponent,
+    TaskHistoryListComponent,
     LoaderComponent,
     ModalComponent,
     CommonModule

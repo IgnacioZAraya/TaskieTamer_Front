@@ -1,0 +1,47 @@
+.user-taskies {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .taskie-card {
+      display: flex;
+      align-items: center; 
+      margin: 20px;
+      padding: 20px;
+      transition: transform 0.3s;
+      cursor: pointer;
+      
+      .content-taskie{
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+      }
+
+      &:hover {
+        transform: scale(1.05);
+      }
+  
+      .taskie-image {
+        width: 200px; 
+        height: auto;
+        display: block;
+        margin: 0 auto 10px;
+      }
+  
+
+      h2 {
+        margin: 10px 0 0;
+        font-size: 1.75rem;
+        font-family: 'QuiteMagical';
+        color: #6a4a3d;
+      }
+    }
+  }
+
+      h1 {
+        margin: 10px 0;
+        font-size: 2rem;
+        font-family: 'PuppyBellies';
+        color: #6a4a3d;
+        text-shadow: #ffc70f 1px 0 10px;
+      }

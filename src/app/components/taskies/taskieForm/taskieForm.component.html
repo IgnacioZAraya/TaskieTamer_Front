@@ -1,0 +1,17 @@
+<form [formGroup]="taskieForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Taskie Name</label>
+      <input id="name" formControlName="name" placeholder="Name your Taskie!" />
+    </div>
+  
+    <div>
+      <label for="species">Specie</label>
+      <select id="species" formControlName="species">
+        <option *ngFor="let specie of speciesList" [value]="specie.id">
+          {{ specie.name }}
+        </option>
+      </select>
+    </div>
+  
+    <button type="submit">Bring it to Life!</button>
+  </form>

@@ -20,11 +20,20 @@ export interface IUser {
   role?: IRole;
   level?: ILevel;
   experience?: number;
+  foodUser?: number;
+  cleanerUser?: number;
+  kid?: boolean;
 }
 
 export interface ILevel {
+  id?: number;
   name?: string;
   value?: number;
+  prize?: IPrize;
+}
+
+export interface IPrize {
+  priority?: string;
 }
 
 export interface IUserSpec {
@@ -36,8 +45,17 @@ export interface IUserSpec {
   active?: boolean;
   createdAt?: string;
   updatedAt?: string;
+  foodUser?: number;
+  cleanerUser?: number;
+  privateCode?: number;
+  kid?: boolean;
 }
-
+export interface IUserDTO {
+  id?: number;
+  name?: string;
+  foodUser?: number;
+  cleanerUser?: number;
+}
 export interface IAuthority {
   authority: string;
 }
@@ -61,15 +79,9 @@ export interface IRole {
 }
 
 export enum IRoleType {
-  admin = "ROLE_ADMIN",
-  user = "ROLE_USER",
+  associate = "ROLE_ASSOCIATE",
+  base = "ROLE_BASE",
   superAdmin = "ROLE_SUPER_ADMIN",
-}
-
-export interface ITaskieImg {
-  src: string;
-  alt: string;
-  title: string;
 }
 
 export interface ITask {
@@ -91,26 +103,37 @@ export interface ITaskie {
   id: number;
   name: string;
   specie: ISpecie;
-  alive: IStatus;
+  status: IStatus;
   user: IUser;
   visible: boolean;
   experience: number;
-  sprite: string;
   life: number;
   cleanse: number;
   hunger: number;
   energy: number;
-  lvlTaskie: ITaskieLevel[];
+  evolved: boolean;
+  lvlTaskie: ITaskieLevel;
+}
+export interface ITaskieSpec {
+  name: string;
+  specieId: number;
+  userId: number;
 }
 export interface IStatus {
   id: number;
   name: string;
+  description: string;
 }
 export interface ITaskieLevel {
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
+  value?: number;
+  cosmetic?: ICosmetic;
+  hasEvolution?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }
-export interface ICosmetic {
+export interface IInteractable {
   id: number;
   name: string;
   sprite: string;
@@ -121,6 +144,9 @@ export interface ICosmetic {
 export interface ISpecie {
   id: number;
   name: string;
+  description: string;
+  sprite: string;
+  evolution: string;
 }
 
 export interface ITaskSpec {
@@ -134,4 +160,18 @@ export interface ITaskSpec {
   visible?: boolean;
   recurrent?: string;
   repeatTimes?: number;
+}
+
+export interface ICosmetic {
+  id?: number;
+  name?: string;
+  sprite?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface ITaskieImg {
+  src: string;
+  alt: string;
+  title: string;
 }

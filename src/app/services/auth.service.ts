@@ -65,6 +65,21 @@ export class AuthService {
     );
   }
 
+  public pwCheck(credentials: {
+    email: string;
+    password: string;
+  }): Observable<ILoginResponse> {
+    return this.http.post<ILoginResponse>("auth/login", credentials).pipe(
+      tap((response: any) => {
+        this.accessToken = response.token;
+        this.user.email = credentials.email;
+        this.expiresIn = response.expiresIn;
+        this.user = response.authUser;
+        this.save();
+      })
+    );
+  }
+
   public hasRole(role: string): boolean {
     return this.user.authorities
       ? this.user?.authorities.some((authority) => authority.authority == role)

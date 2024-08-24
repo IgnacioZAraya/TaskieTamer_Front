@@ -1,46 +1,124 @@
 .taskie-detail {
-  text-align: center;
+  text-align: right;
 
   .taskie-info {
     margin-bottom: 20px;
+    position: relative;
+    margin-bottom: 20px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+
+
+    h1 {
+      margin: 10px 0;
+      padding-bottom: 30px;
+      font-size: 2.5rem;
+      font-family: 'PuppyBellies';
+      color: #6a4a3d;
+      text-shadow: #ffc70f 1px 0 10px;
+    }
 
     h2 {
       margin: 10px 0;
-      font-size: 2em;
+      font-size: 1.75rem;
+      font-family: 'QuiteMagical';
+      color: #6a4a3d;
+      text-shadow: #ffc70f 1px 0 10px;
+      align-self: center;
     }
 
-    .taskie-content {
+    
+
+    .taskie-stats {
+      padding: 30px 40px;
+      margin-right: 75px;
+      border-radius:  18px ;
+      background-color: #ef9174;
+      max-width: 200px;
+    }
+
+
+    .taskie-content { 
+
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
+      background-image: url('../../../../assets/taskies/Background.png');
+      background-size: cover;
+      background-position: center;
+      width: 600px; 
+      height: 400px;
+      padding: 20px;
+      border-radius: 15px; 
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-
     .taskie-stats {
-      margin-left: 20px;
+
       text-align: left;
       font-size: 1.2em;
+      
+    }
+    .taskie-stats p {
+      color: black;
     }
 
     .taskie-image {
       width: 400px;  
       height: auto;
+      position: absolute;
       display: block;
       border: 2px dashed transparent;
-      &:hover {
-        border-color: #ccc;
-      }
+
+      padding-top: 30px;
+
+      background-size: cover;
+      background-position: center;
+     
     }
+   .cosmetic-overlay{
+      position: absolute;//
+      //bottom: 30px;
+      left: 100px;
+      width: 400px;
+      height: auto;
+      display: block;
+      pointer-events: none;
+      padding-top: 30px;
+    }
+
   }
 
-  .cosmetic-list {
+  .interactible-content {
+    background-color: #ef9174;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    margin-left: 10.5%;
+    border-radius: 8px;
+
+    h2 {
+      margin: 10px 0;
+      font-size: 1.75rem;
+      font-family: 'QuiteMagical';
+      color: #6a4a3d;
+      text-shadow: #ffc70f 1px 0 10px;
+      align-self: center;
+    }
+  }
+ 
+  .interactable-list {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 
-    .cosmetic-item {
+    .interactable-item {
       margin: 10px;
       padding: 10px;
-      border: 1px solid #ccc;
+      background-color: #edc951;
       border-radius: 8px;
       cursor: pointer;
       transition: transform 0.3s;
@@ -49,7 +127,7 @@
         transform: scale(1.05);
       }
 
-      .cosmetic-image {
+      .interactable-image {
         width: 80px;
         height: auto;
         display: block;
@@ -63,19 +141,64 @@
       }
     }
   }
+
+  .cosmetics-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 600px;
+    padding: 20px 40px;
+    flex: 20;
+    z-index: 20;
+    border-radius: 8px;
+    background-color: #ef9174;
+
+    .cosmetic-item {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #edc951;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .cosmetic-image {
+        .interactable-image {
+          width: 80px;
+          height: auto;
+          display: block;
+          margin: 0 auto 10px;
+        }
+      }
+
+      p {
+        margin: 0;
+        font-size: 1em;
+        text-align: center;
+      }
+    }
+  }
+
 }
 button {
   margin-bottom: 20px;
   padding: 10px 20px;
   font-size: 1em;
   cursor: pointer;
-  background-color: #007bff;
-  color: white;
+  color: #edc951;
   border: none;
   border-radius: 5px;
   transition: background-color 0.3s;
 
-  &:hover {
-    background-color: #0056b3;
-  }
+
+}
+
+.xp {
+  width: 50%;
 }

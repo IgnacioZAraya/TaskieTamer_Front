@@ -55,6 +55,8 @@
   <div class="px-5">
     <ejs-datetimepicker
     #startDate="ngModel"
+    [min]="minDate" 
+    [max]="maxDate"
     format="yyyy-MM-dd HH:mm:ss"
     id="startDate"
     name="startDate"
@@ -75,6 +77,8 @@
   <div class="px-5">
     <ejs-datetimepicker
     #endDate="ngModel"
+    [min]="minDate"
+    [max]="maxDate"
     format="yyyy-MM-dd HH:mm:ss"
     id="endDate"
     name="endDate"

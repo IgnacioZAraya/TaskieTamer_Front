@@ -1,13 +1,25 @@
-import { inject } from "@angular/core";
-import { CanActivateFn, Router } from "@angular/router";
+import { inject, Injectable } from "@angular/core";
+import { ActivatedRouteSnapshot, CanActivate, CanActivateFn, Router, RouterStateSnapshot } from "@angular/router";
 import { AuthService } from "../services/auth.service";
+import { IRoleType } from "../interfaces";
 
-export const AuthGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
-  const authService = inject(AuthService);
+@Injectable({
+  providedIn: 'root',
+})
+export class AdminRoleGuard implements CanActivate {
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
-  if (authService.check()) return true;
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean {
+    const hasRole = this.authService.hasRole(IRoleType.superAdmin);
 
-  router.navigateByUrl("/app/home");
-  return false;
-};
+    if (!hasRole) {
+      this.router.navigate(['access-denied']);
+      return false;
+    }
+    return true;
+  }
+}

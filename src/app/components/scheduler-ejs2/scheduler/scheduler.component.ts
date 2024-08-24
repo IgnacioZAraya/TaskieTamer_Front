@@ -63,12 +63,17 @@ export class SchedulerComponent {
 
   private authService = inject(AuthService);
   private taskService = inject(TaskService);
-  
+  public minDate: Date = new Date();
+  public maxDate: Date = new Date();
+
   constructor() {
     this.currentUserId = this.authService.getUser()?.id;
     effect(() => {
       this.updateEventSettings();
     });
+
+    this.minDate.setFullYear(this.minDate.getFullYear() - 1);
+    this.maxDate.setFullYear(this.maxDate.getFullYear() + 1);
   }
 
   onRecurrenceChange(event: any): void {

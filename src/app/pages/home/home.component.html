@@ -3,7 +3,7 @@
         <div>
             <img src="../../../assets/icons/logo.png" alt="Taskie Tamer Logo" class="logo" />
         </div>
-        <div>
+        <div *ngIf="isAuth === false">
             <button type="register" value="register" class="registerBtn btn custom-btn" (click)="redRegister()" >Register!</button>
             <button type="login" value="login" class="btn custom-btn" (click)="redLogIn()" >Log In!</button>
         </div>
@@ -13,17 +13,30 @@
     </div>
     <div>
          <div class="d-flex">
-            <img src="../../../assets/icons/stockImg.png" alt="Taskie Tamer Pic 1" class="homeImage" />
-            <img src="../../../assets/icons/stockImg2.png" alt="Taskie Tamer Pic 2" class="homeImage" />
+            <img src="../../../assets/icons/IMG1.PNG" alt="Taskie Tamer Pic 1" class="homeImage" />
+            <img src="../../../assets/icons/IMG2.PNG" alt="Taskie Tamer Pic 2" class="homeImage" />
          </div>
-         <h1>With Taskie Tamer you can:</h1>
-         <div>
-            <p class="bullet">Organize your days by adding important tasks and events.</p>
-            <p class="bullet">Follow daily tasks to earn points and rewards.</p>
-            <p class="bullet">Mark tasks as completed and track your progress.</p>
-            <p class="bullet">Enjoy fun games and activities with your taskie.</p>
-            <p class="bullet">Collect points and unlock surprises for your taskie.</p>
-         </div>
-         <h2>Let's start being responsible and have fun together!</h2>
+        <div class="desc">
+            <h1>With Taskie Tamer you can:</h1>
+            <div>
+                <p class="bullet">Organize your days by adding important tasks and events.</p>
+                <p class="bullet">Follow daily tasks to earn points and rewards.</p>
+                <p class="bullet">Mark tasks as completed and track your progress.</p>
+                <p class="bullet">Enjoy fun games and activities with your taskie.</p>
+                <p class="bullet">Collect points and unlock surprises for your taskie.</p>
+            </div>
+            <h2>Let's start being responsible and have fun together!</h2>
+        </div>
     </div>
+    <footer *ngIf="isAuth === false">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="footer-copyright">
+              <h3 class="footer">
+                Copyright 2024 &copy; Lambda & Omega Operations. All rights ignored.
+              </h3>
+            </div>
+          </div>
+        </div>
+      </footer>
 </body>
