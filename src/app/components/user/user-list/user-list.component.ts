@@ -10,39 +10,39 @@ import { UserFormComponent } from '../user-from/user-form.component';
 
 
 @Component({
-  selector: 'app-user-list',
+  selector: "app-user-list",
   standalone: true,
   imports: [
-    CommonModule, 
+    CommonModule,
     FormsModule,
     ModalComponent,
     UserFormComponent,
     ConfirmationComponent,
     MatSnackBarModule
   ],
-  templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.scss'
+  templateUrl: "./user-list.component.html",
+  styleUrl: "./user-list.component.scss",
 })
 export class UserListComponent {
-  public search: String = '';
+  public search: String = "";
   public userList: IUser[] = [];
   private service = inject(UserService);
   public currentUser: IUser = {
-    email: '',
-    lastname: '',
-    password: '',
-    name: ''
+    email: "",
+    lastname: "",
+    password: "",
+    name: "",
   };
-  
+
   constructor() {
     this.service.getAllSignal();
-    effect(() => {      
+    effect(() => {
       this.userList = this.service.users$();
     });
   }
 
   showDetail(user: IUser, modal: any) {
-    this.currentUser = {...user}; 
+    this.currentUser = { ...user };
     modal.show();
   }
 
@@ -50,5 +50,4 @@ export class UserListComponent {
     this.currentUser = {...user}; 
     modal.show();
   }
-
 }

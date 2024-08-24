@@ -1,6 +1,14 @@
 @import "../../../../../node_modules/@syncfusion/ej2-material-theme/styles/material.css";
 @import "../../../../../node_modules/@syncfusion/ej2-calendars/styles/material.css";
 
+.quick-info-popup.e-schedule .e-quick-popup-wrapper .e-event-popup .e-popup-header {
+  background: #ffff;
+}
+
+.quick-info-popup.e-schedule .e-quick-popup-wrapper .e-event-popup .e-popup-header .e-header-icon-wrapper .e-close {
+  color: black;
+}
+
 .quick-info-popup.e-schedule
   .e-quick-popup-wrapper
   .e-event-popup
